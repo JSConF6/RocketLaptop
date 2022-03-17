@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- 제이쿼리 -->
+<script src="../js/jquery-3.6.0.min.js"></script>
 
 <!-- 구글 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,9 +31,12 @@
 <link rel="stylesheet" href="../css/swiper.css">
 
 <!-- JS -->
+<script src="../js/registerView.js"></script>
+<script src="../js/loginView.js"></script>
 
-<!-- 제이쿼리 -->
-<script src="../js/jquery-3.6.0.min.js"></script>
+<!-- sweetalert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.5/dist/sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.5/dist/sweetalert2.min.css">
 
 <!-- Swiper -->
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
@@ -40,8 +47,7 @@
 <body>
 	<nav class="navbar navbar-light bg-light justify-content-between ps-0 pe-0">
 		<div class="container-fluid pe-0">
-			<a href="/" class="navbar-brand text-black" style="width: 210px">
-				<img alt="" src="../images/RocketLaptopLogo.svg" width="100%" height="100%">
+			<a href="/" class="navbar-brand text-black" style="width: 210px"> <img alt="" src="../images/RocketLaptopLogo.svg" width="100%" height="100%">
 			</a>
 			<div class="input-group" id="search-bar">
 				<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -54,45 +60,34 @@
 				</ul>
 				<input type="text" class="form-control" aria-label="Text input with 2 dropdown buttons" />
 				<button class="btn btn-outline-secondary" type="button">
-					<a href="#">
-						<i class="fa-solid fa-magnifying-glass fa-2x"></i>
+					<a href="#"> <i class="fa-solid fa-magnifying-glass fa-2x"></i>
 					</a>
 				</button>
 			</div>
 			<ul class="nav">
-				<li class="nav-item position-relative"><a href="/cart" class="nav-link d-flex flex-column align-items-center text-secondary" id="cart-icon">
-						<i class="fa-solid fa-cart-shopping fa-2x"></i> <span class="position-absolute top-5 translate-middle badge rounded-pill bg-danger" id="cart-badge"> 0 <span class="visually-hidden">unread messages</span>
-						</span> <span class="fs-5 cart-icon-title">장바구니</span>
+				<li class="nav-item position-relative"><a href="/cart" class="nav-link d-flex flex-column align-items-center text-secondary" id="cart-icon"> <i class="fa-solid fa-cart-shopping fa-2x"></i> <span class="position-absolute top-5 translate-middle badge rounded-pill bg-danger" id="cart-badge"> 0 <span class="visually-hidden">unread messages</span>
+					</span> <span class="fs-5 cart-icon-title">장바구니</span>
+				</a></li>
+				<sec:authorize access="isAnonymous()">
+					<li class="nav-item"><a href="/login" class="nav-link d-flex flex-column align-items-center text-secondary" id="cuser-icon"> <i class="fa-solid fa-circle-user fa-2x"></i> <span class="fs-5 cuser-icon-title">로그인</span>
 					</a></li>
-				<li class="nav-item"><a href="/login" class="nav-link d-flex flex-column align-items-center text-secondary" id="cuser-icon">
-						<i class="fa-solid fa-circle-user fa-2x"></i> <span class="fs-5 cuser-icon-title">로그인</span>
+					<li class="nav-item"><a href="register" class="nav-link d-flex flex-column align-items-center text-secondary" id="puser-icon"> <i class="fa-solid fa-user-plus fa-2x"></i> <span class="fs-5 puser-icon-title">회원가입</span>
 					</a></li>
-				<!-- <div
-          class="d-flex"
-        >
-          <li class="nav-item">
-            <a href="#"
-              class="nav-link d-flex flex-column align-items-center text-secondary"
-              id="mypage-icon"
-            >
-              <i class="fa-solid fa-circle-user fa-2x"></i>
-              <span class="fs-5 mypage-icon-title">마이페이지</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link d-flex flex-column align-items-center text-secondary"
-              id="cuser-icon"
-              href="#"
-            >
-              <i class="fa-solid fa-right-from-bracket fa-2x"></i>
-              <span class="fs-5 cuser-icon-title">로그아웃</span>
-            </a>
-          </li>
-        </div> -->
-				<li class="nav-item"><a href="register" class="nav-link d-flex flex-column align-items-center text-secondary" id="puser-icon">
-						<i class="fa-solid fa-user-plus fa-2x"></i> <span class="fs-5 puser-icon-title">회원가입</span>
-					</a></li>
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
+					<div class="d-flex">
+						<sec:authorize access="hasRole('ROLE_USER')">
+							<li class="nav-item"><a href="#" class="nav-link d-flex flex-column align-items-center text-secondary" id="mypage-icon"> <i class="fa-solid fa-circle-user fa-2x"></i> <span class="fs-5 mypage-icon-title">마이페이지</span>
+							</a></li>
+						</sec:authorize>
+						<sec:authorize access="hasRole('ROLE_ADMIN')"> 
+							<li class="nav-item"><a href="#" class="nav-link d-flex flex-column align-items-center text-secondary" id="mypage-icon"> <i class="fa-solid fa-circle-user fa-2x"></i> <span class="fs-5 mypage-icon-title">관리자페이지</span>
+							</a></li>
+						</sec:authorize>
+						<li class="nav-item"><a class="nav-link d-flex flex-column align-items-center text-secondary" id="cuser-icon" href="/logout"> <i class="fa-solid fa-right-from-bracket fa-2x"></i> <span class="fs-5 cuser-icon-title">로그아웃</span>
+						</a></li>
+					</div>
+				</sec:authorize>
 			</ul>
 		</div>
 	</nav>

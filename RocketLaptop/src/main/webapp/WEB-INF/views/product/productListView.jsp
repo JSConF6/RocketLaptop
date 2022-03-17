@@ -7,9 +7,9 @@
 			<div class="d-flex align-items-center mt-3 mb-3">
 				<img alt="Logo" src="../images/RocketLaptopLogo.svg" width="10%" height="20%"> <span class="fs-1">전체상품</span>
 			</div>
-			<div class="row row-cols-1 row-cols-md-3 row-cols-sm-2 row-cols-lg-4 row-cols-xl-5 g-4">
+			<div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 g-4">
 				<div class="col">
-					<div class="card h-100 w-100">
+					<div class="card w-100">
 						<a href="#">
 							<img src="../images/280.jpg" class="card-img-top" alt="..." />
 						</a>
@@ -21,8 +21,9 @@
 								<h4 class="card-title mb-3">삼성 갤럭시 10+</h4>
 							</a>
 							<p class="card-text fs-4">
-								<span>219,000원</span>
+								<span>가격 : 219,000원</span>
 							</p>
+							<a href="#" class="btn btn-primary w-100">상세보기</a>
 						</div>
 					</div>
 				</div>

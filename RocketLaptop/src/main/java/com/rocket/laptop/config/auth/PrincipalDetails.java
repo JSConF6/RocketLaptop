@@ -58,10 +58,6 @@ public class PrincipalDetails implements UserDetails{
 
 	@Override
 	public String getUsername() {
-		return userDto.getUsername();
-	}
-	
-	public String getId() {
 		return userDto.getId();
 	}
 
