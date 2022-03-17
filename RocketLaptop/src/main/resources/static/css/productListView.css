@@ -1,0 +1,5 @@
+@charset "UTF-8";
+.card > .card-body > .product-list-title {
+  color: #2c3e50;
+  text-decoration: none;
+}

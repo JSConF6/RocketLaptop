@@ -1,0 +1,16 @@
+@charset "UTF-8";
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+
+.register-form {
+  height: 1000px;
+  margin-top: 5%;
+}
+
+.register-container {
+  width: 1200px;
+}

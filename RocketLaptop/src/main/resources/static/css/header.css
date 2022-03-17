@@ -1,0 +1,61 @@
+@charset "UTF-8";
+* {
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+nav {
+  padding: 30px;
+}
+
+nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+nav a.router-link-exact-active {
+  color: #42b983;
+}
+
+@media (max-width: 992px) {
+  #cart-icon > .cart-icon-title,
+  #cuser-icon > .cuser-icon-title,
+  #puser-icon > .puser-icon-title,
+  #admin-icon > .admin-icon-title,
+  #mypage-icon > .mypage-icon-title {
+    display: none;
+  }
+
+  #cart-icon > #cart-badge {
+    left: 55px;
+  }
+}
+
+#search-bar {
+  width: 50%;
+}
+
+@media (max-width: 1270px) {
+  #search-bar {
+    width: 40%;
+  }
+}
+
+@media (max-width: 750px) {
+  #search-bar {
+    display: none;
+  }
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0;
+}
+
+#cart-badge {
+  left: 75px;
+}
+
+a {
+  color: gray;
+  text-decoration: none;
+}
