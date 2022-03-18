@@ -1,18 +1,23 @@
 package com.rocket.laptop.controller;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.rocket.laptop.config.auth.PrincipalDetails;
 import com.rocket.laptop.model.UserDto;
 import com.rocket.laptop.service.UserService;
 
@@ -32,10 +37,24 @@ public class HomeController {
 	}
 	
 	@GetMapping("/login")
-	public String login() {
+	public ModelAndView login(ModelAndView mv,
+			@CookieValue(value="saveId", required = false) Cookie readCookie,
+			@AuthenticationPrincipal PrincipalDetails principalDetails) {
 		logger.info("로그인 view로 이동");
 		
-		return "/home/loginView";
+		if(principalDetails != null) {
+			mv.addObject("duplicate", "duplicateLogin");
+			mv.setViewName("/duplicateLogin");
+			return mv;
+		}
+		
+		if(readCookie != null) {
+			mv.addObject("saveId", readCookie.getValue());
+			logger.info("Cookie Time : " + readCookie.getMaxAge());
+		}
+		
+		mv.setViewName("/home/loginView");
+		return mv;
 	}
 	
 	@GetMapping("/loginFail")
@@ -74,6 +93,13 @@ public class HomeController {
 	@GetMapping("/register/idcheck")
 	public int idCheck(@RequestParam("id") String id) {
 		return userService.isId(id);
+	}
+	
+	@GetMapping("/accessDenied")
+	public String accessDenied() {
+		logger.info("권한 없이 페이지 접속");
+		
+		return "/accessDeniedView";
 	}
 	
 	@GetMapping("/cart")

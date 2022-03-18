@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import com.rocket.laptop.config.auth.PrincipalDetailsService;
+import com.rocket.laptop.config.handler.CustomAccessDeniedHandler;
 import com.rocket.laptop.config.handler.LoginFailHandler;
 import com.rocket.laptop.config.handler.LoginSuccessHandler;
 
@@ -46,7 +47,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.logoutUrl("/logout")
 		.logoutSuccessUrl("/login")
 		.deleteCookies("JSESSIONID")
-		.invalidateHttpSession(true);
+		.invalidateHttpSession(true)
+		.and()
+		.exceptionHandling()
+		.accessDeniedHandler(new CustomAccessDeniedHandler());
 	}
 	
 }

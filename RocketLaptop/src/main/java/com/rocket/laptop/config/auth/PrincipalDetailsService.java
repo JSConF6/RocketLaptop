@@ -26,7 +26,7 @@ public class PrincipalDetailsService implements UserDetailsService{
 		if(userDto != null) {
 			return new PrincipalDetails(userDto);
 		}
-		return null;
+		throw new UsernameNotFoundException("유저 정보를 찾을 수 없습니다.");
 	}
 	
 }

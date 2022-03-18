@@ -33,6 +33,7 @@
 <!-- JS -->
 <script src="../js/registerView.js"></script>
 <script src="../js/loginView.js"></script>
+<script src="../js/mainView.js"></script>
 
 <!-- sweetalert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.5/dist/sweetalert2.all.min.js"></script>
@@ -81,7 +82,7 @@
 							</a></li>
 						</sec:authorize>
 						<sec:authorize access="hasRole('ROLE_ADMIN')"> 
-							<li class="nav-item"><a href="#" class="nav-link d-flex flex-column align-items-center text-secondary" id="mypage-icon"> <i class="fa-solid fa-circle-user fa-2x"></i> <span class="fs-5 mypage-icon-title">관리자페이지</span>
+							<li class="nav-item"><a href="/admin?pageName=home" class="nav-link d-flex flex-column align-items-center text-secondary" id="mypage-icon"> <i class="fa-solid fa-circle-user fa-2x"></i> <span class="fs-5 mypage-icon-title">관리자페이지</span>
 							</a></li>
 						</sec:authorize>
 						<li class="nav-item"><a class="nav-link d-flex flex-column align-items-center text-secondary" id="cuser-icon" href="/logout"> <i class="fa-solid fa-right-from-bracket fa-2x"></i> <span class="fs-5 cuser-icon-title">로그아웃</span>
