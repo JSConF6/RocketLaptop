@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rocket.laptop.repository.ProductMapper">
+
+	<insert id="productInsert" parameterType="ProductDto">
+		insert into product (product_code, category_code, product_name, product_price, product_sales)
+		values(#{product_code}, #{category_code}, #{product_name}, #{product_price}, #{product_sales})
+	</insert>
+	
+	<select id="getProductList" resultType="ProductListDto" parameterType="Map">
+		select pr.* 
+		from (select @ROWNUM := @ROWNUM + 1 AS rnum, p.*
+	  		  from (select @ROWNUM:=0) AS r, (select p.product_code, c.category_name, p.product_name, p.product_price, p.product_reg_date, i.filename, i.original_filename
+				    from product p, image i, category c
+					where p.product_code = i.product_code
+					and p.category_code = c.category_code
+					and i.type = 1
+            		order by p.product_reg_date desc) p) pr
+		where rnum &gt;= #{start} and rnum &lt;= #{end};
+	</select>
+	
+	<select id="getProductListCount" resultType="Int">
+		select count(*)
+		from product;
+	</select>
+
+</mapper>

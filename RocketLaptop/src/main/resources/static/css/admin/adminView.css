@@ -8,6 +8,18 @@ main, footer{
 	margin-left:285px;
 }
 
+a:not([href]){
+color : gray;
+
+text-decoration : none;
+
+}
+
+a{
+	color: black;
+	text-decoration: none;
+}
+
 @media (max-width: 710px) {
   header {
     display: none;

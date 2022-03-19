@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rocket.laptop.repository.FileMapper">
+
+	<insert id="fileInsert" parameterType="FileDto">
+		insert into image (product_code, filename, original_filename, type)
+		values(#{product_code}, #{filename}, #{original_filename}, #{type})
+	</insert>
+	
+	<select id="findByType" resultType="FileDto" parameterType="Map">
+		select *
+		from image
+		where product_code = #{producd_code}
+		and type = #{type}
+	</select>
+
+</mapper>

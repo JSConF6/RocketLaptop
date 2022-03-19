@@ -1,7 +1,5 @@
 $(function() {
-	let result = $.trim($("#result").val());
-	
-	if(result === "fail"){
+	if($.trim($("#result").val()) === "fail"){
 		Swal.fire({
 			icon: "error",
 			title: "회원가입",

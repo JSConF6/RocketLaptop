@@ -2,7 +2,7 @@
 <%@ include file="./adminSidebar.jsp" %>
 
 <main class="mt-5 vw-50">
-	<div class="container">
+	<div class="container-fluid">
 		<div class="d-flex align-items-center">
 			<img alt="Logo" src="../images/RocketLaptopLogo.svg" width="20%" height="30%"> <span class="fs-1">문의사항</span>
 		</div>

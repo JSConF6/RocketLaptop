@@ -26,9 +26,11 @@
 
 <!-- Style -->
 <link rel="stylesheet" href="../css/admin/adminView.css">
+<link rel="stylesheet" href="../css/admin/adminProductAddView.css">
 
 <!-- JS -->
 <script type="text/javascript" src="../js/adminView.js"></script>
+<script type="text/javascript" src="../js/adminProductAddView.js"></script>
 
 </head>
 <body>
