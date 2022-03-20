@@ -46,11 +46,11 @@ $(function(){
 			return false;
 		}
 		
-		if($.trim($("#image1_upload").val()) == "" || $.trim($("#image2_upload").val()) == "" || $.trim($("#image3_upload").val()) == ""){
+		if($.trim($("#image1_upload").val()) === "" && $.trim($("#image2_upload").val()) === "" && $.trim($("#image3_upload").val()) === ""){
 			Swal.fire({
 				icon: "error",
 				title: "상품등록",
-				text: "상품 이미지를 첨부해주세요.",
+				text: "상품 이미지 하나 이상 첨부해주세요",
 				allowOutsideClick: false,
 			})
 			return false;
@@ -96,7 +96,20 @@ $(function(){
 		console.log(image_upload)
 		let inputimg = $(this).val().split("\\");
 		let filename = inputimg[inputimg.length - 1];
+		let imgSize = $(this)[0].files[0].size;
+		let maxSize = 10 * 1024 * 1024;
 		let pattern = /(gif|jpg|jpeg|png)$/i;
+		
+		if(imgSize > maxSize){
+			Swal.fire({
+				icon: "warning",
+				title: "파일등록",
+				text: "이미지 용량은 10MB 이내로 첨부 하실 수 있습니다.",
+				allowOutsideClick: false,
+			})
+			$(this).val('');
+			return false;
+		}
 		
 		if(pattern.test(filename)){
 			$(image_value).text(filename);
@@ -108,12 +121,14 @@ $(function(){
 				text: "확장자는 gif, jpg, jpeg, png가 가능합니다.",
 				allowOutsideClick: false,
 			})
+			$(this).val('');
 			return false;
 		}
 	});
 	
 	$(".image_remove").on("click", image_remove, function(){
 		$(image_value).text('');
+		$(image_upload).val('');
 		show();
 	});
 	

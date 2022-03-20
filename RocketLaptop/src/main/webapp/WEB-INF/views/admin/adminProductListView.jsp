@@ -41,8 +41,7 @@
 											<c:out value="${product.product_reg_date}" />
 										</p>
 										<p class="card-text text-end">
-											<button class="btn btn-secondary">수정</button>
-											<button class="btn btn-danger">삭제</button>
+											<a class="btn btn-primary" href="/admin/productDetail?pageName=product&product_code=${product.product_code}">상세보기</a>
 										</p>
 									</div>
 								</div>

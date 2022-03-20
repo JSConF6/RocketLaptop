@@ -29,27 +29,27 @@
 				<div class="mb-3">
 					<label for="formFile" class="form-label">대표 이미지</label><br/>
 					<button class="btn btn-primary image_btn me-2" value="thumbnail" id="thumbnail_btn">이미지 첨부</button>
-					<input class="form-control image_upload" type="file" id="thumbnail_upload" name="thumbnail_upload" accept="image/*"> <span id="thumbnail_value"></span> <img src="../images/remove.png" alt="이미지삭제" width="30px" class="thumbnail_remove image_remove">
+					<input class="form-control image_upload" type="file" id="thumbnail_upload" name="image_upload" accept="image/*"> <span id="thumbnail_value"></span> <img src="../images/remove.png" alt="이미지삭제" width="30px" class="thumbnail_remove image_remove">
 				</div>
 				<div class="mb-3">
 					<label for="formFile" class="form-label">상품 이미지1</label> <br/>
 					<button class="btn btn-primary image_btn me-2" value="image1" id="image1_btn">이미지 첨부</button>
-					<input class="form-control image_upload" type="file" id="image1_upload" name="image1_upload" accept="image/*"> <span id="image1_value"></span> <img src="../images/remove.png" alt="이미지삭제" width="30px" class="image1_remove image_remove">
+					<input class="form-control image_upload" type="file" id="image1_upload" name="image_upload" accept="image/*"> <span id="image1_value"></span> <img src="../images/remove.png" alt="이미지삭제" width="30px" class="image1_remove image_remove">
 				</div>
 				<div class="mb-3">
 					<label for="formFile" class="form-label">상품 이미지2</label> <br/>
 					<button class="btn btn-primary image_btn me-2" value="image2" id="image2_btn">이미지 첨부</button>
-					<input class="form-control image_upload" type="file" id="image2_upload" name="image2_upload" accept="image/*"> <span id="image2_value"></span> <img src="../images/remove.png" alt="이미지삭제" width="30px" class="image2_remove image_remove">
+					<input class="form-control image_upload" type="file" id="image2_upload" name="image_upload" accept="image/*"> <span id="image2_value"></span> <img src="../images/remove.png" alt="이미지삭제" width="30px" class="image2_remove image_remove">
 				</div>
 				<div class="mb-3">
 					<label for="formFile" class="form-label">상품 이미지3</label> <br/>
 					<button class="btn btn-primary image_btn me-2" value="image3" id="image3_btn">이미지 첨부</button>
-					<input class="form-control image_upload" type="file" id="image3_upload" name="image3_upload" accept="image/*"> <span id="image3_value"></span> <img src="../images/remove.png" alt="이미지삭제" width="30px" class="image3_remove image_remove">
+					<input class="form-control image_upload" type="file" id="image3_upload" name="image_upload" accept="image/*"> <span id="image3_value"></span> <img src="../images/remove.png" alt="이미지삭제" width="30px" class="image3_remove image_remove">
 				</div>
 				<div class="mb-3">
 					<label for="formFile" class="form-label">상세설명</label> <br/>
 					<button class="btn btn-primary image_btn me-2" value="details" id="details_btn">이미지 첨부</button>
-					<input class="form-control image_upload" type="file" id="details_upload" name="details_upload" accept="image/*"> <span id="details_value"></span> <img src="../images/remove.png" alt="이미지삭제" width="30px" class="details_remove image_remove">
+					<input class="form-control image_upload" type="file" id="details_upload" name="image_upload" accept="image/*"> <span id="details_value"></span> <img src="../images/remove.png" alt="이미지삭제" width="30px" class="details_remove image_remove">
 				</div>
 				<div class="d-flex justify-content-end mb-3">
 					<button type="submit" class="btn btn-primary me-3">등록</button>

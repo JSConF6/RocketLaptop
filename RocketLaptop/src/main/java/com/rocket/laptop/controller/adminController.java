@@ -79,6 +79,14 @@ public class adminController {
 		return "/admin/adminOrderListView";
 	}
 	
+	@GetMapping("/admin/userList")
+	public String adminUserView(String pageName, Model model) {
+		logger.info("유저목록 페이지로 이동");
+		model.addAttribute("pageName", pageName);
+		
+		return "/admin/adminUserListView";
+	}
+	
 	@GetMapping("/admin/productList")
 	public String adminProductView(String pageName, Model model, @RequestParam(value="page", defaultValue = "1", required = false) int page) {
 		logger.info("상품관리 페이지로 이동");
@@ -105,6 +113,12 @@ public class adminController {
 		return "/admin/adminProductListView";
 	}
 	
+	@GetMapping("/admin/productDetail")
+	public String adminProductDetail(@RequestParam(value="product_code") String product_code, String pageName) {
+		
+		return "";
+	}
+	
 	@GetMapping("/admin/productAddView")
 	public String adminProductAddView(String pageName, Model model) {
 		logger.info("상품등록 페이지로 이동");
@@ -119,28 +133,29 @@ public class adminController {
 	
 	@PostMapping("/admin/productAdd")
 	public String adminProductAdd(String pageName, Model model, ProductDto productDto,
-			MultipartHttpServletRequest multi) throws Exception{
+			@RequestParam("image_upload") List<MultipartFile> multipartFiles) throws Exception{
 		logger.info("상품등록");
+		System.out.println(multipartFiles);
 		
 		productService.productAdd(productDto);
 		
-		Iterator<String> files = multi.getFileNames();
-		
-		while(files.hasNext()) {
+		for(int i = 0; i < multipartFiles.size(); i++) {
+			MultipartFile file = (MultipartFile) multipartFiles.get(i);
+			
+			if(file.isEmpty()) {
+				continue;
+			}
+			
 			FileDto fileDto = new FileDto();
 			
-			String uploadfile = files.next();
-			
-			if(uploadfile.substring(0, uploadfile.lastIndexOf("_")).contains("thumbnail")) {
+			if(i == 0) {
 				fileDto.setProduct_img_type(1);
-			}else if(uploadfile.substring(0, uploadfile.lastIndexOf("_")).contains("image")) {
+			}else if(i == 1 || i == 2 || i == 3) {
 				fileDto.setProduct_img_type(2);
-			}else if(uploadfile.substring(0, uploadfile.lastIndexOf("_")).contains("details")) {
+			}else if(i == 4) {
 				fileDto.setProduct_img_type(3);
 			}
 			
-			MultipartFile file = multi.getFile(uploadfile);
-
 			String originalFileName = file.getOriginalFilename(); // 오리지날 파일명
 			logger.info("오리지날 파일명 : " + originalFileName);
 			
@@ -189,13 +204,5 @@ public class adminController {
 		
 		return fileDBName;
 		
-	}
-	
-	@GetMapping("/admin/userList")
-	public String adminUserView(String pageName, Model model) {
-		logger.info("유저목록 페이지로 이동");
-		model.addAttribute("pageName", pageName);
-		
-		return "/admin/adminUserListView";
 	}
 }
