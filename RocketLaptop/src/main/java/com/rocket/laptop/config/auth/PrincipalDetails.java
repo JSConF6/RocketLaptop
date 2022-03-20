@@ -44,7 +44,7 @@ public class PrincipalDetails implements UserDetails{
 			
 			@Override
 			public String getAuthority() {
-				return userDto.getRole();
+				return userDto.getUser_role();
 			}
 		});
 		
@@ -53,12 +53,12 @@ public class PrincipalDetails implements UserDetails{
 
 	@Override
 	public String getPassword() {
-		return userDto.getPassword();
+		return userDto.getUser_password();
 	}
 
 	@Override
 	public String getUsername() {
-		return userDto.getId();
+		return userDto.getUser_id();
 	}
 
 	@Override

@@ -9,17 +9,17 @@
 		<div class="d-flex align-items-center">
 			<img alt="Logo" src="../images/RocketLaptopLogo.svg" width="20%" height="30%"> <span class="fs-1">상품목록</span>
 		</div>
+		<p class="mt-3 d-flex justify-content-between align-items-center">
+			<span class="fs-5">상품 갯수 : ${pageHandler.listCount}개</span> <a class="btn btn-primary" href="/admin/productAddView?pageName=product">상품등록</a>
+		</p>
 		<c:if test="${pageHandler.listCount > 0}">
-			<p class="mt-3 d-flex justify-content-between align-items-center">
-				<span class="fs-5">상품 갯수 : ${pageHandler.listCount}개</span> <a class="btn btn-primary" href="/admin/productAddView?pageName=product">상품등록</a>
-			</p>
 			<div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-1 row-cols-xl-2 g-4">
 				<c:forEach var="product" items="${productList}">
 					<div class="col-6">
 						<div class="card mb-3">
 							<div class="row g-0">
 								<div class="col-md-4">
-									<img src="../upload${product.filename}" class="img-fluid rounded-start w-100 h-100">
+									<img src="../upload${product.product_img_name}" class="img-fluid rounded-start w-100 h-100">
 								</div>
 								<div class="col-md-8">
 									<div class="card-body w-100 h-100 d-flex flex-column justify-content-center">

@@ -12,7 +12,7 @@
 				<form name="loginform" action="/login" method="POST">
 					<div class="row mb-3">
 						<div class="col-sm-12">
-							<input type="text" class="form-control border-top-0 border-start-0 border-end-0" placeholder="ID" id="login_id" name="id"
+							<input type="text" class="form-control border-top-0 border-start-0 border-end-0" placeholder="ID" id="login_id" name="user_id"
 								<c:if test="${!empty saveId}">
 									value="${saveId}"
 								</c:if>/>
@@ -20,7 +20,7 @@
 					</div>
 					<div class="row mb-3">
 						<div class="col-sm-12">
-							<input type="password" class="form-control border-top-0 border-start-0 border-end-0" placeholder="Password" id="login_password" name="password"/>
+							<input type="password" class="form-control border-top-0 border-start-0 border-end-0" placeholder="Password" id="login_password" name="user_password"/>
 						</div>
 					</div>
 					<div class="row mb-3">

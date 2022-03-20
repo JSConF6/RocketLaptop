@@ -10,7 +10,7 @@ public class ProductListDto {
 	private String category_name;
 	private String product_name;
 	private int product_price;
-	private String filename;
-	private String original_filename;
+	private String product_img_name;
+	private String product_img_original_name;
 	private Timestamp product_reg_date;
 }

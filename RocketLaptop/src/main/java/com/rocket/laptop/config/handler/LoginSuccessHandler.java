@@ -18,8 +18,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler{
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		String remember = (String) request.getParameter("remember");
-		PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
-		System.out.println(principalDetails.getUserDto());
+		
 		Cookie saveCookie = new Cookie("saveId", authentication.getName());
 		if(remember != null) {
 			saveCookie.setMaxAge(60*60);

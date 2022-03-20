@@ -132,11 +132,11 @@ public class adminController {
 			String uploadfile = files.next();
 			
 			if(uploadfile.substring(0, uploadfile.lastIndexOf("_")).contains("thumbnail")) {
-				fileDto.setType(1);
+				fileDto.setProduct_img_type(1);
 			}else if(uploadfile.substring(0, uploadfile.lastIndexOf("_")).contains("image")) {
-				fileDto.setType(2);
+				fileDto.setProduct_img_type(2);
 			}else if(uploadfile.substring(0, uploadfile.lastIndexOf("_")).contains("details")) {
-				fileDto.setType(3);
+				fileDto.setProduct_img_type(3);
 			}
 			
 			MultipartFile file = multi.getFile(uploadfile);
@@ -144,7 +144,7 @@ public class adminController {
 			String originalFileName = file.getOriginalFilename(); // 오리지날 파일명
 			logger.info("오리지날 파일명 : " + originalFileName);
 			
-			fileDto.setOriginal_filename(originalFileName);
+			fileDto.setProduct_img_original_name(originalFileName);
 			
 			fileDto.setProduct_code(productDto.getProduct_code());
 			
@@ -152,7 +152,7 @@ public class adminController {
 			
 			file.transferTo(new File(saveFolder + fileDBName));
 			
-			fileDto.setFilename(fileDBName);
+			fileDto.setProduct_img_name(fileDBName);
 			
 			fileService.fileAdd(fileDto);
 		}

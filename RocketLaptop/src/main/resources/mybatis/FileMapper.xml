@@ -6,15 +6,15 @@
 <mapper namespace="com.rocket.laptop.repository.FileMapper">
 
 	<insert id="fileInsert" parameterType="FileDto">
-		insert into image (product_code, filename, original_filename, type)
-		values(#{product_code}, #{filename}, #{original_filename}, #{type})
+		insert into product_img (product_code, product_img_name, product_img_original_name, product_img_type)
+		values(#{product_code}, #{product_img_name}, #{product_img_original_name}, #{product_img_type})
 	</insert>
 	
 	<select id="findByType" resultType="FileDto" parameterType="Map">
 		select *
-		from image
-		where product_code = #{producd_code}
-		and type = #{type}
+		from product_img
+		where product_code = #{product_code}
+		and product_img_type = #{product_img_type}
 	</select>
 
 </mapper>

@@ -13,11 +13,11 @@
 	<select id="getProductList" resultType="ProductListDto" parameterType="Map">
 		select pr.* 
 		from (select @ROWNUM := @ROWNUM + 1 AS rnum, p.*
-	  		  from (select @ROWNUM:=0) AS r, (select p.product_code, c.category_name, p.product_name, p.product_price, p.product_reg_date, i.filename, i.original_filename
-				    from product p, image i, category c
+	  		  from (select @ROWNUM:=0) AS r, (select p.product_code, c.category_name, p.product_name, p.product_price, p.product_reg_date, i.product_img_name, i.product_img_original_name
+				    from product p, product_img i, category c
 					where p.product_code = i.product_code
 					and p.category_code = c.category_code
-					and i.type = 1
+					and i.product_img_type = 1
             		order by p.product_reg_date desc) p) pr
 		where rnum &gt;= #{start} and rnum &lt;= #{end};
 	</select>

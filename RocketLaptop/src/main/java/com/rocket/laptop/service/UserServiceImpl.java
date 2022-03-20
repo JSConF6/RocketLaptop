@@ -30,11 +30,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int register(UserDto userDto) {
-		String rawPassword = userDto.getPassword();
+		String rawPassword = userDto.getUser_password();
 		String encPassword = bCryptPasswordEncoder.encode(rawPassword);
-		userDto.setPassword(encPassword);
+		userDto.setUser_password(encPassword);
 		
-		userDto.setRole(RoleType.USER.role());
+		userDto.setUser_role(RoleType.USER.role());
 		
 		return userMapper.save(userDto);
 	}
