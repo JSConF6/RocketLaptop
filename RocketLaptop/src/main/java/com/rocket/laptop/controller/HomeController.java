@@ -30,8 +30,7 @@ public class HomeController {
 	private UserService userService;
 	
 	@GetMapping("/")
-	public String home(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-		System.out.println(principalDetails);
+	public String home(Model model) {
 		logger.info("홈으로 이동");
 		
 		return "index";
