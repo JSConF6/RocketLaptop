@@ -2,6 +2,7 @@ $(function(){
 	let image_value = "";
 	let image_upload = "";
 	let image_remove = "";
+	let imageType = new Array();
 	
 	$(".product_add_form").on('submit', function(e){
 		e.preventDefault();
@@ -66,6 +67,7 @@ $(function(){
 			return false;
 		}
 		
+		$(".imgType").val(imageType);
 		this.submit();
 	}); // submit end
 	
@@ -112,6 +114,20 @@ $(function(){
 		}
 		
 		if(pattern.test(filename)){
+			console.log(filename)
+			if(image_value.includes("thumbnail")){
+				imageType.push(filename + "/" + 1);
+			}else if(image_value.includes("image1")){
+				imageType.push(filename + "/" + 2);
+			}else if(image_value.includes("image2")){
+				imageType.push(filename + "/" + 2);
+			}else if(image_value.includes("image3")){
+				imageType.push(filename + "/" + 2);
+			}else if(image_value.includes("details")){
+				imageType.push(filename + "/" + 3);
+			}
+			console.log(imageType);
+			
 			$(image_value).text(filename);
 			show();
 		}else{
@@ -126,11 +142,37 @@ $(function(){
 		}
 	});
 	
-	$(".image_remove").on("click", image_remove, function(){
+	$(".image_remove").on("click", function(e){
+		e.preventDefault();
+		if($(this)[0].classList[0] === "thumbnail_remove"){
+			changeId("#thumbnail_value", "#thumbnail_upload", ".thumbnail_remove");
+			remove();
+		}else if($(this)[0].classList[0] === "image1_remove"){
+			changeId("#image1_value", "#image1_upload", ".image1_remove");
+			remove();
+		}else if($(this)[0].classList[0] === "image2_remove"){
+			changeId("#image2_value", "#image2_upload", ".image2_remove");
+			remove();
+		}else if($(this)[0].classList[0] === "image3_remove"){
+			changeId("#image3_value", "#image3_upload", ".image3_remove");
+			remove();
+		}else if($(this)[0].classList[0] === "details_remove"){	
+			changeId("#details_value", "#details_upload", ".details_remove");
+			remove();
+		}
+	})
+	
+	function remove(){
+		let imageName = $(image_value).text();
+		
+		let filtered = imageType.filter((element) => !element.includes(imageName));
+		console.log(filtered)
+		imageType = filtered;
+		
 		$(image_value).text('');
 		$(image_upload).val('');
 		show();
-	});
+	};
 	
 	$(".image_btn").on("click", function(e){
 		e.preventDefault();
@@ -159,7 +201,8 @@ $(function(){
 		image_remove = remove;
 	}
 	
-	$(".productAddCancelBtn").on("click", function(){
+	$(".productAddCancelBtn").on("click", function(e){
+		e.preventDefault();
 		history.back();
 	}); // productAddCancelBtn end
 });

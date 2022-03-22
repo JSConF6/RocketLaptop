@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.rocket.laptop.model.ProductDetailDto;
 import com.rocket.laptop.model.ProductDto;
 import com.rocket.laptop.model.ProductListDto;
 
@@ -17,4 +18,6 @@ public interface ProductMapper {
 	public List<ProductListDto> getProductList(Map<String, Object> map);
 	
 	public int getProductListCount();
+	
+	public ProductDetailDto getProductDetail(String product_code);
 }

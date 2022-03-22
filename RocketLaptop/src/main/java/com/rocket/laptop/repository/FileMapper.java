@@ -1,5 +1,6 @@
 package com.rocket.laptop.repository;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -13,4 +14,6 @@ public interface FileMapper {
 	public void fileInsert(FileDto fileDto);
 	
 	public FileDto findByType(Map<String, Object> map);
+	
+	public List<FileDto> getProductDetailFile(String product_code);
 }

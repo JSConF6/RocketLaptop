@@ -16,5 +16,11 @@
 		where product_code = #{product_code}
 		and product_img_type = #{product_img_type}
 	</select>
+	
+	<select id="getProductDetailFile" resultType="FileDto" parameterType="String">
+		select *
+		from product_img
+		where product_code = #{product_code}
+	</select>
 
 </mapper>

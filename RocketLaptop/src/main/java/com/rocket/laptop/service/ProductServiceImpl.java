@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rocket.laptop.model.PageHandler;
+import com.rocket.laptop.model.ProductDetailDto;
 import com.rocket.laptop.model.ProductDto;
 import com.rocket.laptop.model.ProductListDto;
 import com.rocket.laptop.repository.ProductMapper;
@@ -36,6 +37,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public int getProductListCount() {
 		return productMapper.getProductListCount();
+	}
+
+	@Override
+	public ProductDetailDto getProductDetail(String product_code) {
+		return productMapper.getProductDetail(product_code);
 	}
 
 }

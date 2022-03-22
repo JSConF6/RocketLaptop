@@ -1,6 +1,7 @@
 package com.rocket.laptop.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,11 @@ public class FileServiceImpl implements FileService {
 		map.put("product_code", product_code);
 		
 		return fileMapper.findByType(map);
+	}
+
+	@Override
+	public List<FileDto> getProductDetailFile(String product_code) {
+		return fileMapper.getProductDetailFile(product_code);
 	}
 
 }

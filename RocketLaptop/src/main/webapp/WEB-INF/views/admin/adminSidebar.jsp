@@ -29,11 +29,12 @@
 <link rel="stylesheet" href="../css/admin/adminProductAddView.css">
 
 <!-- JS -->
-<script type="text/javascript" src="../js/adminView.js"></script>
-<script type="text/javascript" src="../js/adminProductAddView.js"></script>
+<script type="text/javascript" src="../js/admin/adminView.js"></script>
+<script type="text/javascript" src="../js/admin/adminProductAddView.js"></script>
+<script type="text/javascript" src="../js/admin/adminProductDetailView.js"></script>
 
 </head>
-<body>
+<body>v
 	<input type="hidden" value="${pageName}" class="pageName" />
 	<header>
 		<div class="d-flex flex-column flex-shrink-0 p-3 bg-light vh-100 shadow-lg fixed-top" style="width: 280px;">
