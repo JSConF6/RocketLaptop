@@ -61,12 +61,5 @@ public class adminController {
 		return "/admin/adminOrderListView";
 	}
 	
-	@GetMapping("/admin/userList")
-	public String adminUserView() {
-		logger.info("유저목록 페이지로 이동");
-		
-		return "/admin/adminUserListView";
-	}
-	
 	
 }

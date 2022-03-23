@@ -17,7 +17,7 @@
 	  		  	   (select q.qna_num, q.user_id, q.qna_title, 
 	  		  	   		   q.qna_content, q.qna_readcount, q.qna_reg_date, c.comment_content
 	  		  	    from qna q left join comment c
-	  		  	    on q.qna_num = c.qna_num
+	  		  	   	 on q.qna_num = c.qna_num
 	  		  	    order by q.qna_reg_date desc) qn) qu
 		where rnum &gt;= #{start} and rnum &lt;= #{end};
 	</select>

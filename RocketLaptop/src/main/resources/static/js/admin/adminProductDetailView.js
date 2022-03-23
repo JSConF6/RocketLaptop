@@ -42,6 +42,6 @@ $(function() {
 
 	$(".productListBtn").on("click", function(e) {
 		e.preventDefault();
-		location.href = "/admin/productList";
+		history.back();
 	});
 });

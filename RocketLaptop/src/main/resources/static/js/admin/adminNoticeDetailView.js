@@ -41,6 +41,6 @@ $(function(){
 	
 	$(".noticeListBtn").on("click", function(e){
 		e.preventDefault();
-		location.href = "/admin/noticeList";
+		history.back();
 	});
 });

@@ -79,6 +79,6 @@ $(function(){
 	
 	$(".questionListBtn").on("click", function(e){
 		e.preventDefault();
-		location.href = "/admin/questionList";
+		history.back();
 	});
 });

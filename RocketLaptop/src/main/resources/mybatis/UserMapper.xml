@@ -13,5 +13,22 @@
 		insert into user (user_id, user_name, user_password, user_email, user_birth, user_phone, user_gender, user_role)
 		values (#{user_id}, #{user_name}, #{user_password}, #{user_email}, #{user_birth}, #{user_phone}, #{user_gender}, #{user_role})
 	</insert>
+	
+	<select id="getUserListCount" resultType="int">
+		select count(*)
+		from user
+		where user_id != 'admin';
+	</select>
+	
+	<select id="getUserList" parameterType="Map" resultType="UserDto">
+		select us.* 
+		from (select @ROWNUM := @ROWNUM + 1 AS rnum, u.*
+	  		  from (select @ROWNUM:=0) AS r, 
+	  		  	   (select *
+	  		  	    from user
+	  		  	    where user_id != 'admin'
+	  		  	    order by user_reg_date desc) u) us
+		where rnum &gt;= #{start} and rnum &lt;= #{end};
+	</select>
 
 </mapper>
