@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rocket.laptop.repository.QuestionMapper">
+	
+	<select id="getQuestionListCount" resultType="int">
+		select count(*)
+		from qna;
+	</select>
+	
+	<select id="getQuestionList" parameterType="Map" resultType="QuestionDto">
+		select qu.* 
+		from (select @ROWNUM := @ROWNUM + 1 AS rnum, qn.*
+	  		  from (select @ROWNUM:=0) AS r, 
+	  		  	   (select q.qna_num, q.user_id, q.qna_title, 
+	  		  	   		   q.qna_content, q.qna_readcount, q.qna_reg_date, c.comment_content
+	  		  	    from qna q left join comment c
+	  		  	    on q.qna_num = c.qna_num
+	  		  	    order by q.qna_reg_date desc) qn) qu
+		where rnum &gt;= #{start} and rnum &lt;= #{end};
+	</select>
+	
+	<select id="getQuestionDetail" parameterType="int" resultType="QuestionDto">
+		select *
+		from qna
+		where qna_num = #{num}
+	</select>
+	
+	<delete id="questionDelete" parameterType="int">
+		delete from qna
+		where qna_num = #{num}
+	</delete>
+	
+	<select id="getComment" parameterType="int" resultType="CommentDto">
+		select *
+		from comment
+		where qna_num = #{num}
+	</select>
+	
+	<insert id="commentAdd" parameterType="Map">
+		insert into comment (qna_num, comment_content)
+		values(#{num}, #{comment_content})
+	</insert>
+
+</mapper>

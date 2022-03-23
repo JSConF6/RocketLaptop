@@ -68,7 +68,7 @@
 		</c:if>
 		<c:if test="${pageHandler.listCount == 0 || empty pageHandler.listCount}">
 			<div class="text-center mt-5 mb-5">
-				<h1>등록된 상품이 없습니다.</h1>
+				<h1>공지사항이 없습니다.</h1>
 			</div>
 		</c:if>
 	</div>

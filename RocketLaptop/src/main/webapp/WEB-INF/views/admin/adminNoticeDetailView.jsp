@@ -19,7 +19,7 @@
 			<textarea class="form-control" id="notice_content" rows="10" disabled style="resize: none"><c:out value="${noticeDto.notice_content}" /></textarea>
 		</div>
 		<div class="mb-3">
-			<label for="notice_reg_date" class="form-label">공지사항 쓴 날짜</label> <input type="text" class="form-control" id="notice_reg_date" disabled value="${noticeDto.notice_reg_date}">
+			<label for="notice_reg_date" class="form-label">날짜</label> <input type="text" class="form-control" id="notice_reg_date" disabled value="${noticeDto.notice_reg_date}">
 		</div>
 		<div class="d-flex justify-content-end mb-3 mt-3">
 			<a class="btn btn-secondary me-3" href="/admin/noticeModifyView?num=${noticeDto.notice_num}">수정</a>

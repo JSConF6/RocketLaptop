@@ -66,7 +66,7 @@ public class adminNoticeController {
 	}
 	
 	@GetMapping("/admin/noticeDetail")
-	public String adminDetailView(@RequestParam(value="num") int num, Model model) {
+	public String adminNoticeDetailView(@RequestParam(value="num") int num, Model model) {
 		logger.info("공지사항 상세 페이지로 이동");
 		
 		NoticeDto noticeDto = noticeService.getNoticeDetail(num);
@@ -109,7 +109,7 @@ public class adminNoticeController {
 	@PostMapping("/admin/noticeDelete")
 	@ResponseBody
 	public int adminNoticeDelete(@RequestParam(value="num") int num, Model model) {
-		logger.info("상품 삭제 처리");
+		logger.info("공지사항 삭제 처리");
 		
 		int result = noticeService.noticeDelete(num);
 		

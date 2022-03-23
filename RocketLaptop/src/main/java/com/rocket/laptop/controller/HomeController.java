@@ -109,34 +109,6 @@ public class HomeController {
 		return "/user/cartView";
 	}
 	
-	@GetMapping("/productDetail")
-	public String productDetail() {
-		logger.info("상품 상세설명 view로 이동");
-		
-		return "/product/productDetailView";
-	}
-	
-	@GetMapping("/productList")
-	public String productList() {
-		logger.info("상품 리스트 view로 이동");
-		
-		return "/product/productListView";
-	}
-	
-	@GetMapping("/notice")
-	public String notice() {
-		logger.info("공지사항 view로 이동");
-		
-		return "/home/noticeView";
-	}
-	
-	@GetMapping("/question")
-	public String question() {
-		System.out.println("문의사항 view로 이동");
-		
-		return "/home/questionView";
-	}
-	
 	@GetMapping("/mypage")
 	public String mypage() {
 		logger.info("마이페이지 view로 이동");

@@ -36,6 +36,7 @@
 <script type="text/javascript" src="../js/admin/adminNoticeListView.js"></script>
 <script type="text/javascript" src="../js/admin/adminNoticeDetailView.js"></script>
 <script type="text/javascript" src="../js/admin/adminNoticeModifyView.js"></script>
+<script type="text/javascript" src="../js/admin/adminQuestionDetailView.js"></script>
 
 </head>
 <body>
