@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rocket.laptop.repository.NoticeMapper">
+
+	<insert id="noticeAdd" parameterType="NoticeDto">
+		insert into notice (notice_title, notice_content)
+		values(#{notice_title}, #{notice_content})
+	</insert>
+	
+	<select id="getNoticeListCount" resultType="int">
+		select count(*)
+		from notice;
+	</select>
+	
+	<select id="getNoticeList" parameterType="Map" resultType="NoticeDto">
+		select no.* 
+		from (select @ROWNUM := @ROWNUM + 1 AS rnum, n.*
+	  		  from (select @ROWNUM:=0) AS r, (select * from notice order by notice_reg_date desc) n) no
+		where rnum &gt;= #{start} and rnum &lt;= #{end};
+	</select>
+	
+	<select id="getNoticeDetail" parameterType="int" resultType="NoticeDto">
+		select *
+		from notice
+		where notice_num = #{num}
+	</select>
+	
+	<delete id="noticeDelete" parameterType="int">
+		delete from notice
+		where notice_num = #{num}
+	</delete>
+	
+	<update id="noticeModify" parameterType="NoticeDto">
+		update notice
+		set notice_title = #{notice_title}, notice_content = #{notice_content}
+		where notice_num = #{notice_num}
+	</update>
+
+</mapper>

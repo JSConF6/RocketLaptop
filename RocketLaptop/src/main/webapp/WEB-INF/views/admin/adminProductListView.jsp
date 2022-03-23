@@ -62,7 +62,7 @@
 					</c:if>
 					<c:forEach var="a" begin="${pageHandler.startPage}" end="${pageHandler.endPage}">
 						<c:if test="${a == pageHandler.page}">
-							<li class="page-item"><a class="page-link gray">${a}</a></li>
+							<li class="page-item active"><a class="page-link gray">${a}</a></li>
 						</c:if>
 						<c:if test="${a != pageHandler.page}">
 							<li class="page-item"><a class="page-link" href="/admin/productList?page=${a}">${a}</a></li>

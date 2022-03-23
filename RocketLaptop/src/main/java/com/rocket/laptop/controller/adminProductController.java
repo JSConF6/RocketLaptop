@@ -95,15 +95,12 @@ public class adminProductController {
 	
 	@PostMapping("/admin/productDelete")
 	@ResponseBody
-	public Map<String, Object> adminProductDelete(@RequestParam(value="product_code") String product_code, Model model) {
+	public int adminProductDelete(@RequestParam(value="product_code") String product_code, Model model) {
 		logger.info("상품 삭제 처리");
 		
 		int result = productService.productDelete(product_code);
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("result", result);
-		
-		return map;
+		return result;
 	}
 	
 	@GetMapping("/admin/productModifyView")

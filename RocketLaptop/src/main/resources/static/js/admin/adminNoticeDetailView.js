@@ -1,11 +1,12 @@
-$(function() {
-	$(".productDeleteBtn").on("click", function(e) {
+$(function(){
+	
+	$(".noticeDetailDeleteBtn").on("click", function(e){
 		e.preventDefault();
-
-		let productCode = $("#productCode").val();
-
+		
+		let num = $("#notice_num").val();
+		
 		Swal.fire({
-			title: "상품을 삭제하시겠습니까?",
+			title: "공지사항을 삭제하시겠습니까?",
 			icon: "warning",
 			showCancelButton: true,
 			confirmButtonColor: "#df2525",
@@ -15,21 +16,20 @@ $(function() {
 			allowOutsideClick: false,
 		}).then((result) => {
 			if (result.isConfirmed) {
-				console.log("SSS");
 
 				$.ajax({
-					url: "/admin/productDelete",
+					url: "/admin/noticeDelete",
 					type: "POST",
-					data: { "product_code": productCode},
+					data: {"num": num},
 				}).done(function(res) {
 					if(res === 1){
 						Swal.fire({
 							icon: "success",
-							title: "상품삭제",
-							text: "상품 삭제 완료되었습니다.",
+							title: "공지사항 삭제",
+							text: "공지사항 삭제 완료되었습니다.",
 							allowOutsideClick: false,
 						}).then(() => {
-							location.replace("/admin/productList");
+							location.replace("/admin/noticeList");
 						})
 					}
 				}).fail(function(err) {
@@ -37,11 +37,10 @@ $(function() {
 				})
 			}
 		})
-
 	});
-
-	$(".productListBtn").on("click", function(e) {
+	
+	$(".noticeListBtn").on("click", function(e){
 		e.preventDefault();
-		location.href = "/admin/productList";
+		location.href = "/admin/noticeList";
 	});
 });
