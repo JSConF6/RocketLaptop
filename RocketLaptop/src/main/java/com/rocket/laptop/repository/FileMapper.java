@@ -16,4 +16,6 @@ public interface FileMapper {
 	public FileDto findByType(Map<String, Object> map);
 	
 	public List<FileDto> getProductDetailFile(String product_code);
+	
+	public void fileDelete(String product_code);
 }

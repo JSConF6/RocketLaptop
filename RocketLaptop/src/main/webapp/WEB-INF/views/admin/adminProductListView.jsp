@@ -10,7 +10,7 @@
 			<img alt="Logo" src="../images/RocketLaptopLogo.svg" width="20%" height="30%"> <span class="fs-1">상품목록</span>
 		</div>
 		<p class="mt-3 d-flex justify-content-between align-items-center">
-			<span class="fs-5">상품 갯수 : ${pageHandler.listCount}개</span> <a class="btn btn-primary" href="/admin/productAddView?pageName=product">상품등록</a>
+			<span class="fs-5">상품 갯수 : ${pageHandler.listCount}개</span> <a class="btn btn-primary" href="/admin/productAddView">상품등록</a>
 		</p>
 		<c:if test="${pageHandler.listCount > 0}">
 			<div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-1 row-cols-xl-2 g-4">
@@ -41,7 +41,7 @@
 											<c:out value="${product.product_reg_date}" />
 										</p>
 										<p class="card-text text-end">
-											<a class="btn btn-primary" href="/admin/productDetail?pageName=product&product_code=${product.product_code}">상세보기</a>
+											<a class="btn btn-primary" href="/admin/productDetail?&product_code=${product.product_code}">상세보기</a>
 										</p>
 									</div>
 								</div>
@@ -57,7 +57,7 @@
 						</a></li>
 					</c:if>
 					<c:if test="${pageHandler.page > 1}">
-						<li class="page-item"><a class="page-link" href="/admin/productList?pageName=product&page=${pageHandler.page-1}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+						<li class="page-item"><a class="page-link" href="/admin/productList?page=${pageHandler.page-1}" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 						</a></li>
 					</c:if>
 					<c:forEach var="a" begin="${pageHandler.startPage}" end="${pageHandler.endPage}">
@@ -65,14 +65,14 @@
 							<li class="page-item"><a class="page-link gray">${a}</a></li>
 						</c:if>
 						<c:if test="${a != pageHandler.page}">
-							<li class="page-item"><a class="page-link" href="/admin/productList?pageName=product&page=${a}">${a}</a></li>
+							<li class="page-item"><a class="page-link" href="/admin/productList?page=${a}">${a}</a></li>
 						</c:if>
 					</c:forEach>
 					<c:if test="${pageHandler.page >= pageHandler.maxPage}">
 						<li class="page-item"><a class="page-link gray" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
 					</c:if>
 					<c:if test="${pageHandler.page < pageHandler.maxPage}">
-						<li class="page-item"><a class="page-link" href="/admin/productList?pageName=product&page=${pageHandler.page+1}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+						<li class="page-item"><a class="page-link" href="/admin/productList?page=${pageHandler.page+1}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
 					</c:if>
 				</ul>
 			</nav>

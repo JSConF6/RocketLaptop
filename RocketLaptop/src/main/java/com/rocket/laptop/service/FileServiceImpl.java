@@ -36,4 +36,9 @@ public class FileServiceImpl implements FileService {
 		return fileMapper.getProductDetailFile(product_code);
 	}
 
+	@Override
+	public void fileDelete(String product_code) {
+		fileMapper.fileDelete(product_code);
+	}
+
 }

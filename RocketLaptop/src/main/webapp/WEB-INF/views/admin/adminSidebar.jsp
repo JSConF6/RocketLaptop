@@ -32,27 +32,27 @@
 <script type="text/javascript" src="../js/admin/adminView.js"></script>
 <script type="text/javascript" src="../js/admin/adminProductAddView.js"></script>
 <script type="text/javascript" src="../js/admin/adminProductDetailView.js"></script>
+<script type="text/javascript" src="../js/admin/adminProductModifyView.js"></script>
 
 </head>
-<body>v
-	<input type="hidden" value="${pageName}" class="pageName" />
+<body>
 	<header>
 		<div class="d-flex flex-column flex-shrink-0 p-3 bg-light vh-100 shadow-lg fixed-top" style="width: 280px;">
 			<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none"> <img alt="Logo" src="../images/RocketLaptopLogo.svg" width="100%" height="100%">
 			</a>
 			<hr>
 			<ul class="nav nav-pills flex-column mb-auto">
-				<li class="nav-item"><a href="/admin?pageName=home" class="nav-link link-dark fs-5 admin-link" id="home" aria-current="page"> <i class="fa-solid fa-house"></i>&nbsp;&nbsp;대시보드
+				<li class="nav-item"><a href="/admin" class="nav-link link-dark fs-5 admin-link" id="home" aria-current="page"> <i class="fa-solid fa-house"></i>&nbsp;&nbsp;대시보드
 				</a></li>
-				<li><a href="/admin/noticeList?pageName=notice" class="nav-link link-dark fs-5 admin-link" id="notice"> <i class="fa-solid fa-clipboard"></i>&nbsp;&nbsp;공지사항
+				<li><a href="/admin/noticeList" class="nav-link link-dark fs-5 admin-link" id="notice"> <i class="fa-solid fa-clipboard"></i>&nbsp;&nbsp;공지사항
 				</a></li>
-				<li><a href="/admin/questionList?pageName=question" class="nav-link link-dark fs-5 admin-link" id="question"> <i class="fa-solid fa-question"></i>&nbsp;&nbsp;문의사항
+				<li><a href="/admin/questionList" class="nav-link link-dark fs-5 admin-link" id="question"> <i class="fa-solid fa-question"></i>&nbsp;&nbsp;문의사항
 				</a></li>
-				<li><a href="/admin/orderList?pageName=order" class="nav-link link-dark fs-5 admin-link" id="order"> <i class="fa-solid fa-calculator"></i>&nbsp;&nbsp;주문목록
+				<li><a href="/admin/orderList" class="nav-link link-dark fs-5 admin-link" id="order"> <i class="fa-solid fa-calculator"></i>&nbsp;&nbsp;주문목록
 				</a></li>
-				<li><a href="/admin/productList?pageName=product" class="nav-link link-dark fs-5 admin-link" id="product"> <i class="fa-solid fa-boxes-stacked"></i>&nbsp;&nbsp;상품목록
+				<li><a href="/admin/productList" class="nav-link link-dark fs-5 admin-link" id="product"> <i class="fa-solid fa-boxes-stacked"></i>&nbsp;&nbsp;상품목록
 				</a></li>
-				<li><a href="/admin/userList?pageName=user" class="nav-link link-dark fs-5 admin-link" id="user"> <i class="fa-solid fa-user"></i>&nbsp;&nbsp;유저목록
+				<li><a href="/admin/userList" class="nav-link link-dark fs-5 admin-link" id="user"> <i class="fa-solid fa-user"></i>&nbsp;&nbsp;유저목록
 				</a></li>
 			</ul>
 			<hr>

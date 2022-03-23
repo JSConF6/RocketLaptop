@@ -48,41 +48,36 @@ public class adminController {
 	private FileService fileService;
 	
 	@GetMapping("/admin")
-	public String adminView(String pageName, Model model) {
+	public String adminView() {
 		logger.info("관리자 페이지로 이동");
-		model.addAttribute("pageName", pageName);
 		
 		return "/admin/adminView";
 	}
 	
 	@GetMapping("/admin/noticeList")
-	public String adminNoticeView(String pageName, Model model) {
+	public String adminNoticeView() {
 		logger.info("공지사항 관리 페이지로 이동");
-		model.addAttribute("pageName", pageName);
 		
 		return "/admin/adminNoticeListView";
 	}
 	
 	@GetMapping("/admin/questionList")
-	public String adminQuestionView(String pageName, Model model) {
+	public String adminQuestionView() {
 		logger.info("문의사항 관리 페이지로 이동");
-		model.addAttribute("pageName", pageName);
 		
 		return "/admin/adminQuestionListView";
 	}
 	
 	@GetMapping("/admin/orderList")
-	public String adminOrderView(String pageName, Model model) {
+	public String adminOrderView() {
 		logger.info("주문관리 페이지로 이동");
-		model.addAttribute("pageName", pageName);
 		
 		return "/admin/adminOrderListView";
 	}
 	
 	@GetMapping("/admin/userList")
-	public String adminUserView(String pageName, Model model) {
+	public String adminUserView() {
 		logger.info("유저목록 페이지로 이동");
-		model.addAttribute("pageName", pageName);
 		
 		return "/admin/adminUserListView";
 	}

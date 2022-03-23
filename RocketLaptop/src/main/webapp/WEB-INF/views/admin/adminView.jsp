@@ -2,7 +2,6 @@
 
 <%@ include file="./adminSidebar.jsp"%>
 
-<input type="hidden" value="${result}" class="result"/>
 <main class="mt-5 vw-50">
 	<section>
 		<div class="container-fluid">

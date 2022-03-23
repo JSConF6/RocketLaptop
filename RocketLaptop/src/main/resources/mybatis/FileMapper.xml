@@ -22,5 +22,10 @@
 		from product_img
 		where product_code = #{product_code}
 	</select>
+	
+	<delete id="fileDelete" parameterType="String">
+		delete from product_img
+		where product_code = #{product_code}
+	</delete>
 
 </mapper>

@@ -11,4 +11,6 @@ public interface FileService {
 	public FileDto isType(int type, String product_code);
 	
 	public List<FileDto> getProductDetailFile(String product_code);
+	
+	public void fileDelete(String product_code);
 }

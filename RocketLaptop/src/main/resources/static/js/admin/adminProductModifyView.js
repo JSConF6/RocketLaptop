@@ -2,28 +2,19 @@ $(function(){
 	let imageType = new Array();
 	let image_upload = new Array();
 	
-	$(".productAddSubmitBtn").on("click", function(e){
+	$(".productModdifySubmitBtn").on("click", function(e){
 		e.preventDefault();
-		productAdd();
+		productModify();
 	});
 	
-	function productAdd(){
+	function productModify(){
 		let product_code = $.trim($("#productCode").val());
-		if(product_code == ""){
-			Swal.fire({
-				icon: "error",
-				title: "상품등록",
-				text: "상품코드를 입력해주세요.",
-				allowOutsideClick: false,
-			})
-			return false;
-		}
 		
 		let product_name = $.trim($("#productName").val());
 		if(product_name == ""){
 			Swal.fire({
 				icon: "error",
-				title: "상품등록",
+				title: "상품수정",
 				text: "상품이름을 입력해주세요.",
 				allowOutsideClick: false,
 			})
@@ -34,7 +25,7 @@ $(function(){
 		if(product_price == ""){
 			Swal.fire({
 				icon: "error",
-				title: "상품등록",
+				title: "상품수정",
 				text: "상품가격을 입력해주세요.",
 				allowOutsideClick: false,
 			})
@@ -44,7 +35,7 @@ $(function(){
 		if($.trim($("#thumbnail_upload").val()) == ""){
 			Swal.fire({
 				icon: "error",
-				title: "상품등록",
+				title: "상품수정",
 				text: "썸네일 이미지를 첨부해주세요.",
 				allowOutsideClick: false,
 			})
@@ -54,7 +45,7 @@ $(function(){
 		if($.trim($("#image1_upload").val()) === "" && $.trim($("#image2_upload").val()) === "" && $.trim($("#image3_upload").val()) === ""){
 			Swal.fire({
 				icon: "error",
-				title: "상품등록",
+				title: "상품수정",
 				text: "상품 이미지 하나 이상 첨부해주세요",
 				allowOutsideClick: false,
 			})
@@ -64,7 +55,7 @@ $(function(){
 		if($.trim($("#detail_upload").val()) == ""){
 			Swal.fire({
 				icon: "error",
-				title: "상품등록",
+				title: "상품수정",
 				text: "상세설명 이미지를 첨부해주세요.",
 				allowOutsideClick: false,
 			})
@@ -84,10 +75,10 @@ $(function(){
 		frm.append("product_name", product_name);
 		frm.append("product_price", product_price);
 		
-		frm.append("imageType", imageType)
+		frm.append("imageType", imageType);
 		
 		$.ajax({
-				url: "/admin/productAdd",
+				url: "/admin/productModify",
 				enctype : "multipart/form-data",
 				processData: false,
     			contentType: false,
@@ -98,20 +89,20 @@ $(function(){
 			if(res.status === 200){
 				Swal.fire({
 					icon: "success",
-					title: "상품등록",
-					text: "상품이 등록되었습니다.",
+					title: "상품수정",
+					text: "상품이 수정되었습니다.",
 					allowOutsideClick: false,
 				}).then(() => {
-					location.replace("/admin/productList");
+					location.replace("/admin/productDetail?product_code=" + product_code);
 				})
 			}else{
 				Swal.fire({
 					icon: "error",
-					title: "상품등록",
-					text: "상품 등록 실패했습니다. 다시 등록 해주세요.",
+					title: "상품수정",
+					text: "상품 수정 실패했습니다.",
 					allowOutsideClick: false,
 				}).then(() => {
-					location.replace("/admin/productAddView");
+					location.replace("/admin/productList");
 				})
 			}
 		}).fail(function(err) {
@@ -119,22 +110,22 @@ $(function(){
 		})
 	}
 	
-	//이미지 첨부 부분
-	function show(value, remove){
-		if(value === undefined){
-			$(".image_remove").css('display', 'none');
-		}else {
-			if($(value).text() === ''){
-				$(remove).css('display', 'none');
-			} else {
-				$(remove).css('display', 'inline-block');
-			}	
-		}
+	function removeShow(){
+		$(".image_modify_remove").css('display', 'inline-block');
 	}
 	
-	show();
+	removeShow();
 	
-	$(".image_upload").on("change", function(){
+	//이미지 첨부 부분
+	function show(value, remove){
+		if($(value).text() === ''){
+			$(remove).css('display', 'none');
+		} else {
+			$(remove).css('display', 'inline-block');
+		}	
+	}
+	
+	$(".image_modify_upload").on("change", function(){
 		let file = $(this)[0].files[0];
 		let id = $(this)[0].id;
 		
@@ -181,7 +172,7 @@ $(function(){
 		}
 	})
 	
-	$(".image_remove").on("click", function(e){
+	$(".image_modify_remove").on("click", function(e){
 		e.preventDefault();
 		let id = $(this)[0].id;
 		let image_value = "#" + id.split("_")[0] + "_value";
@@ -211,7 +202,7 @@ $(function(){
 		console.log(filtered)
 		imageType = filtered;
 		
-		delete image_upload[num] ;
+		delete image_upload[num];
 		console.log(image_upload)
 		
 		$(value).text('');
@@ -219,7 +210,7 @@ $(function(){
 		show(value, remove);
 	};
 	
-	$(".productAddCancelBtn").on("click", function(e){
+	$(".productModifyCancelBtn").on("click", function(e){
 		e.preventDefault();
 		history.back();
 	}); // productAddCancelBtn end

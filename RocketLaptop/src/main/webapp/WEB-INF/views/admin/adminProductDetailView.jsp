@@ -62,7 +62,7 @@
 					</div>
 				</div>
 				<div class="d-flex justify-content-end mb-3 mt-3">
-					<button class="btn btn-secondary me-3 productModifyBtn">수정</button>
+					<a class="btn btn-secondary me-3" href="/admin/productModifyView?product_code=${productDetail.product_code}">수정</a>
 					<button class="btn btn-danger me-3 productDeleteBtn">삭제</button>
 					<button class="btn btn-primary productListBtn">목록</button>
 				</div>

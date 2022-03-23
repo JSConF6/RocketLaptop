@@ -1,15 +1,17 @@
 $(function(){
-	let pageName = $.trim($(".pageName").val());
-	$(".admin-link").removeClass('active');
-	$("#" + pageName).addClass('active');
+	let url = window.location.pathname.split("/")[2];
 	
-	let result = $(".result").val();
-	if(result === "productAddSuccess"){
-		Swal.fire({
-			icon: "success",
-			title: "상품등록",
-			text: "상품이 등록되었습니다.",
-			allowOutsideClick: false,
-		})
+	if(url === undefined){
+		$("#home").addClass('active');	
+	}else if(url.includes("notice")){
+		$("#notice").addClass('active');
+	}else if(url.includes("question")){
+		$("#question").addClass('active');
+	}else if(url.includes("order")){
+		$("#order").addClass('active');
+	}else if(url.includes("product")){
+		$("#product").addClass('active');
+	}else if(url.includes("user")){
+		$("#user").addClass('active');
 	}
 });
