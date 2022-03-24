@@ -28,3 +28,12 @@ a{
   	margin-left:0px;
   }
 }
+
+.update_icon{
+	transition: all ease 1s;
+	cursor : pointer;
+}
+
+.update_icon:hover {
+	transform: rotate( 720deg );
+}

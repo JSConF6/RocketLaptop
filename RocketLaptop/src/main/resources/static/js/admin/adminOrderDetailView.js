@@ -22,6 +22,6 @@ $(function() {
 	
 	$(".orderListBtn").on("click", function(e) {
 		e.preventDefault();
-		history.back();
+		location.href = "/admin/orderList";
 	});
 });
