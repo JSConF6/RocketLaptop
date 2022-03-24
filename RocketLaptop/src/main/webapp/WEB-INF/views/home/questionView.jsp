@@ -5,7 +5,7 @@
 <div class="container-fluid mb-5">
 	<div class="row">
 		<div class="col-8 mx-auto">
-			<div class="d-flex align-items-center mt-3 mb-3">
+			<div class="d-flex align-items-center mt-5 mb-3">
 				<img alt="Logo" src="../images/RocketLaptopLogo.svg" width="20%" height="20%"> <span class="fs-1">문의사항</span>
 			</div>
 			<table class="table">

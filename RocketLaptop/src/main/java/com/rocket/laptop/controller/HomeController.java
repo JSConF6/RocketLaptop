@@ -1,5 +1,7 @@
 package com.rocket.laptop.controller;
 
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,7 +20,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rocket.laptop.config.auth.PrincipalDetails;
+import com.rocket.laptop.model.CategoryDto;
+import com.rocket.laptop.model.PageHandler;
+import com.rocket.laptop.model.ProductListDto;
 import com.rocket.laptop.model.UserDto;
+import com.rocket.laptop.service.CategoryService;
+import com.rocket.laptop.service.ProductService;
 import com.rocket.laptop.service.UserService;
 
 @Controller
@@ -29,9 +36,27 @@ public class HomeController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private ProductService productService;
+	
+	@Autowired
+	private CategoryService categoryService;
+	
 	@GetMapping("/")
 	public String home(Model model) {
 		logger.info("홈으로 이동");
+		
+		List<CategoryDto> categoryList = categoryService.getAllCategory();
+		
+		int productListCount = productService.getProductListCount();
+		
+		PageHandler pageHandler = new PageHandler(1, productListCount, 9);
+		List<ProductListDto> newProductList = productService.getNewProductList(pageHandler);
+		List<ProductListDto> bestProductList = productService.getBestProductList(pageHandler);
+		
+		model.addAttribute("categoryList", categoryList);
+		model.addAttribute("newProductList", newProductList);
+		model.addAttribute("bestProductList", bestProductList);
 		
 		return "index";
 	}
@@ -107,6 +132,20 @@ public class HomeController {
 		logger.info("장바구니 view로 이동");
 		
 		return "/user/cartView";
+	}
+	
+	@GetMapping("/notice")
+	public String notice() {
+		logger.info("공지사항 view로 이동");
+		
+		return "/home/noticeView";
+	}
+	
+	@GetMapping("/question")
+	public String question() {
+		logger.info("문의사항 view로 이동");
+		
+		return "/home/questionView";
 	}
 	
 	@GetMapping("/mypage")

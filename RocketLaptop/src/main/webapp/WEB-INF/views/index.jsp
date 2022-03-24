@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <%@ include file="./layout/header.jsp"%>
 
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -31,158 +33,33 @@
 		<div class="col col-10">
 			<div class="d-flex justify-content-between mt-4 align-items-center">
 				<h1>새로운 상품</h1>
-				<a href="#" class="text-secondary">
-					<i class="fa-solid fa-angle-right fa-2x"></i>
+				<a href="#" class="text-secondary"> <i class="fa-solid fa-angle-right fa-2x"></i>
 				</a>
 			</div>
 		</div>
 		<div class="swiper mySwiper col-10">
 			<div class="swiper-pagination"></div>
 			<div class="swiper-wrapper">
-				<div class="swiper-slide">
-					<div class="card" style="width: 18rem">
-						<span class="badge bg-primary position-absolute fs-6" style="top: 2%; left: 77%">New</span>
-						<a href="#">
-							<img src="../images/280.jpg" class="card-img-top" alt="..." />
-						</a>
-						<div class="card-body">
-							<h6 class="card-title">
-								<span class="badge bg-dark">스마트폰</span>&nbsp; <span class="badge bg-dark">삼성</span>
-							</h6>
-							<p class="card-text fs-6">삼성전자 갤럭시 노트10+</p>
-							<a href="productDetail" class="btn btn-secondary">상세보기</a>
-							&nbsp; <span class="card-text">423,000원</span>
+				<c:forEach var="newProduct" items="${newProductList}">
+					<div class="swiper-slide">
+						<div class="card" style="width: 18rem">
+							<div class="text-end pt-2 pe-2">
+								<span class="badge bg-primary fs-6">New</span> 
+							</div>
+							<a href="#"> 
+								<img src="/upload${newProduct.product_img_name}" class="card-img-top" alt="..." />
+							</a>
+							<div class="card-body">
+								<h6 class="card-title">
+									<span class="badge bg-dark">노트북</span>&nbsp; <span class="badge bg-dark">${newProduct.category_name}</span>
+								</h6>
+								<p class="card-text fs-5 mt-3">${newProduct.product_name}</p> 
+								<fmt:formatNumber var="newProductPrice" value="${newProduct.product_price}" pattern="###,###,###" />
+								<a href="productDetail" class="btn btn-secondary">상세보기</a> &nbsp; <span class="card-text">${newProductPrice}원</span>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="card" style="width: 18rem">
-						<span class="badge bg-primary position-absolute fs-6" style="top: 2%; left: 77%">New</span>
-						<a href="#">
-							<img src="../images/280.jpg" class="card-img-top" alt="..." />
-						</a>
-						<div class="card-body">
-							<h6 class="card-title">
-								<span class="badge bg-dark">스마트폰</span>&nbsp; <span class="badge bg-dark">삼성</span>
-							</h6>
-							<p class="card-text fs-6">삼성전자 갤럭시 노트10+</p>
-							<a href="#" class="btn btn-secondary">상세보기</a>
-							&nbsp; <span class="card-text">423,000원</span>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="card" style="width: 18rem">
-						<span class="badge bg-primary position-absolute fs-6" style="top: 2%; left: 77%">New</span>
-						<a href="#">
-							<img src="../images/280.jpg" class="card-img-top" alt="..." />
-						</a>
-						<div class="card-body">
-							<h6 class="card-title">
-								<span class="badge bg-dark">스마트폰</span>&nbsp; <span class="badge bg-dark">삼성</span>
-							</h6>
-							<p class="card-text fs-6">삼성전자 갤럭시 노트10+</p>
-							<a href="#" class="btn btn-secondary">상세보기</a>
-							&nbsp; <span class="card-text">423,000원</span>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="card" style="width: 18rem">
-						<span class="badge bg-primary position-absolute fs-6" style="top: 2%; left: 77%">New</span>
-						<a href="#">
-							<img src="../images/280.jpg" class="card-img-top" alt="..." />
-						</a>
-						<div class="card-body">
-							<h6 class="card-title">
-								<span class="badge bg-dark">스마트폰</span>&nbsp; <span class="badge bg-dark">삼성</span>
-							</h6>
-							<p class="card-text fs-6">삼성전자 갤럭시 노트10+</p>
-							<a href="#" class="btn btn-secondary">상세보기</a>
-							&nbsp; <span class="card-text">423,000원</span>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="card" style="width: 18rem">
-						<span class="badge bg-primary position-absolute fs-6" style="top: 2%; left: 77%">New</span>
-						<a href="#">
-							<img src="../images/280.jpg" class="card-img-top" alt="..." />
-						</a>
-						<div class="card-body">
-							<h6 class="card-title">
-								<span class="badge bg-dark">스마트폰</span>&nbsp; <span class="badge bg-dark">삼성</span>
-							</h6>
-							<p class="card-text fs-6">삼성전자 갤럭시 노트10+</p>
-							<a href="#" class="btn btn-secondary">상세보기</a>
-							&nbsp; <span class="card-text">423,000원</span>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="card" style="width: 18rem">
-						<span class="badge bg-primary position-absolute fs-6" style="top: 2%; left: 77%">New</span>
-						<a href="#">
-							<img src="../images/280.jpg" class="card-img-top" alt="..." />
-						</a>
-						<div class="card-body">
-							<h6 class="card-title">
-								<span class="badge bg-dark">스마트폰</span>&nbsp; <span class="badge bg-dark">삼성</span>
-							</h6>
-							<p class="card-text fs-6">삼성전자 갤럭시 노트10+</p>
-							<a href="#" class="btn btn-secondary">상세보기</a>
-							&nbsp; <span class="card-text">423,000원</span>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="card" style="width: 18rem">
-						<span class="badge bg-primary position-absolute fs-6" style="top: 2%; left: 77%">New</span>
-						<a href="#">
-							<img src="../images/280.jpg" class="card-img-top" alt="..." />
-						</a>
-						<div class="card-body">
-							<h6 class="card-title">
-								<span class="badge bg-dark">스마트폰</span>&nbsp; <span class="badge bg-dark">삼성</span>
-							</h6>
-							<p class="card-text fs-6">삼성전자 갤럭시 노트10+</p>
-							<a href="#" class="btn btn-secondary">상세보기</a>
-							&nbsp; <span class="card-text">423,000원</span>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="card" style="width: 18rem">
-						<span class="badge bg-primary position-absolute fs-6" style="top: 2%; left: 77%">New</span>
-						<a href="#">
-							<img src="../images/280.jpg" class="card-img-top" alt="..." />
-						</a>
-						<div class="card-body">
-							<h6 class="card-title">
-								<span class="badge bg-dark">스마트폰</span>&nbsp; <span class="badge bg-dark">삼성</span>
-							</h6>
-							<p class="card-text fs-6">삼성전자 갤럭시 노트10+</p>
-							<a href="#" class="btn btn-secondary">상세보기</a>
-							&nbsp; <span class="card-text">423,000원</span>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="card" style="width: 18rem">
-						<span class="badge bg-primary position-absolute fs-6" style="top: 2%; left: 77%">New</span>
-						<a href="#">
-							<img src="../images/280.jpg" class="card-img-top" alt="..." />
-						</a>
-						<div class="card-body">
-							<h6 class="card-title">
-								<span class="badge bg-dark">스마트폰</span>&nbsp; <span class="badge bg-dark">삼성</span>
-							</h6>
-							<p class="card-text fs-6">삼성전자 갤럭시 노트10+</p>
-							<a href="#" class="btn btn-secondary">상세보기</a>
-							&nbsp; <span class="card-text">423,000원</span>
-						</div>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</div>
@@ -190,159 +67,34 @@
 		<div class="col col-10">
 			<div class="d-flex justify-content-between mt-4 align-items-center">
 				<h1>베스트 상품</h1>
-				<a href="#" class="text-secondary">
+				<a href="#" class="text-secondary"> 
 					<i class="fa-solid fa-angle-right fa-2x"></i>
-				</a>
 				</a>
 			</div>
 		</div>
 		<div class="swiper mySwiper col-10">
 			<div class="swiper-pagination"></div>
 			<div class="swiper-wrapper">
-				<div class="swiper-slide">
-					<div class="card" style="width: 18rem">
-						<span class="badge bg-danger position-absolute fs-6" style="top: 2%; left: 77%">Best</span>
-						<a href="#">
-							<img src="../images/281.jpg" class="card-img-top" alt="..." />
-						</a>
-						<div class="card-body">
-							<h6 class="card-title">
-								<span class="badge bg-dark">노트북</span>&nbsp; <span class="badge bg-dark">ASUS</span>
-							</h6>
-							<p class="card-text fs-6">에이수스 2022 노트북</p>
-							<a href="#" class="btn btn-secondary">상세보기</a>
-							&nbsp; <span class="card-text">1,592,000원</span>
+				<c:forEach var="bestProduct" items="${bestProductList}">
+					<div class="swiper-slide">
+						<div class="card" style="width: 18rem">
+							<div class="text-end pt-2 pe-2">
+								<span class="badge bg-danger fs-6">Best</span>
+							</div> 
+							<a href="#"> 
+								<img src="/upload${bestProduct.product_img_name}" class="card-img-top" alt="..." />
+							</a>
+							<div class="card-body">
+								<h6 class="card-title">
+									<span class="badge bg-dark">노트북</span>&nbsp; <span class="badge bg-dark">${bestProduct.category_name}</span>
+								</h6>
+								<p class="card-text fs-5 mt-3">${bestProduct.product_name}</p>
+								<fmt:formatNumber var="bestProductPrice" value="${bestProduct.product_price}" pattern="###,###,###" />
+								<a href="#" class="btn btn-secondary">상세보기</a> &nbsp; <span class="card-text">${bestProductPrice}원</span>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="card" style="width: 18rem">
-						<span class="badge bg-danger position-absolute fs-6" style="top: 2%; left: 77%">Best</span>
-						<a href="#">
-							<img src="../images/281.jpg" class="card-img-top" alt="..." />
-						</a>
-						<div class="card-body">
-							<h6 class="card-title">
-								<span class="badge bg-dark">노트북</span>&nbsp; <span class="badge bg-dark">ASUS</span>
-							</h6>
-							<p class="card-text fs-6">에이수스 2022 노트북</p>
-							<a href="#" class="btn btn-secondary">상세보기</a>
-							&nbsp; <span class="card-text">1,592,000원</span>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="card" style="width: 18rem">
-						<span class="badge bg-danger position-absolute fs-6" style="top: 2%; left: 77%">Best</span>
-						<a href="#">
-							<img src="../images/281.jpg" class="card-img-top" alt="..." />
-						</a>
-						<div class="card-body">
-							<h6 class="card-title">
-								<span class="badge bg-dark">노트북</span>&nbsp; <span class="badge bg-dark">ASUS</span>
-							</h6>
-							<p class="card-text fs-6">에이수스 2022 노트북</p>
-							<a href="#" class="btn btn-secondary">상세보기</a>
-							&nbsp; <span class="card-text">1,592,000원</span>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="card" style="width: 18rem">
-						<span class="badge bg-danger position-absolute fs-6" style="top: 2%; left: 77%">Best</span>
-						<a href="#">
-							<img src="../images/281.jpg" class="card-img-top" alt="..." />
-						</a>
-						<div class="card-body">
-							<h6 class="card-title">
-								<span class="badge bg-dark">노트북</span>&nbsp; <span class="badge bg-dark">ASUS</span>
-							</h6>
-							<p class="card-text fs-6">에이수스 2022 노트북</p>
-							<a href="#" class="btn btn-secondary">상세보기</a>
-							&nbsp; <span class="card-text">1,592,000원</span>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="card" style="width: 18rem">
-						<span class="badge bg-danger position-absolute fs-6" style="top: 2%; left: 77%">Best</span>
-						<a href="#">
-							<img src="../images/281.jpg" class="card-img-top" alt="..." />
-						</a>
-						<div class="card-body">
-							<h6 class="card-title">
-								<span class="badge bg-dark">노트북</span>&nbsp; <span class="badge bg-dark">ASUS</span>
-							</h6>
-							<p class="card-text fs-6">에이수스 2022 노트북</p>
-							<a href="#" class="btn btn-secondary">상세보기</a>
-							&nbsp; <span class="card-text">1,592,000원</span>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="card" style="width: 18rem">
-						<span class="badge bg-danger position-absolute fs-6" style="top: 2%; left: 77%">Best</span>
-						<a href="#">
-							<img src="../images/281.jpg" class="card-img-top" alt="..." />
-						</a>
-						<div class="card-body">
-							<h6 class="card-title">
-								<span class="badge bg-dark">노트북</span>&nbsp; <span class="badge bg-dark">ASUS</span>
-							</h6>
-							<p class="card-text fs-6">에이수스 2022 노트북</p>
-							<a href="#" class="btn btn-secondary">상세보기</a>
-							&nbsp; <span class="card-text">1,592,000원</span>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="card" style="width: 18rem">
-						<span class="badge bg-danger position-absolute fs-6" style="top: 2%; left: 77%">Best</span>
-						<a href="#">
-							<img src="../images/281.jpg" class="card-img-top" alt="..." />
-						</a>
-						<div class="card-body">
-							<h6 class="card-title">
-								<span class="badge bg-dark">노트북</span>&nbsp; <span class="badge bg-dark">ASUS</span>
-							</h6>
-							<p class="card-text fs-6">에이수스 2022 노트북</p>
-							<a href="#" class="btn btn-secondary">상세보기</a>
-							&nbsp; <span class="card-text">1,592,000원</span>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="card" style="width: 18rem">
-						<span class="badge bg-danger position-absolute fs-6" style="top: 2%; left: 77%">Best</span>
-						<a href="#">
-							<img src="../images/281.jpg" class="card-img-top" alt="..." />
-						</a>
-						<div class="card-body">
-							<h6 class="card-title">
-								<span class="badge bg-dark">노트북</span>&nbsp; <span class="badge bg-dark">ASUS</span>
-							</h6>
-							<p class="card-text fs-6">에이수스 2022 노트북</p>
-							<a href="#" class="btn btn-secondary">상세보기</a>
-							&nbsp; <span class="card-text">1,592,000원</span>
-						</div>
-					</div>
-				</div>
-				<div class="swiper-slide">
-					<div class="card" style="width: 18rem">
-						<span class="badge bg-danger position-absolute fs-6" style="top: 2%; left: 77%">Best</span>
-						<a href="#">
-							<img src="../images/281.jpg" class="card-img-top" alt="..." />
-						</a>
-						<div class="card-body">
-							<h6 class="card-title">
-								<span class="badge bg-dark">노트북</span>&nbsp; <span class="badge bg-dark">ASUS</span>
-							</h6>
-							<p class="card-text fs-6">에이수스 2022 노트북</p>
-							<a href="#" class="btn btn-secondary">상세보기</a>
-							&nbsp; <span class="card-text">1,592,000원</span>
-						</div>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</div>

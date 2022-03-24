@@ -44,5 +44,17 @@
 		set product_name = #{product_name}, product_price = #{product_price}
 		where product_code = #{product_code}
 	</update>
+	
+	<select id="getBestProductList" parameterType="Map" resultType="ProductListDto">
+		select pr.* 
+		from (select @ROWNUM := @ROWNUM + 1 AS rnum, p.*
+	  		  from (select @ROWNUM:=0) AS r, (select p.product_code, c.category_name, p.product_name, p.product_price, p.product_reg_date, i.product_img_name, i.product_img_original_name
+				    from product p, product_img i, category c
+					where p.product_code = i.product_code
+					and p.category_code = c.category_code
+					and i.product_img_type = 1
+            		order by p.product_sales desc) p) pr
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
 
 </mapper>

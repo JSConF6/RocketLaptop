@@ -54,4 +54,24 @@ public class ProductServiceImpl implements ProductService {
 		productMapper.productModify(productDto);
 	}
 
+	@Override
+	public List<ProductListDto> getNewProductList(PageHandler pageHandler) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("start", pageHandler.getStartRow());
+		map.put("end", pageHandler.getEndRow());
+		
+		return productMapper.getProductList(map);
+	}
+
+	@Override
+	public List<ProductListDto> getBestProductList(PageHandler pageHandler) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("start", pageHandler.getStartRow());
+		map.put("end", pageHandler.getEndRow());
+		
+		return productMapper.getBestProductList(map);
+	}
+
 }

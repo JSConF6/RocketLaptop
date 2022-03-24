@@ -24,4 +24,6 @@ public interface ProductMapper {
 	public int productDelete(String product_code);
 	
 	public void productModify(ProductDto productDto);
+
+	public List<ProductListDto> getBestProductList(Map<String, Object> map);
 }

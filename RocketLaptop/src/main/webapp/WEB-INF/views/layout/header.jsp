@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,7 +82,7 @@
 							<li class="nav-item"><a href="#" class="nav-link d-flex flex-column align-items-center text-secondary" id="mypage-icon"> <i class="fa-solid fa-circle-user fa-2x"></i> <span class="fs-5 mypage-icon-title">마이페이지</span>
 							</a></li>
 						</sec:authorize>
-						<sec:authorize access="hasRole('ROLE_ADMIN')"> 
+						<sec:authorize access="hasRole('ROLE_ADMIN')">
 							<li class="nav-item"><a href="/admin?pageName=home" class="nav-link d-flex flex-column align-items-center text-secondary" id="mypage-icon"> <i class="fa-solid fa-circle-user fa-2x"></i> <span class="fs-5 mypage-icon-title">관리자페이지</span>
 							</a></li>
 						</sec:authorize>
@@ -111,28 +112,20 @@
 										<a href="/productList">전체</a>
 									</button>
 								</li>
-								<li>
-									<button class="dropdown-item" type="button">
-										<a href="#">노트북</a>
-									</button>
-								</li>
-								<li>
-									<button class="dropdown-item" type="button">
-										<a href="#">스마트폰</a>
-									</button>
-								</li>
-								<li>
-									<button class="dropdown-item" type="button">
-										<a href="#">카메라</a>
-									</button>
-								</li>
+								<c:forEach var="category" items="${categoryList}">
+									<li>
+										<button class="dropdown-item" type="button">
+											<a href="#">${category.category_name}</a>
+										</button>
+									</li>
+								</c:forEach>
 							</ul>
 						</div>
 					</li>
 					<li class="nav-item"><a href="#" class="nav-link me-3 text-secondary fs-4">베스트상품</a></li>
 					<li class="nav-item"><a href="#" class="nav-link me-3 text-secondary fs-4">신규상품</a></li>
 					<li class="nav-item"><a class="nav-link me-3 text-secondary fs-4" href="/notice">공지사항</a></li>
-					<li class="nav-item"><a href="question" class="nav-link me-3 text-secondary fs-4">문의사항</a></li>
+					<li class="nav-item"><a href="/question" class="nav-link me-3 text-secondary fs-4">문의사항</a></li>
 				</ul>
 			</div>
 		</div>

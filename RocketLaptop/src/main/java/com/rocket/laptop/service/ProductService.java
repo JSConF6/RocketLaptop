@@ -20,4 +20,8 @@ public interface ProductService {
 	public int productDelete(String product_code);
 	
 	public void productModify(ProductDto productDto);
+	
+	public List<ProductListDto> getNewProductList(PageHandler pageHandler);
+	
+	public List<ProductListDto> getBestProductList(PageHandler pageHandler);
 }
