@@ -38,7 +38,7 @@ public class adminNoticeController {
 		logger.info("limit : " + limit);
 		
 		int listCount = noticeService.getNoticeListCount();
-		logger.info("총 게시물 갯수 : " + listCount);
+		logger.info("총 공지사항 갯수 : " + listCount);
 		
 		PageHandler pageHandler = new PageHandler(page, listCount, limit);
 		

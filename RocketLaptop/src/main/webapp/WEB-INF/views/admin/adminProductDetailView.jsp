@@ -27,6 +27,10 @@
 					<fmt:formatNumber var="product_price" value="${productDetail.product_price}" pattern="###,###"></fmt:formatNumber>
 					<label for="productPrice" class="form-label">상품가격</label> <input type="text" class="form-control" id="productPrice" value="${product_price}원" disabled />
 				</div>
+				<div class="mb-3">
+					<fmt:formatDate var="productDate" value="${productDetail.product_reg_date}" pattern="yyyy-MM-dd"/>
+					<label for="productDate" class="form-label">상품등록일</label> <input type="text" class="form-control" id="productDate" value='${productDate}' disabled />
+				</div>
 				<c:set var="product_detail" />
 				<div class="row row-cols-1 row-cols-md-2 g-4">
 					<c:forEach var="file" items="${fileList}" varStatus="status">

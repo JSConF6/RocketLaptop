@@ -19,7 +19,7 @@
 		select no.* 
 		from (select @ROWNUM := @ROWNUM + 1 AS rnum, n.*
 	  		  from (select @ROWNUM:=0) AS r, (select * from notice order by notice_reg_date desc) n) no
-		where rnum &gt;= #{start} and rnum &lt;= #{end};
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	
 	<select id="getNoticeDetail" parameterType="int" resultType="NoticeDto">

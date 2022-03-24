@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="./adminSidebar.jsp"%>
 
@@ -9,7 +10,7 @@
 			<img alt="Logo" src="../images/RocketLaptopLogo.svg" width="20%" height="30%"> <span class="fs-1">유저목록</span>
 		</div>
 		<p class="mt-3">
-			<span class="fs-5">유저수 : ${pageHandlet.listCount}명</span>
+			<span class="fs-5">유저수 : ${pageHandler.listCount}명</span>
 		</p>
 		<c:if test="${pageHandler.listCount > 0}">
 			<table class="table table-striped table-hover text-center">
@@ -33,7 +34,7 @@
 							<c:if test="${user.user_role == 'ROLE_USER'}">
 								<td>유저</td>
 							</c:if>
-							<td>${user.user_reg_date}</td>
+							<td><fmt:formatDate value="${user.user_reg_date}" pattern="yyyy-MM-dd"/></td>
 						</tr>
 					</c:forEach>
 				</tbody>

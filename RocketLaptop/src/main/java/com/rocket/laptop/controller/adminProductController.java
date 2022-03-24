@@ -63,7 +63,7 @@ public class adminProductController {
 		logger.info("limit : " + limit);
 		
 		int listCount = productService.getProductListCount();
-		logger.info("총 게시물 갯수 : " + listCount);
+		logger.info("총 상품 갯수 : " + listCount);
 		
 		PageHandler pageHandler = new PageHandler(page, listCount, limit);
 		

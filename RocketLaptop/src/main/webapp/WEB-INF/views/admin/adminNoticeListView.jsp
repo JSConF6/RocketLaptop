@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="./adminSidebar.jsp"%>
 
@@ -31,7 +32,7 @@
 							<td><a href="/admin/noticeDetail?num=${notice.notice_num}"> <c:out value="${notice.notice_title}" escapeXml="true" />
 							</a></td>
 							<td>관리자</td>
-							<td>${notice.notice_reg_date}</td>
+							<td><fmt:formatDate value="${notice.notice_reg_date}" pattern="yyyy-MM-dd"/></td>
 							<td><button type="button" class="btn btn-danger noticeDeleteBtn">삭제</button>
 								<input type="hidden" value="${notice.notice_num}" class="notice_num">
 							</td>

@@ -17,7 +17,7 @@
 	<select id="getUserListCount" resultType="int">
 		select count(*)
 		from user
-		where user_id != 'admin';
+		where user_id != 'admin'
 	</select>
 	
 	<select id="getUserList" parameterType="Map" resultType="UserDto">
@@ -28,7 +28,7 @@
 	  		  	    from user
 	  		  	    where user_id != 'admin'
 	  		  	    order by user_reg_date desc) u) us
-		where rnum &gt;= #{start} and rnum &lt;= #{end};
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 
 </mapper>

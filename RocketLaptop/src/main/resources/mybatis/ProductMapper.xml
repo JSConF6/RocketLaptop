@@ -19,12 +19,12 @@
 					and p.category_code = c.category_code
 					and i.product_img_type = 1
             		order by p.product_reg_date desc) p) pr
-		where rnum &gt;= #{start} and rnum &lt;= #{end};
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	
 	<select id="getProductListCount" resultType="Int">
 		select count(*)
-		from product;
+		from product
 	</select>
 	
 	<select id="getProductDetail" resultType="ProductDetailDto" parameterType="String">

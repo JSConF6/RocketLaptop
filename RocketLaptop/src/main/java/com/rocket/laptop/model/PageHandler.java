@@ -7,7 +7,7 @@ public class PageHandler {
 	private int page; // 현재 페이지
 	private int listCount; // 총 게시물 갯수
 	private int limit; // 한 페이지 크기
-	private int maxPage;
+	private int maxPage; // 총 페이지 수
 	private int startPage; // 네비게이션 첫번째 페이지
 	private int endPage; // 네비게이션 마지막 페이지
 	private int startRow;

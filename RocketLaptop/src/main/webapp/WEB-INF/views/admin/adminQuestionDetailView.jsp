@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="./adminSidebar.jsp"%>
 
@@ -19,7 +20,8 @@
 			<textarea class="form-control" id="question_content" rows="10" disabled style="resize: none"><c:out value="${questionDto.qna_content}" /></textarea>
 		</div>
 		<div class="mb-3">
-			<label for="question_reg_date" class="form-label">날짜</label> <input type="text" class="form-control" id="question_reg_date" disabled value="${questionDto.qna_reg_date}">
+			<fmt:formatDate var="qnaDate" value="${questionDto.qna_reg_date}" pattern="yyyy-MM-dd"/>
+			<label for="question_reg_date" class="form-label">날짜</label> <input type="text" class="form-control" id="question_reg_date" disabled value="${qnaDate}" />
 		</div>
 		<c:if test="${!empty commentDto}">
 			<div class="card">
@@ -27,13 +29,14 @@
 				<div class="card-body">
 					<p class="card-text">${commentDto.comment_content}</p>
 				</div>
-				<div class="card-footer">날짜 ${commentDto.comment_reg_date}</div>
+				<fmt:formatDate var="commentDate" value="${commentDto.comment_reg_date}" pattern="yyyy-MM-dd"/>
+				<div class="card-footer">날짜 ${commentDate}</div>
 			</div>
 		</c:if>
 		<c:if test="${empty commentDto}">
 			<div class="card">
 				<div class="card-body text-center">
-					<p class="card-text">답변이 아직 없습니다.</p>
+					<p class="card-text">답변대기</p>
 				</div>
 			</div>
 		</c:if>

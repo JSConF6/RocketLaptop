@@ -7,7 +7,7 @@
 	
 	<select id="getQuestionListCount" resultType="int">
 		select count(*)
-		from qna;
+		from qna
 	</select>
 	
 	<select id="getQuestionList" parameterType="Map" resultType="QuestionDto">
@@ -19,7 +19,7 @@
 	  		  	    from qna q left join comment c
 	  		  	   	 on q.qna_num = c.qna_num
 	  		  	    order by q.qna_reg_date desc) qn) qu
-		where rnum &gt;= #{start} and rnum &lt;= #{end};
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	
 	<select id="getQuestionDetail" parameterType="int" resultType="QuestionDto">

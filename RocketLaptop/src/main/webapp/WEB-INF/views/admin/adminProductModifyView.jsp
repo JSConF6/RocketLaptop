@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="./adminSidebar.jsp"%>
 
@@ -28,6 +29,9 @@
 				<div class="mb-3">
 					<label for="productPrice" class="form-label">상품가격</label> 
 					<input type=text class="form-control" id="productPrice" pattern="[0-9]+" placeholder="상품가격을 숫자로 입력하세요" value="${productDetail.product_price}">
+				</div>
+				<div class="mb-3">
+					<label for="productDate" class="form-label">상품등록일</label> <input type="text" class="form-control" id="productDate" value='<fmt:formatDate value="${productDetail.product_reg_date}" pattern="yyyy-MM-dd"/>' disabled />
 				</div>
 				<c:forEach var="file" items="${fileList}" varStatus="status">
 					<div class="mb-3 img-container">

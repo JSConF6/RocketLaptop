@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rocket.laptop.repository.OrderMapper">
+	
+	<select id="getOrderList" resultType="OrderDto" parameterType="Map">
+		select ord.* 
+		from (select @ROWNUM := @ROWNUM + 1 AS rnum, o.*
+	  		  from (select @ROWNUM:=0) AS r, 
+	  	    	   (select * 
+	  			   from order_tb
+	  		  	   order by order_date desc) o) ord
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<select id="getOrderListCount" resultType="Int">
+		select count(*)
+		from order_tb
+	</select>
+	
+	<select id="getOrder" parameterType="String" resultType="OrderDto">
+		select *
+		from order_tb
+		where order_id = #{order_id}
+	</select>
+	
+	<select id="getOrderDetail" parameterType="String" resultType="OrderDetailDto">
+		select p.PRODUCT_CODE, p.CATEGORY_CODE, c.CATEGORY_NAME, p.PRODUCT_NAME, 
+	   		   p.PRODUCT_PRICE, o.order_de_amount, i.product_img_name, i.PRODUCT_IMG_ORIGINAL_NAME
+		from product p, order_detail o, product_img i, category c
+		where p.product_code = o.product_code
+		and o.order_id = #{order_id}
+		and p.PRODUCT_CODE = i.PRODUCT_CODE
+		and p.CATEGORY_CODE = c.CATEGORY_CODE
+		and i.PRODUCT_IMG_TYPE = 1;
+	</select>
+	
+	<update id="OrderDeliveryUpdate" parameterType="Map">
+		update order_tb
+		set order_state = #{delivery_text}
+		where order_id = #{order_id}
+	</update>
+
+</mapper>

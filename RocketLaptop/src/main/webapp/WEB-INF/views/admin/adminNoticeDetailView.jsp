@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="./adminSidebar.jsp"%>
 
@@ -19,7 +20,8 @@
 			<textarea class="form-control" id="notice_content" rows="10" disabled style="resize: none"><c:out value="${noticeDto.notice_content}" /></textarea>
 		</div>
 		<div class="mb-3">
-			<label for="notice_reg_date" class="form-label">날짜</label> <input type="text" class="form-control" id="notice_reg_date" disabled value="${noticeDto.notice_reg_date}">
+			<fmt:formatDate value="${noticeDto.notice_reg_date}" var="noticeDate" pattern="yyyy-MM-dd"/>
+			<label for="notice_reg_date" class="form-label">날짜</label> <input type="text" class="form-control" id="notice_reg_date" disabled value="${noticeDate}">
 		</div>
 		<div class="d-flex justify-content-end mb-3 mt-3">
 			<a class="btn btn-secondary me-3" href="/admin/noticeModifyView?num=${noticeDto.notice_num}">수정</a>

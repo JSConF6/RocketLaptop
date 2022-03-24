@@ -15,7 +15,7 @@
 		<c:if test="${pageHandler.listCount > 0}">
 			<div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 row-cols-lg-1 row-cols-xl-2 g-4">
 				<c:forEach var="product" items="${productList}">
-					<div class="col-6">
+					<div class="col">
 						<div class="card mb-3">
 							<div class="row g-0">
 								<div class="col-md-4">
@@ -26,19 +26,18 @@
 										<h3 class="card-title mt-3 mb-3">
 											<a href="/admin/productDetail?product_code=${product.product_code}"><c:out value="${product.product_name}" /></a>
 										</h3>
-										<p class="card-text">
+										<p class="card-text fs-5">
 											카테고리 : <span class="badge bg-dark">노트북</span>&nbsp; <span class="badge bg-dark"> <c:out value="${product.category_name}" />
 											</span>
 										</p>
-										<fmt:formatNumber var="product_price" value="${product.product_price}" pattern="###,###,###" />
-										<p class="card-text">
+										<p class="card-text fs-5">
 											상품가격 :
-											<c:out value="${product_price}" />
+											<fmt:formatNumber value="${product.product_price}" pattern="###,###,###" />
 											원
 										</p>
-										<p class="card-text">
+										<p class="card-text fs-5">
 											상품 등록일 :
-											<c:out value="${product.product_reg_date}" />
+											<fmt:formatDate value="${product.product_reg_date}" pattern="yyyy-MM-dd" />
 										</p>
 										<p class="card-text text-end">
 											<a class="btn btn-primary" href="/admin/productDetail?&product_code=${product.product_code}">상세보기</a>

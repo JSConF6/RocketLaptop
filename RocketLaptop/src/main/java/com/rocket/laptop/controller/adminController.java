@@ -54,12 +54,4 @@ public class adminController {
 		return "/admin/adminView";
 	}
 	
-	@GetMapping("/admin/orderList")
-	public String adminOrderView() {
-		logger.info("주문관리 페이지로 이동");
-		
-		return "/admin/adminOrderListView";
-	}
-	
-	
 }

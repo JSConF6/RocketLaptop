@@ -115,7 +115,7 @@ $(function(){
 				})
 			}
 		}).fail(function(err) {
-			consle.log(err)
+			console.log(err)
 		})
 	}
 	
