@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+
 <%@ include file="../layout/header.jsp"%>
 
 <div class="container-fluid mt-5 mb-5">
@@ -12,15 +16,15 @@
 				</div>
 				<div class="carousel-inner">
 					<div class="carousel-item active" data-bs-interval="10000">
-						<img src="../images/280.jpg" class="d-block w-100" alt="..." />
+						<img src="/upload${fileList[1].product_img_name}" class="d-block w-100" alt="..." />
 						<div class="carousel-caption d-none d-md-block"></div>
 					</div>
 					<div class="carousel-item" data-bs-interval="2000">
-						<img src="../images/281.jpg" class="d-block w-100" alt="..." />
+						<img src="/upload${fileList[2].product_img_name}" class="d-block w-100" alt="..." />
 						<div class="carousel-caption d-none d-md-block"></div>
 					</div>
 					<div class="carousel-item">
-						<img src="../images/280.jpg" class="d-block w-100" alt="..." />
+						<img src="/upload${fileList[3].product_img_name}" class="d-block w-100" alt="..." />
 						<div class="carousel-caption d-none d-md-block"></div>
 					</div>
 				</div>
@@ -35,12 +39,15 @@
 		<div class="col-md-7">
 			<div class="card shadow-sm h-100">
 				<div class="card-body mt-5 mb-5">
-					<h5 class="card-title fs-3 text-start">K70 RGB MK.2 BROWN 기계식 게이밍 키보드 갈축</h5>
-					<h5 class="card-title pt-3 border-top fs-3 text-start">219,000원</h5>
+					<input type="hidden" value="${productDetail.product_price}" id="price" />
+					<input type="hidden" value="${productDetail.product_code}" id="product_code" />
+					<h5 class="card-title fs-3 text-start">${productDetail.product_name}</h5>
+					<fmt:formatNumber var="productDetailPrice" value="${productDetail.product_price}" pattern="###,###,###" />
+					<h5 class="card-title pt-3 border-top fs-3 text-start productDetailPrice">${productDetailPrice}원</h5>
 					<p class="card-text pt-3 border-top text-start">
-						<span class="badge bg-dark me-1 fs-3">전자제품</span><span class="badge bg-dark me-1 fs-3">컴퓨터</span><span class="badge bg-dark fs-3">악세사리</span>
+						<span class="badge bg-dark me-1 fs-3">노트북</span><span class="badge bg-dark me-1 fs-3">${productDetail.category_name}</span>
 					</p>
-					<p class="card-text pb-3 fs-3 text-start border-top pt-3 mb-0">배송비 2,500원</p>
+					<p class="card-text pb-3 fs-3 text-start border-top pt-3 mb-0">무료배송</p>
 					<p class="card-text pb-3 fs-3 text-start border-top pt-3 mb-0">5일 이내 출고 (주말, 공휴일 제외)</p>
 					<div class="card-text border-top pt-3 pb-3">
 						<div class="row">
@@ -49,21 +56,21 @@
 							</div>
 							<div class="col-auto">
 								<div class="input-group">
-									<span class="input-group-text" style="cursor: pointer">-</span>
-									<input type="text" class="form-control bg-white" style="width: 45px" disabled />
-									<span class="input-group-text" style="cursor: pointer">+</span>
+									<span class="input-group-text minus" style="cursor: pointer">-</span>
+									<input type="text" class="form-control bg-white text-center productCount" style="width: 45px" disabled value="1"/>
+									<span class="input-group-text plus" style="cursor: pointer">+</span>
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="row pt-3 pb-3 border-top">
 						<p class="d-flex justify-content-between fs-3">
-							총 상품 금액<span>1,500,000원</span>
+							총 상품 금액<span class="productTotalPrice">${productDetailPrice}원</span>
 						</p>
 					</div>
 					<div class="d-flex justify-content-between align-items-center">
 						<div class="col-6 d-grid p-1">
-							<button type="button" class="btn btn-lg btn-dark btn-outline-secondary text-white">장바구니 담기</button>
+							<button type="button" class="btn btn-lg btn-dark btn-outline-secondary text-white cartBtn">장바구니 담기</button>
 						</div>
 						<div class="col-6 d-grid p-1">
 							<button type="button" class="btn btn-lg btn-primary text-white">주문하기</button>
@@ -78,7 +85,7 @@
 			<h2 class="text-white pt-3 pb-3 mb-0 text-center">상세설명</h2>
 		</div>
 		<div class="col-12 d-flex justify-content-center">
-			<img class="img-fluid" src="http://earlyadopter.godohosting.com/goods_earlyadopter_godo_co_kr/162/0ac90345448ccd5c.jpg" />
+			<img class="img-fluid" src="/upload${fileList[4].product_img_name}" />
 		</div>
 	</div>
 </div>

@@ -37,95 +37,106 @@
 				</a>
 			</div>
 		</div>
-		<div class="swiper mySwiper col-10">
-			<div class="swiper-pagination"></div>
-			<div class="swiper-wrapper">
-				<c:forEach var="newProduct" items="${newProductList}">
-					<div class="swiper-slide">
-						<div class="card" style="width: 18rem">
-							<div class="text-end pt-2 pe-2">
-								<span class="badge bg-primary fs-6">New</span> 
-							</div>
-							<a href="#"> 
-								<img src="/upload${newProduct.product_img_name}" class="card-img-top" alt="..." />
-							</a>
-							<div class="card-body">
-								<h6 class="card-title">
-									<span class="badge bg-dark">노트북</span>&nbsp; <span class="badge bg-dark">${newProduct.category_name}</span>
-								</h6>
-								<p class="card-text fs-5 mt-3">${newProduct.product_name}</p> 
-								<fmt:formatNumber var="newProductPrice" value="${newProduct.product_price}" pattern="###,###,###" />
-								<a href="productDetail" class="btn btn-secondary">상세보기</a> &nbsp; <span class="card-text">${newProductPrice}원</span>
+		<c:if test="${!empty newProductList}">
+			<div class="swiper mySwiper col-10">
+				<div class="swiper-pagination"></div>
+				<div class="swiper-wrapper">
+					<c:forEach var="newProduct" items="${newProductList}">
+						<div class="swiper-slide">
+							<div class="card" style="width: 18rem">
+								<div class="text-end pt-2 pe-2">
+									<span class="badge bg-primary fs-6">New</span>
+								</div>
+								<a href="#"> <img src="/upload${newProduct.product_img_name}" class="card-img-top" alt="..." />
+								</a>
+								<div class="card-body">
+									<h6 class="card-title">
+										<span class="badge bg-dark">노트북</span>&nbsp; <span class="badge bg-dark">${newProduct.category_name}</span>
+									</h6>
+									<p class="card-text fs-5 mt-3">${newProduct.product_name}</p>
+									<fmt:formatNumber var="newProductPrice" value="${newProduct.product_price}" pattern="###,###,###" />
+									<a href="productDetail" class="btn btn-secondary">상세보기</a> &nbsp; <span class="card-text">${newProductPrice}원</span>
+								</div>
 							</div>
 						</div>
-					</div>
-				</c:forEach>
+					</c:forEach>
+				</div>
 			</div>
-		</div>
+		</c:if>
+		<c:if test="${empty newProductList}">
+			<div class="text-center mt-5 mb-5">
+				<h1>새로운 상품이 없습니다.</h1>
+			</div>
+		</c:if>
 	</div>
 	<div class="row justify-content-center mb-5">
 		<div class="col col-10">
 			<div class="d-flex justify-content-between mt-4 align-items-center">
 				<h1>베스트 상품</h1>
-				<a href="#" class="text-secondary"> 
-					<i class="fa-solid fa-angle-right fa-2x"></i>
+				<a href="#" class="text-secondary"> <i class="fa-solid fa-angle-right fa-2x"></i>
 				</a>
 			</div>
 		</div>
-		<div class="swiper mySwiper col-10">
-			<div class="swiper-pagination"></div>
-			<div class="swiper-wrapper">
-				<c:forEach var="bestProduct" items="${bestProductList}">
-					<div class="swiper-slide">
-						<div class="card" style="width: 18rem">
-							<div class="text-end pt-2 pe-2">
-								<span class="badge bg-danger fs-6">Best</span>
-							</div> 
-							<a href="#"> 
-								<img src="/upload${bestProduct.product_img_name}" class="card-img-top" alt="..." />
-							</a>
-							<div class="card-body">
-								<h6 class="card-title">
-									<span class="badge bg-dark">노트북</span>&nbsp; <span class="badge bg-dark">${bestProduct.category_name}</span>
-								</h6>
-								<p class="card-text fs-5 mt-3">${bestProduct.product_name}</p>
-								<fmt:formatNumber var="bestProductPrice" value="${bestProduct.product_price}" pattern="###,###,###" />
-								<a href="#" class="btn btn-secondary">상세보기</a> &nbsp; <span class="card-text">${bestProductPrice}원</span>
+		<c:if test="${!empty bestProductList}">
+			<div class="swiper mySwiper col-10">
+				<div class="swiper-pagination"></div>
+				<div class="swiper-wrapper">
+					<c:forEach var="bestProduct" items="${bestProductList}">
+						<div class="swiper-slide">
+							<div class="card" style="width: 18rem">
+								<div class="text-end pt-2 pe-2">
+									<span class="badge bg-danger fs-6">Best</span>
+								</div>
+								<a href="#"> <img src="/upload${bestProduct.product_img_name}" class="card-img-top" alt="..." />
+								</a>
+								<div class="card-body">
+									<h6 class="card-title">
+										<span class="badge bg-dark">노트북</span>&nbsp; <span class="badge bg-dark">${bestProduct.category_name}</span>
+									</h6>
+									<p class="card-text fs-5 mt-3">${bestProduct.product_name}</p>
+									<fmt:formatNumber var="bestProductPrice" value="${bestProduct.product_price}" pattern="###,###,###" />
+									<a href="#" class="btn btn-secondary">상세보기</a> &nbsp; <span class="card-text">${bestProductPrice}원</span>
+								</div>
 							</div>
 						</div>
-					</div>
-				</c:forEach>
+					</c:forEach>
+				</div>
 			</div>
-		</div>
+		</c:if>
+		<c:if test="${empty newProductList}">
+			<div class="text-center mt-5 mb-5">
+				<h1>베스트 상품이 없습니다.</h1>
+			</div>
+		</c:if>
 	</div>
 </div>
 <script>
-      var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 1,
-        spaceBetween: 10,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        breakpoints: {
-          800: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
-          1250: {
-            slidesPerView: 3,
-            spaceBetween: 40,
-          },
-          1600: {
-              slidesPerView: 4,
-              spaceBetween: 50,
-            },
-          2000: {
-            slidesPerView: 5,
-            spaceBetween: 50,
-          },
-        },
-      });
-    </script>
+	var swiper = new Swiper(".mySwiper", {
+		slidesPerView : 1,
+		spaceBetween : 10,
+		pagination : {
+			el : ".swiper-pagination",
+			clickable : true,
+		},
+		breakpoints : {
+			800 : {
+				slidesPerView : 2,
+				spaceBetween : 20,
+			},
+			1250 : {
+				slidesPerView : 3,
+				spaceBetween : 40,
+			},
+			1600 : {
+				slidesPerView : 4,
+				spaceBetween : 50,
+			},
+			2000 : {
+				slidesPerView : 5,
+				spaceBetween : 50,
+			},
+		},
+	});
+</script>
 
 <%@ include file="./layout/footer.jsp"%>

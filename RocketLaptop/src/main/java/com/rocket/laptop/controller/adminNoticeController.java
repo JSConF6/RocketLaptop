@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.rocket.laptop.model.NoticeDto;
 import com.rocket.laptop.model.PageHandler;
 import com.rocket.laptop.model.ProductListDto;
-import com.rocket.laptop.model.response.Response;
+import com.rocket.laptop.model.ResponseDto;
 import com.rocket.laptop.service.NoticeService;
 
 @Controller
@@ -88,22 +88,16 @@ public class adminNoticeController {
 	}
 	
 	@PostMapping("/admin/noticeModify")
-	public ResponseEntity<Response> adminNoticeModify(NoticeDto noticeDto, Model model) {
+	public ResponseDto<String> adminNoticeModify(NoticeDto noticeDto, Model model) {
 		logger.info("공지사항 상세 페이지로 이동");
 		
 		int result = noticeService.noticeModify(noticeDto);
 		
 		if(result != 1) {
-			return ResponseEntity.ok(Response.builder()
-					.status(HttpStatus.BAD_REQUEST.value())
-					.message("공지사항 수정 실패")
-					.build());
+			return new ResponseDto<String>(HttpStatus.BAD_REQUEST.value(), "공지사항 수정 실패");
 		}
 		
-		return ResponseEntity.ok(Response.builder()
-				.status(HttpStatus.OK.value())
-				.message("공지사항 수정 성공")
-				.build());
+		return new ResponseDto<String> (HttpStatus.OK.value(), "공지사항 수정 성공");
 	}
 	
 	@PostMapping("/admin/noticeDelete")

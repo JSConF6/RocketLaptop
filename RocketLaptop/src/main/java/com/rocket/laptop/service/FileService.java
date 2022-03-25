@@ -13,4 +13,8 @@ public interface FileService {
 	public List<FileDto> getProductDetailFile(String product_code);
 	
 	public void fileDelete(String product_code);
+
+	public List<FileDto> getAllFiles(String product_code);
+
+	public void fileModify(FileDto fileDto, int fileNum, String product_code);
 }

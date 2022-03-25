@@ -16,6 +16,13 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 
+a:not([href]){
+color : gray;
+
+text-decoration : none;
+
+}
+
 @media (max-width: 992px) {
   #cart-icon > .cart-icon-title,
   #cuser-icon > .cuser-icon-title,

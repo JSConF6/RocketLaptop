@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rocket.laptop.repository.CartMapper">
+
+	<insert id="cartAdd" parameterType="CartDto">
+		insert into cart (product_code, user_id, order_de_amount)
+		values(#{product_code}, #{user_id}, #{order_de_amount})
+	</insert>
+	
+	<select id="findByProductCode" parameterType="String" resultType="CartDto">
+		select *
+		from cart
+		where product_code = #{product_code}
+	</select>
+	
+	<select id="getCartList" parameterType="String" resultType="CartDto">
+		select c.cart_num, c.product_code, c.user_id, c.order_de_amount,
+			   ct.category_name, p.product_name, p.product_price, i.product_img_name
+		from cart c, product p, category ct, product_img i
+		where user_id = #{user_id}
+		and c.product_code = p.product_code
+		and p.category_code = ct.category_code
+		and p.product_code = i.product_code
+		and i.product_img_type = 1
+	</select>
+	
+	<select id="getCartListCount" parameterType="String" resultType="int">
+		select count(*)
+		from cart
+		where user_id = #{user_id}
+	</select>
+	
+	<delete id="cartDelete" parameterType="CartDto">
+		delete from cart
+		where user_id = #{user_id}
+		and cart_num = #{cart_num}
+	</delete>
+	
+	<delete id="cartAllDelete" parameterType="Map">
+		delete from cart
+		where user_id = #{user_id}
+		and cart_num in
+		<foreach item="cartNum" collection="cartNumList" 
+				 open="(" separator="," close=")">
+			#{cartNum}
+		</foreach>
+	</delete>
+
+</mapper>

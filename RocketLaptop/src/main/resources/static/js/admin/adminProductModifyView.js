@@ -1,6 +1,7 @@
 $(function(){
 	let imageType = new Array();
 	let image_upload = new Array();
+	let check = new Array(5);
 	
 	$(".productModdifySubmitBtn").on("click", function(e){
 		e.preventDefault();
@@ -32,34 +33,66 @@ $(function(){
 			return false;
 		}
 		
-		if($.trim($("#thumbnail_upload").val()) == ""){
-			Swal.fire({
-				icon: "error",
-				title: "상품수정",
-				text: "썸네일 이미지를 첨부해주세요.",
-				allowOutsideClick: false,
-			})
-			return false;
+		console.log(check);
+	
+		if($.trim($("#thumbnail_upload").val()) === ""){
+			if(check[0] === 0){
+				Swal.fire({
+					icon: "error",
+					title: "상품수정",
+					text: "썸네일 이미지를 첨부해주세요.",
+					allowOutsideClick: false,
+				})
+				return false;	
+			}
+		}
+			
+		if($.trim($("#image1_upload").val()) === ""){
+			if(check[1] === 0){
+				Swal.fire({
+					icon: "error",
+					title: "상품수정",
+					text: "상품이미지1 첨부해주세요.",
+					allowOutsideClick: false,
+				})
+				return false;	
+			}
 		}
 		
-		if($.trim($("#image1_upload").val()) === "" && $.trim($("#image2_upload").val()) === "" && $.trim($("#image3_upload").val()) === ""){
-			Swal.fire({
-				icon: "error",
-				title: "상품수정",
-				text: "상품 이미지 하나 이상 첨부해주세요",
-				allowOutsideClick: false,
-			})
-			return false;
+		if($.trim($("#image2_upload").val()) === ""){
+			if(check[2] === 0){
+				Swal.fire({
+					icon: "error",
+					title: "상품수정",
+					text: "상품이미지2 첨부해주세요.",
+					allowOutsideClick: false,
+				})
+				return false;	
+			}
 		}
 		
-		if($.trim($("#detail_upload").val()) == ""){
-			Swal.fire({
-				icon: "error",
-				title: "상품수정",
-				text: "상세설명 이미지를 첨부해주세요.",
-				allowOutsideClick: false,
-			})
-			return false;
+		if($.trim($("#image1_upload").val()) === ""){
+			if(check[3] === 0){
+				Swal.fire({
+					icon: "error",
+					title: "상품수정",
+					text: "상품이미지3 첨부해주세요.",
+					allowOutsideClick: false,
+				})
+				return false;	
+			}
+		}
+		
+		if($.trim($("#detail_upload").val()) === ""){
+			if(check[4] === 0){
+				Swal.fire({
+					icon: "error",
+					title: "상품수정",
+					text: "상세설명 이미지를 첨부해주세요.",
+					allowOutsideClick: false,
+				})
+				return false;	
+			}
 		}
 		
 		let category_code = $("#category_code").val();
@@ -68,6 +101,7 @@ $(function(){
 		
 		for(let i = 0; i < image_upload.length; i++){
 			frm.append("image_upload", image_upload[i]);
+			console.log(image_upload);
 		}
 		
 		frm.append("product_code", product_code);
@@ -151,21 +185,25 @@ $(function(){
 		if(pattern.test(filename)){
 			if(value.includes("thumbnail")){
 				image_upload[0] = file;
-				imageType.push(filename + "/" + 1);
+				check[0] = 1;
+				imageType[0] = filename + "/" + 1 + "/" + $("#file_thumbnail_num").val();
 			}else if(value.includes("image1")){
 				image_upload[1] = file;
-				imageType.push(filename + "/" + 2);
+				check[1] = 1;
+				imageType[1] = filename + "/" + 2 + "/" + $("#file_image1_num").val();;
 			}else if(value.includes("image2")){
 				image_upload[2] = file;
-				imageType.push(filename + "/" + 2);
+				check[2] = 1;
+				imageType[2] = filename + "/" + 2 + "/" + $("#file_image2_num").val();
 			}else if(value.includes("image3")){
 				image_upload[3] = file;
-				imageType.push(filename + "/" + 2);
+				check[3] = 1;
+				imageType[3] = filename + "/" + 2 + "/" + $("#file_image3_num").val();
 			}else if(value.includes("detail")){
 				image_upload[4] = file;
-				imageType.push(filename + "/" + 3);
+				check[4] = 1;
+				imageType[4] = filename + "/" + 3 + "/" + $("#file_detail_num").val();
 			}
-			console.log(imageType);
 			
 			$(value).text(filename);
 			show(value, remove);
@@ -196,14 +234,10 @@ $(function(){
 	})
 	
 	function remove(value, upload, remove, num){
-		let imageName = $(value).text();
-		
-		let filtered = imageType.filter((element) => !element.includes(imageName));
-		console.log(filtered)
-		imageType = filtered;
+		delete imageType[num];
 		
 		delete image_upload[num];
-		console.log(image_upload)
+		check[num] = 0;
 		
 		$(value).text('');
 		$(upload).val('');

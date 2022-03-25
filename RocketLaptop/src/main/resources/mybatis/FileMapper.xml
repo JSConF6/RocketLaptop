@@ -27,5 +27,20 @@
 		delete from product_img
 		where product_code = #{product_code}
 	</delete>
+	
+	<select id="getAllFiles" parameterType="String" resultType="FileDto">
+		select *
+		from product_img
+		where product_code = #{product_code}
+	</select>
+	
+	<update id="fileModify" parameterType="Map">
+		update product_img
+		set product_img_name = #{fileDto.product_img_name},
+			product_img_original_name = #{fileDto.product_img_original_name},
+			product_img_type = #{fileDto.product_img_type}
+		where product_code = #{product_code}
+		and product_img_num = #{fileNum}
+	</update>
 
 </mapper>

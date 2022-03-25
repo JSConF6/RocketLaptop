@@ -41,4 +41,20 @@ public class FileServiceImpl implements FileService {
 		fileMapper.fileDelete(product_code);
 	}
 
+	@Override
+	public List<FileDto> getAllFiles(String product_code) {
+		return fileMapper.getAllFiles(product_code);
+	}
+
+	@Override
+	public void fileModify(FileDto fileDto, int fileNum, String product_code) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("fileDto", fileDto);
+		map.put("fileNum", fileNum);
+		map.put("product_code", product_code);
+		
+		fileMapper.fileModify(map);
+	}
+
 }

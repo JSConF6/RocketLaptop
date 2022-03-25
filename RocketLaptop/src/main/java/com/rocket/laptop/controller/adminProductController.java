@@ -19,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,7 +34,7 @@ import com.rocket.laptop.model.PageHandler;
 import com.rocket.laptop.model.ProductDetailDto;
 import com.rocket.laptop.model.ProductDto;
 import com.rocket.laptop.model.ProductListDto;
-import com.rocket.laptop.model.response.Response;
+import com.rocket.laptop.model.ResponseDto;
 import com.rocket.laptop.service.CategoryService;
 import com.rocket.laptop.service.FileService;
 import com.rocket.laptop.service.ProductService;
@@ -118,63 +119,56 @@ public class adminProductController {
 	
 	@PostMapping("/admin/productModify")
 	@ResponseBody
-	public ResponseEntity<Response> adminProductModify(ProductDto productDto,
-			@RequestParam("image_upload") List<MultipartFile> multipartFiles, 
+	public ResponseDto<String> adminProductModify(ProductDto productDto,
+			@RequestParam(value = "image_upload", required = false) List<MultipartFile> multipartFiles, 
 			@RequestParam("imageType") String[] imageTypeList){
 		logger.info("상품수정");
 		
 		productService.productModify(productDto);
-		fileService.fileDelete(productDto.getProduct_code());
 		
-		for(int i = 0; i < multipartFiles.size(); i++) {
-			MultipartFile file = (MultipartFile) multipartFiles.get(i);
-			
-			if(file.isEmpty()) {
-				continue;
-			}
-			
-			FileDto fileDto = new FileDto();
-			
-			for(String list : imageTypeList) {
-				System.out.println(list);
-				String[] typeList = list.split("/");
-				System.out.println(typeList[0]);
-				if(typeList[0].equals(file.getOriginalFilename())) {
-					logger.info("오리지날 이름 : " + typeList[0] + " 이미지 타입 : " +typeList[1]);
-					fileDto.setProduct_img_type(Integer.parseInt(typeList[1]));
+		if(CollectionUtils.isEmpty(multipartFiles)) {
+			logger.info("기존 파일 5개 그대로 사용");
+			return new ResponseDto<String>(HttpStatus.OK.value(), "상품 수정 성공");
+		}else {
+			for(int i = 0; i < multipartFiles.size(); i++) {
+				logger.info("파일이 하나라도 수정");
+				MultipartFile file = (MultipartFile) multipartFiles.get(i);
+				
+				FileDto fileDto = new FileDto();
+				
+				String originalFileName = file.getOriginalFilename();
+				logger.info("오리지날 파일 명 : " + originalFileName);
+				
+				int fileNum = 0;
+				
+				for(String list : imageTypeList) {
+					System.out.println(list);
+					String[] typeList = list.split("/");
+					System.out.println(typeList[0]);
+					if(typeList[0].equals(originalFileName)) {
+						logger.info("오리지날 이름 : " + typeList[0] + " 이미지 타입 : " +typeList[1] + " 파일번호 : " + typeList[2]);
+						fileDto.setProduct_img_type(Integer.parseInt(typeList[1]));
+						fileNum = Integer.parseInt(typeList[2]);
+					}
 				}
-			}			
-
-			String originalFileName = file.getOriginalFilename(); // 오리지날 파일명
-			logger.info("오리지날 파일명 : " + originalFileName);
-			
-			fileDto.setProduct_img_original_name(originalFileName);
-			
-			fileDto.setProduct_code(productDto.getProduct_code());
-			
-			String fileDBName = fileDBName(originalFileName, saveFolder);
-			
-			try {
-				file.transferTo(new File(saveFolder + fileDBName));
-			} catch (Exception e) {
-				int result = productService.productDelete(productDto.getProduct_code());
-				logger.info("productDelete : " + result);
-				ResponseEntity.ok(Response.builder()
-						.status(HttpStatus.BAD_REQUEST.value())
-						.message("상품 수정 실패")
-						.build());
-			} 
-			
-			fileDto.setProduct_img_name(fileDBName);
-			
-			fileService.fileAdd(fileDto);
+				
+				fileDto.setProduct_img_original_name(originalFileName);
+				
+				String fileDBName = fileDBName(originalFileName,  saveFolder);
+				
+				try {
+					file.transferTo(new File(saveFolder + fileDBName));
+				} catch (Exception e) {
+					return new ResponseDto<String> (HttpStatus.BAD_REQUEST.value(), "상품 수정 실패");
+				}
+				
+				fileDto.setProduct_img_name(fileDBName);
+				
+				fileService.fileModify(fileDto, fileNum, productDto.getProduct_code());
+			}
 		}
 		
-		
-		return ResponseEntity.ok(Response.builder()
-				.status(HttpStatus.OK.value())
-				.message("상품 수정 성공")
-				.build());
+		return new ResponseDto<String>(HttpStatus.OK.value(), "상품 수정 성공");
 	}
 	
 	@GetMapping("/admin/productAddView")
@@ -189,7 +183,7 @@ public class adminProductController {
 	
 	@PostMapping("/admin/productAdd")
 	@ResponseBody
-	public ResponseEntity<Response> adminProductAdd(ProductDto productDto,
+	public ResponseDto<String> adminProductAdd(ProductDto productDto,
 			@RequestParam("image_upload") List<MultipartFile> multipartFiles, 
 			@RequestParam("imageType") String[] imageTypeList){
 		logger.info("상품등록");
@@ -198,10 +192,6 @@ public class adminProductController {
 		
 		for(int i = 0; i < multipartFiles.size(); i++) {
 			MultipartFile file = (MultipartFile) multipartFiles.get(i);
-			
-			if(file.isEmpty()) {
-				continue;
-			}
 			
 			FileDto fileDto = new FileDto();
 			
@@ -229,10 +219,7 @@ public class adminProductController {
 			} catch (Exception e) {
 				int result = productService.productDelete(productDto.getProduct_code());
 				logger.info("productDelete : " + result);
-				ResponseEntity.ok(Response.builder()
-						.status(HttpStatus.BAD_REQUEST.value())
-						.message("상품 등록 실패")
-						.build());
+				return new ResponseDto<String> (HttpStatus.BAD_REQUEST.value(), "상품 등록 실패");
 			} 
 			
 			fileDto.setProduct_img_name(fileDBName);
@@ -241,10 +228,7 @@ public class adminProductController {
 		}
 		
 		
-		return ResponseEntity.ok(Response.builder()
-				.status(HttpStatus.OK.value())
-				.message("상품 등록 성공")
-				.build());
+		return new ResponseDto<String> (HttpStatus.OK.value(), "상품 등록 성공");
 	}
 	
 	private String fileDBName(String originalFileName, String saveFolder) {

@@ -61,6 +61,14 @@ public class HomeController {
 		return "index";
 	}
 	
+	@GetMapping("/MainCategoryList")
+	@ResponseBody
+	public List<CategoryDto> MainCategoryList(){
+		List<CategoryDto> categoryList = categoryService.getAllCategory();
+		
+		return categoryList;
+	}
+	
 	@GetMapping("/login")
 	public ModelAndView login(ModelAndView mv,
 			@CookieValue(value="saveId", required = false) Cookie readCookie,

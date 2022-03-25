@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- 제이쿼리 -->
-<script src="../js/jquery-3.6.0.min.js"></script>
+<script src="${pageContext.request.contextPath}/js/jquery-3.6.0.min.js" type="text/javascript"></script>
 
 <!-- 구글 폰트 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,17 +24,19 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css" integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <!-- Style -->
-<link rel="stylesheet" href="../css/header.css">
-<link rel="stylesheet" href="../css/loginView.css">
-<link rel="stylesheet" href="../css/registerView.css">
-<link rel="stylesheet" href="../css/cartView.css">
-<link rel="stylesheet" href="../css/productListView.css">
-<link rel="stylesheet" href="../css/swiper.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/header.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/loginView.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/registerView.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/cartView.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/productListView.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/swiper.css" type="text/css">
 
 <!-- JS -->
-<script src="../js/registerView.js"></script>
-<script src="../js/loginView.js"></script>
-<script src="../js/mainView.js"></script>
+<script src="${pageContext.request.contextPath}/js/registerView.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/loginView.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/mainView.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/productDetailView.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/cartListView.js" type="text/javascript"></script>
 
 <!-- sweetalert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.5/dist/sweetalert2.all.min.js"></script>
@@ -49,7 +51,7 @@
 <body>
 	<nav class="navbar navbar-light bg-light justify-content-between ps-0 pe-0">
 		<div class="container-fluid pe-0">
-			<a href="/" class="navbar-brand text-black" style="width: 210px"> <img alt="" src="../images/RocketLaptopLogo.svg" width="100%" height="100%">
+			<a href="/" class="navbar-brand text-black" style="width: 210px"> <img alt="" src="/images/RocketLaptopLogo.svg" width="100%" height="100%">
 			</a>
 			<div class="input-group" id="search-bar">
 				<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -67,18 +69,24 @@
 				</button>
 			</div>
 			<ul class="nav">
-				<li class="nav-item position-relative"><a href="/cart" class="nav-link d-flex flex-column align-items-center text-secondary" id="cart-icon"> <i class="fa-solid fa-cart-shopping fa-2x"></i> <span class="position-absolute top-5 translate-middle badge rounded-pill bg-danger" id="cart-badge"> 0 <span class="visually-hidden">unread messages</span>
-					</span> <span class="fs-5 cart-icon-title">장바구니</span>
-				</a></li>
 				<sec:authorize access="isAnonymous()">
 					<li class="nav-item"><a href="/login" class="nav-link d-flex flex-column align-items-center text-secondary" id="cuser-icon"> <i class="fa-solid fa-circle-user fa-2x"></i> <span class="fs-5 cuser-icon-title">로그인</span>
 					</a></li>
-					<li class="nav-item"><a href="register" class="nav-link d-flex flex-column align-items-center text-secondary" id="puser-icon"> <i class="fa-solid fa-user-plus fa-2x"></i> <span class="fs-5 puser-icon-title">회원가입</span>
+					<li class="nav-item"><a href="/register" class="nav-link d-flex flex-column align-items-center text-secondary" id="puser-icon"> <i class="fa-solid fa-user-plus fa-2x"></i> <span class="fs-5 puser-icon-title">회원가입</span>
 					</a></li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<div class="d-flex">
 						<sec:authorize access="hasRole('ROLE_USER')">
+							<sec:authentication property="principal.userDto.user_id" var="user_id"/>
+							<input type="hidden" value="${user_id}" id="user_id" />
+							<li class="nav-item position-relative">
+								<a href="/user/cart/list?user_id=${user_id}" class="nav-link d-flex flex-column align-items-center text-secondary" id="cart-icon"> 
+									<i class="fa-solid fa-cart-shopping fa-2x"></i> 
+									<span class="position-absolute top-5 translate-middle badge rounded-pill bg-success" id="cart-badge">0</span> 
+									<span class="fs-5 cart-icon-title">장바구니</span>
+								</a>
+							</li>
 							<li class="nav-item"><a href="#" class="nav-link d-flex flex-column align-items-center text-secondary" id="mypage-icon"> <i class="fa-solid fa-circle-user fa-2x"></i> <span class="fs-5 mypage-icon-title">마이페이지</span>
 							</a></li>
 						</sec:authorize>
@@ -102,28 +110,17 @@
 			<div class="collapse navbar-collapse justify-content-center" id="navbarNav">
 				<ul class="nav justify-content-center align-items-center">
 					<li class="nav-item me-3">
-						<div class="dropdown">
+						<div class="dropdown category">
 							<button class="btn text-secondary d-flex align-items-center" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
 								<i class="fa-solid fa-bars fa-2x"></i> <span class="fs-4">&nbsp;&nbsp;카테고리</span>
 							</button>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-								<li>
-									<button class="dropdown-item" type="button">
-										<a href="/productList">전체</a>
-									</button>
-								</li>
-								<c:forEach var="category" items="${categoryList}">
-									<li>
-										<button class="dropdown-item" type="button">
-											<a href="#">${category.category_name}</a>
-										</button>
-									</li>
-								</c:forEach>
+							<ul class="dropdown-menu category-menu">
+								
 							</ul>
 						</div>
 					</li>
-					<li class="nav-item"><a href="#" class="nav-link me-3 text-secondary fs-4">베스트상품</a></li>
-					<li class="nav-item"><a href="#" class="nav-link me-3 text-secondary fs-4">신규상품</a></li>
+					<li class="nav-item"><a href="/product/bestProductList" class="nav-link me-3 text-secondary fs-4">베스트상품</a></li>
+					<li class="nav-item"><a href="/product/newProductList" class="nav-link me-3 text-secondary fs-4">신규상품</a></li>
 					<li class="nav-item"><a class="nav-link me-3 text-secondary fs-4" href="/notice">공지사항</a></li>
 					<li class="nav-item"><a href="/question" class="nav-link me-3 text-secondary fs-4">문의사항</a></li>
 				</ul>

@@ -38,6 +38,8 @@
 					<c:if test="${file.product_img_type == 1}">
 						<label for="thumbnail_upload" class="form-label fs-4">대표 이미지<br/>
 							<span class="btn btn-primary me-2">이미지 첨부</span>
+							<input type="hidden" value="${file.product_img_num}" id="file_thumbnail_num" />
+							<input type="hidden" value="${file.product_img_name}" id="old_thumbnail_upload" />
 							<input class="form-control image_modify_upload" type="file" id="thumbnail_upload" accept="image/*"> 
 							<span id="thumbnail_value" class="image_value"> <c:out value="${file.product_img_original_name}" /> </span> 
 							<img src="../images/remove.png" alt="이미지삭제" width="30px" class="thumbnail_remove image_modify_remove" id="thumbnail_remove">
@@ -46,6 +48,8 @@
 					<c:if test="${file.product_img_type == 2}">
 						<label for="image${status.index}_upload" class="form-label fs-4">상품 이미지${status.index}<br/>
 							<span class="btn btn-primary me-2">이미지 첨부</span>
+							<input type="hidden" value="${file.product_img_num}" id="file_image${status.index}_num" />
+							<input type="hidden" value="${file.product_img_name}" id="old_image${status.index}_upload" />
 							<input class="form-control image_modify_upload" type="file" id="image${status.index}_upload" accept="image/*"> 
 							<span id="image${status.index}_value" class="image_value"> <c:out value="${file.product_img_original_name}" /> </span> 
 							<img src="../images/remove.png" alt="이미지삭제" width="30px" class="image${status.index}_remove image_modify_remove" id="image${status.index}_remove">
@@ -54,6 +58,8 @@
 					<c:if test="${file.product_img_type == 3}">
 						<label for="detail_upload" class="form-label fs-4">상세설명<br/>
 							<span class="btn btn-primary me-2">이미지 첨부</span>
+							<input type="hidden" value="${file.product_img_num}" id="file_detail_num" />
+							<input type="hidden" value="${file.product_img_name}" id="old_detail_upload" />
 							<input class="form-control image_modify_upload" type="file" id="detail_upload" accept="image/*"> 
 							<span id="detail_value" class="image_value"> <c:out value="${file.product_img_original_name}" /> </span> 
 							<img src="../images/remove.png" alt="이미지삭제" width="30px" class="detail_remove image_modify_remove" id="detail_remove">

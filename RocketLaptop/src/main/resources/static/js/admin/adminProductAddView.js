@@ -51,11 +51,31 @@ $(function(){
 			return false;
 		}
 		
-		if($.trim($("#image1_upload").val()) === "" && $.trim($("#image2_upload").val()) === "" && $.trim($("#image3_upload").val()) === ""){
+		if($.trim($("#image1_upload").val()) === ""){
 			Swal.fire({
 				icon: "error",
 				title: "상품등록",
-				text: "상품 이미지 하나 이상 첨부해주세요",
+				text: "상품 이미지1 첨부해주세요",
+				allowOutsideClick: false,
+			})
+			return false;
+		}
+		
+		if($.trim($("#image2_upload").val()) === ""){
+			Swal.fire({
+				icon: "error",
+				title: "상품등록",
+				text: "상품 이미지2 첨부해주세요",
+				allowOutsideClick: false,
+			})
+			return false;
+		}
+		
+		if($.trim($("#image3_upload").val()) === ""){
+			Swal.fire({
+				icon: "error",
+				title: "상품등록",
+				text: "상품 이미지3 첨부해주세요",
 				allowOutsideClick: false,
 			})
 			return false;
@@ -205,11 +225,7 @@ $(function(){
 	})
 	
 	function remove(value, upload, remove, num){
-		let imageName = $(value).text();
-		
-		let filtered = imageType.filter((element) => !element.includes(imageName));
-		console.log(filtered)
-		imageType = filtered;
+		delete imageType[num];
 		
 		delete image_upload[num] ;
 		console.log(image_upload)

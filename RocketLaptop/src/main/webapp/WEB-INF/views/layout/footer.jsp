@@ -3,7 +3,7 @@
 	<footer class="row row-cols-5 py-3 my-5 border-top justify-content-center align-items-center">
 		<div class="col pt-4">
 			<a href="/" class="d-flex align-items-center mb-3 link-dark text-decoration-none justify-content-center">
-				<img alt="FooterLogo" src="../images/RocketLaptopLogo.svg" width="40%" height="40%">
+				<img alt="FooterLogo" src="/images/RocketLaptopLogo.svg" width="40%" height="40%">
 			</a>
 			<p class="text-muted d-flex justify-content-center">&copy; 2022 Copyright.</p>
 		</div>
