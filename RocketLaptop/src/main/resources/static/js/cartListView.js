@@ -2,11 +2,11 @@ $(function(){
 	function cartTotalPrice(){
 		let sum = 0;
 		let rowCheckList = $("input[name='RowCheck']");
-		for(let i = 0; i < rowCheckList.length; i++){
-			if(rowCheckList[i].checked){
-				sum += parseInt($(rowCheckList[i]).val());
+		Array.from(rowCheckList).forEach((rowCheck) => {
+			if(rowCheck.checked){
+				sum += sum += parseInt($(rowCheck).val());
 			}
-		}
+		})
 		$(".cartProductTotalPrice").text(Number(sum).toLocaleString("en") + "원");
 	}
 	
@@ -16,11 +16,21 @@ $(function(){
 	
 	$('input[name="allCheck"]').on('click', function(){
 		let checkList = $('input[name="RowCheck"]');
-		for(let i = 0; i < checkList.length; i++){
-			checkList[i].checked = this.checked;
+		Array.from(checkList).forEach(check => {
+			check.checked = this.checked;
 			cartTotalPrice();
-		}
+		})
 	});
+	
+	let rowCnt = $("input[name='RowCheck']").length;
+	
+	$("input[name='RowCheck']").on("click", function(){
+		if($("input[name='RowCheck']:checked").length == rowCnt){
+			$('input[name="allCheck"]')[0].checked = true;
+		}else{
+			$('input[name="allCheck"]')[0].checked = false;
+		}
+	}) 
 	
 	$(".cartDeleteBtn").on("click", function(e){
 		e.preventDefault();
@@ -83,10 +93,9 @@ $(function(){
 			allowOutsideClick: false,
 		}).then((result) => {
 			if (result.isConfirmed) {
-				for(let i = 0; i < rowCheckList.length; i++){
-					console.log($(rowCheckList[i]).attr("data-cartNum"));
-					cartNumList.push($(rowCheckList[i]).attr("data-cartNum"));
-				}
+				Array.from(rowCheckList).forEach(rowCheck => {
+					cartNumList.push($(rowCheck).attr("data-cartNum"));
+				});
 				
 				$.ajax({
 					url: "/user/cart/allDelete",
