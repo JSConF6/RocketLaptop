@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.rocket.laptop.model.OrderDetailDto;
 import com.rocket.laptop.model.OrderDto;
+import com.rocket.laptop.model.OrderViewDto;
 import com.rocket.laptop.model.PageHandler;
 
 public interface OrderService {
@@ -17,4 +18,8 @@ public interface OrderService {
 	public List<OrderDetailDto> getOrderDetail(String order_id);
 	
 	public int OrderDeliveryUpdate(String order_id, String delivery_text);
+
+	public List<OrderViewDto> getOrderViewList(String user_id, int[] cartNumList);
+
+	public void orderAdd(OrderDto orderDto, int[] cartNumList);
 }

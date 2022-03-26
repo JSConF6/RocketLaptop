@@ -24,5 +24,7 @@ public interface CartMapper {
 	int cartDelete(CartDto cartDto);
 
 	int cartAllDelete(Map<String, Object> map);
+
+	int orderCartDelete(Map<String, Object> map);
 	
 }

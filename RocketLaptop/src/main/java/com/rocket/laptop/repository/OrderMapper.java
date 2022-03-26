@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.rocket.laptop.model.OrderDetailDto;
 import com.rocket.laptop.model.OrderDto;
+import com.rocket.laptop.model.OrderViewDto;
 
 @Mapper
 @Repository
@@ -22,5 +23,11 @@ public interface OrderMapper {
 	List<OrderDetailDto> getOrderDetail(String order_id);
 
 	int OrderDeliveryUpdate(Map<String, Object> map);
+
+	List<OrderViewDto> getOrderViewList(Map<String, Object> map);
+
+	void orderAdd(OrderDto orderDto);
+
+	void orderDetailAdd(Map<String, Object> map);
 
 }

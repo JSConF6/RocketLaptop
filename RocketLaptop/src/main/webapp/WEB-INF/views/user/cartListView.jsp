@@ -26,7 +26,7 @@
 					<tbody>
 						<c:forEach var="cart" items="${cartList}">
 							<tr>
-								<td><input type="checkbox" name="RowCheck" value="${cart.product_price * cart.order_de_amount}" data-cartNum="${cart.cart_num}" /></td>
+								<td><input type="checkbox" name="RowCheck" value="${cart.product_price * cart.order_de_amount}" data-cartNum="${cart.cart_num}" data-productCode="${cart.product_code}"/></td>
 								<td>
 									<div class="product-item">
 										<a class="product-thumb" href="#"><img src="/upload${cart.product_img_name}" alt="Product" height="90px"></a>
@@ -62,7 +62,9 @@
 			</div>
 			<div class="shopping-cart-footer">
 				<div class="text-end">
-					<a class="btn btn-primary" href="#">주문하기</a>
+					<form action="/user/order/orderView" method="POST" class="orderViewForm">
+						<button class="btn btn-primary orderBtn">주문하기</button>
+					</form>
 				</div>
 			</div>
 		</c:if>

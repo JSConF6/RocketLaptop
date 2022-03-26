@@ -42,5 +42,38 @@
 		set order_state = #{delivery_text}
 		where order_id = #{order_id}
 	</update>
+	
+	<select id="getOrderViewList" parameterType="Map" resultType="OrderViewDto">
+		select c.cart_num, c.product_code, c.user_id, c.order_de_amount,
+			   ct.category_name, p.product_name, p.product_price, i.product_img_name
+		from cart c, product p, category ct, product_img i
+		where user_id = #{user_id}
+		and c.product_code = p.product_code
+		and p.category_code = ct.category_code
+		and p.product_code = i.product_code
+		and i.product_img_type = 1
+		and cart_num in
+		<foreach item="cartNum" collection="cartNumList"
+				open="(" separator="," close=")">
+			#{cartNum}
+		</foreach>
+	</select>
+	
+	<insert id="orderAdd" parameterType="OrderDto">
+		insert into order_tb (order_id, user_id, order_name, user_address1, user_address2, user_address3, order_phone, order_totalprice)
+		values(#{order_id}, #{user_id}, #{order_name}, #{user_address1}, #{user_address2}, #{user_address3}, #{order_phone}, #{order_totalprice})
+	</insert>
+	
+	<insert id="orderDetailAdd" parameterType="Map">
+		insert into order_detail
+			(order_id, product_code, order_de_amount)
+		select #{orderDto.order_id}, product_code, order_de_amount
+		from cart
+		where cart_num in
+		<foreach item="cart" collection="cartNumList"
+				 open="(" separator="," close=")">
+			#{cart}
+		</foreach>
+	</insert>
 
 </mapper>

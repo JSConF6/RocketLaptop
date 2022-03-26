@@ -25,7 +25,6 @@ import com.rocket.laptop.service.FileService;
 import com.rocket.laptop.service.ProductService;
 
 @Controller
-@RequestMapping("/user")
 public class CartController {
 	
 	private Logger logger = LoggerFactory.getLogger(CartController.class);
@@ -33,7 +32,7 @@ public class CartController {
 	@Autowired
 	private CartService cartService;
 	
-	@PostMapping("/cart/add")
+	@PostMapping("/user/cart/add")
 	@ResponseBody
 	public ResponseDto<String> cartAdd(Model model, CartDto cartDto) {
 		logger.info("장바구니 담기");
@@ -53,7 +52,7 @@ public class CartController {
 		return new ResponseDto<String>(HttpStatus.OK.value(), "장바구니 담기 성공");
 	}
 	
-	@GetMapping("/cart/list")
+	@GetMapping("/user/cart/list")
 	public String cartList(@RequestParam("user_id") String user_id, Model model) {
 		logger.info("장바구니 리스트");
 		
@@ -66,7 +65,7 @@ public class CartController {
 		return "/user/cartListView";
 	}
 	
-	@GetMapping("/cartListCount")
+	@GetMapping("/user/cartListCount")
 	@ResponseBody
 	public int cartListCount(@RequestParam("user_id") String user_id) {
 		logger.info("장바구니 리스트 갯수");
@@ -76,7 +75,7 @@ public class CartController {
 		return cartListCount;
 	}
 	
-	@PostMapping("/cart/delete")
+	@PostMapping("/user/cart/delete")
 	@ResponseBody
 	public ResponseDto<String> cartDelete(CartDto cartDto) {
 		logger.info("장바구니 삭제");
@@ -90,7 +89,7 @@ public class CartController {
 		return new ResponseDto<String>(HttpStatus.OK.value(), "장바구니 삭제 성공");
 	}
 	
-	@PostMapping("/cart/allDelete")
+	@PostMapping("/user/cart/allDelete")
 	@ResponseBody
 	public ResponseDto<String> allDelete(@RequestParam("user_id") String user_id, @RequestParam("cartNumList") int[] cartNumList) {
 		logger.info("장바구니 전체 삭제");

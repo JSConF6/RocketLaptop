@@ -6,10 +6,14 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.rocket.laptop.exception.OrderFailException;
 import com.rocket.laptop.model.OrderDetailDto;
 import com.rocket.laptop.model.OrderDto;
+import com.rocket.laptop.model.OrderViewDto;
 import com.rocket.laptop.model.PageHandler;
+import com.rocket.laptop.repository.CartMapper;
 import com.rocket.laptop.repository.OrderMapper;
 
 @Service
@@ -17,6 +21,9 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderMapper orderMapper;
+	
+	@Autowired
+	private CartMapper cartMapper;
 	
 	@Override
 	public int getOrderListCount() {
@@ -53,6 +60,35 @@ public class OrderServiceImpl implements OrderService {
 		map.put("delivery_text", delivery_text);
 		
 		return orderMapper.OrderDeliveryUpdate(map);
+	}
+
+	@Override
+	public List<OrderViewDto> getOrderViewList(String user_id, int[] cartNumList) {
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("user_id", user_id);
+		map.put("cartNumList", cartNumList);
+
+		return orderMapper.getOrderViewList(map);
+	}
+
+	@Override
+	@Transactional
+	public void orderAdd(OrderDto orderDto, int[] cartNumList) {
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("orderDto", orderDto);
+		map.put("cartNumList", cartNumList);
+		
+		try {
+			orderMapper.orderAdd(orderDto);
+			
+			orderMapper.orderDetailAdd(map);
+			
+			cartMapper.orderCartDelete(map);
+		} catch (Exception e) {
+			throw new OrderFailException("주문 실패했습니다.");
+		}
 	}
 
 }
