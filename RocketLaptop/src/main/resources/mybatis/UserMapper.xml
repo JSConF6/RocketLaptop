@@ -30,5 +30,17 @@
 	  		  	    order by user_reg_date desc) u) us
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
+	
+	<update id="userUpdate" parameterType="UserDto">
+		update user
+		set user_email = #{user_email}, user_phone = #{user_phone}
+		where user_id = #{user_id}
+	</update>
+	
+	<update id="updatePassword" parameterType="Map">
+		update user
+		set user_password = #{encPassword}
+		where user_id = #{user_id}
+	</update>
 
 </mapper>

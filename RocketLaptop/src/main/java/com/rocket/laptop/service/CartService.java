@@ -17,4 +17,6 @@ public interface CartService {
 	public int cartDelete(CartDto cartDto);
 
 	public int cartAllDelete(String user_id, int[] cartNumList);
+
+	public List<CartDto> findByCartNumList(int[] cartNumList);
 }

@@ -14,7 +14,7 @@ import com.rocket.laptop.model.OrderViewDto;
 @Repository
 public interface OrderMapper {
 
-	int getOrderListCount();
+	int getOrderListCount(String user_id);
 
 	List<OrderDto> getOrderList(Map<String, Object> map);
 
@@ -29,5 +29,13 @@ public interface OrderMapper {
 	void orderAdd(OrderDto orderDto);
 
 	void orderDetailAdd(Map<String, Object> map);
+
+	int getAdminOrderListCount();
+
+	List<OrderDto> getAdminOrderList(Map<String, Object> map);
+
+	List<OrderDto> getOrderDtoList(Map<String, Object> map);
+
+	OrderDto getUserOrderDetail(Map<String, Object> map);
 
 }

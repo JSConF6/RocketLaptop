@@ -1,4 +1,5 @@
 $(function(){
+	
 	function MainCategoryList(){
 		$.ajax({
 			url: "/MainCategoryList",

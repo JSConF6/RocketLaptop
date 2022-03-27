@@ -11,11 +11,28 @@
 	  		  from (select @ROWNUM:=0) AS r, 
 	  	    	   (select * 
 	  			   from order_tb
+	  			   where user_id = user_id
 	  		  	   order by order_date desc) o) ord
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	
 	<select id="getOrderListCount" resultType="Int">
+		select count(*)
+		from order_tb
+		where user_id = #{user_id}
+	</select>
+	
+	<select id="getAdminOrderList" resultType="OrderDto" parameterType="Map">
+		select ord.* 
+		from (select @ROWNUM := @ROWNUM + 1 AS rnum, o.*
+	  		  from (select @ROWNUM:=0) AS r, 
+	  	    	   (select * 
+	  			   from order_tb
+	  		  	   order by order_date desc) o) ord
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<select id="getAdminOrderListCount" resultType="Int">
 		select count(*)
 		from order_tb
 	</select>
@@ -65,15 +82,15 @@
 	</insert>
 	
 	<insert id="orderDetailAdd" parameterType="Map">
-		insert into order_detail
-			(order_id, product_code, order_de_amount)
-		select #{orderDto.order_id}, product_code, order_de_amount
-		from cart
-		where cart_num in
-		<foreach item="cart" collection="cartNumList"
-				 open="(" separator="," close=")">
-			#{cart}
-		</foreach>
+		insert into order_detail (order_id, product_code, order_de_amount)
+		values(#{orderDto.order_id}, #{product_code}, #{order_de_amount})
 	</insert>
+	
+	<select id="getUserOrderDetail" parameterType="Map" resultType="OrderDto">
+		select *
+		from order_tb
+		where order_id = #{order_id}
+		and user_id = #{user_id}
+	</select>
 
 </mapper>

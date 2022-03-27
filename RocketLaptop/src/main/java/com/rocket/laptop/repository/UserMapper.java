@@ -19,5 +19,9 @@ public interface UserMapper {
 	int getUserListCount();
 
 	List<UserDto> getUserList(Map<String, Object> map);
+
+	int userUpdate(UserDto userDto);
+
+	int updatePassword(Map<String, Object> map);
 	
 }

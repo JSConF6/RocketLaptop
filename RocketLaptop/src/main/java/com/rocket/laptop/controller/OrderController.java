@@ -40,13 +40,16 @@ import com.siot.IamportRestClient.response.Payment;
 @Controller
 public class OrderController {
 	
-	private Logger logger = LoggerFactory.getLogger(OrderController.class);
+	private final Logger logger = LoggerFactory.getLogger(OrderController.class);
 	
 	@Autowired
 	private OrderService orderService;
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private CartService cartService;
 	
 	private IamportClient iamportClient;
 	
@@ -78,35 +81,16 @@ public class OrderController {
 		logger.info("상품 결제");
 		Payment payment = iamportClient.paymentByImpUid(orderDto.getImpUid()).getResponse();
 		
-		orderDto.setOrder_totalprice(new BigDecimal(400));
-		
 		if(!orderDto.getOrder_totalprice().equals(payment.getAmount())) {
 			CancelData cancelData = new CancelData(orderDto.getImpUid(), true);
-			Payment response = iamportClient.cancelPaymentByImpUid(cancelData).getResponse();
+			iamportClient.cancelPaymentByImpUid(cancelData);
 			return new ResponseDto<String>(HttpStatus.BAD_REQUEST.value(), "결제 금액 오류, 결제가 취소됩니다.");
 		}
 		
-		orderService.orderAdd(orderDto, cartNumList);
+		List<CartDto> cartDtoList = cartService.findByCartNumList(cartNumList);
+		
+		orderService.orderAdd(orderDto, cartDtoList, cartNumList, iamportClient);
 		
 		return new ResponseDto<String>(HttpStatus.OK.value(), "주문이 완료되었습니다.");
-	}
-	
-	@GetMapping("/user/order/list")
-	public String orderListView(@RequestParam(value="page", defaultValue = "1", required = false) int page,
-			@RequestParam("user_id") String user_id, Model model) {
-		logger.info("주문목록 리스트");
-		
-		int limit = 10;
-		
-		int orderListCount = orderService.getOrderListCount();
-		
-		PageHandler pageHandler = new PageHandler(page, orderListCount, limit);
-		
-		List<OrderDto> orderList = orderService.getOrderList(pageHandler);
-		
-		model.addAttribute(orderList);
-		model.addAttribute(pageHandler);
-		
-		return "/user/orderListView";
 	}
 }

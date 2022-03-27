@@ -36,7 +36,7 @@ $(function(){
 		let order_de_amount = $(".productCount").val();
 		let user_id = $("#user_id").val();
 		
-		if(user_id === "anonymousUser"){
+		if(user_id === undefined){
 			Swal.fire({
 				icon: "warning",
 				title: "장바구니 담기",
@@ -45,6 +45,7 @@ $(function(){
 			}).then(() => {
 				location.href = "/login";
 			})
+			return false;
 		}
 		
 		$.ajax({

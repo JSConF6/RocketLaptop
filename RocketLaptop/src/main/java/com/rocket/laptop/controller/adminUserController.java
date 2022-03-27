@@ -20,7 +20,7 @@ import com.rocket.laptop.service.UserService;
 @Controller
 public class adminUserController {
 	
-	private Logger logger = LoggerFactory.getLogger(adminUserController.class);
+	private final Logger logger = LoggerFactory.getLogger(adminUserController.class);
 	
 	@Autowired
 	private UserService userService;

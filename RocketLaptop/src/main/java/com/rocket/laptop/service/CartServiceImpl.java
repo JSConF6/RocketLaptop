@@ -52,4 +52,13 @@ public class CartServiceImpl implements CartService {
 		return cartMapper.cartAllDelete(map);
 	}
 
+	@Override
+	public List<CartDto> findByCartNumList(int[] cartNumList) {
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("cartNumList", cartNumList);
+		
+		return cartMapper.findByCartNumList(map);
+	}
+
 }

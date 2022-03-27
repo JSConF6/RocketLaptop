@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.rocket.laptop.model.PageHandler;
+import com.rocket.laptop.model.PasswordDto;
 import com.rocket.laptop.model.RoleType;
 import com.rocket.laptop.model.UserDto;
 import com.rocket.laptop.repository.UserMapper;
@@ -57,6 +58,31 @@ public class UserServiceImpl implements UserService {
 		map.put("end", pageHandler.getEndRow());
 		
 		return userMapper.getUserList(map);
+	}
+
+	@Override
+	public int userUpdate(UserDto userDto) {
+		return userMapper.userUpdate(userDto);
+	}
+
+	@Override
+	public int updatePassword(UserDto userDto, PasswordDto passwordDto) {
+		int result = 0;
+		
+		if(bCryptPasswordEncoder.matches(passwordDto.getCurrentPassword(), userDto.getUser_password())) {
+			if(passwordDto.getNewPassword().equals(passwordDto.getReNewPassword())) {
+				String encPassword = bCryptPasswordEncoder.encode(passwordDto.getNewPassword());
+				
+				Map<String, Object> map = new HashMap<>();
+				
+				map.put("user_id", userDto.getUser_id());
+				map.put("encPassword", encPassword);
+				
+				result = userMapper.updatePassword(map);
+			}
+		}
+		
+		return result;
 	}
 
 }

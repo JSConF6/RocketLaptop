@@ -66,7 +66,7 @@ public class adminController {
 		int noticeListCount = noticeService.getNoticeListCount();
 		int productListCount = productService.getProductListCount();
 		int userListCount = userService.getUserListCount();
-		int orderListCount = orderService.getOrderListCount();
+		int orderListCount = orderService.getAdminOrderListCount();
 		int questionListCount = questionService.getQuestionListCount();
 		
 		PageHandler questionPageHandler = new PageHandler(1, questionListCount, 5);
@@ -112,7 +112,7 @@ public class adminController {
 			break;
 			
 		case "order":
-			listCount = orderService.getOrderListCount();
+			listCount = orderService.getAdminOrderListCount();
 			updateClass = "orderListCount";
 			break;
 		}

@@ -22,7 +22,7 @@ import com.rocket.laptop.service.ProductService;
 @RequestMapping("/product")
 public class MainProductController {
 	
-	private Logger logger = LoggerFactory.getLogger(MainProductController.class);
+	private final Logger logger = LoggerFactory.getLogger(MainProductController.class);
 	
 	@Autowired
 	private ProductService productService;

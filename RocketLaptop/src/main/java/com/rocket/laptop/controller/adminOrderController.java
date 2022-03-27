@@ -23,7 +23,7 @@ import com.rocket.laptop.service.OrderService;
 @Controller
 public class adminOrderController {
 	
-	private Logger logger = LoggerFactory.getLogger(adminOrderController.class);
+	private final Logger logger = LoggerFactory.getLogger(adminOrderController.class);
 	
 	@Autowired
 	private OrderService orderService;
@@ -35,7 +35,7 @@ public class adminOrderController {
 		int limit = 10;
 		logger.info("limit : " + limit);
 		
-		int listCount = orderService.getOrderListCount();
+		int listCount = orderService.getAdminOrderListCount();
 		logger.info("총 주문 갯수 : " + listCount);
 		
 		PageHandler pageHandler = new PageHandler(page, listCount, limit);
@@ -44,7 +44,7 @@ public class adminOrderController {
 			pageHandler.setEndPage(pageHandler.getMaxPage());
 		}
 		
-		List<OrderDto> orderList = orderService.getOrderList(pageHandler);
+		List<OrderDto> orderList = orderService.getAdminOrderList(pageHandler);
 		logger.info("주문 리스트 갯수 : " + orderList);
 		
 		model.addAttribute("pageHandler", pageHandler);

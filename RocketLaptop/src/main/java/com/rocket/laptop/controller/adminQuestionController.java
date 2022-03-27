@@ -21,7 +21,7 @@ import com.rocket.laptop.service.QuestionService;
 @Controller
 public class adminQuestionController {
 	
-	private Logger logger = LoggerFactory.getLogger(adminQuestionController.class);
+	private final Logger logger = LoggerFactory.getLogger(adminQuestionController.class);
 	
 	@Autowired
 	private QuestionService questionService;

@@ -3,6 +3,7 @@ package com.rocket.laptop.service;
 import java.util.List;
 
 import com.rocket.laptop.model.PageHandler;
+import com.rocket.laptop.model.PasswordDto;
 import com.rocket.laptop.model.UserDto;
 
 public interface UserService {
@@ -16,4 +17,8 @@ public interface UserService {
 	public int getUserListCount();
 
 	public List<UserDto> getUserList(PageHandler pageHandler);
+
+	public int userUpdate(UserDto userDto);
+
+	public int updatePassword(UserDto userDto, PasswordDto passwordDto);
 }

@@ -27,7 +27,7 @@ import com.rocket.laptop.service.ProductService;
 @Controller
 public class CartController {
 	
-	private Logger logger = LoggerFactory.getLogger(CartController.class);
+	private final Logger logger = LoggerFactory.getLogger(CartController.class);
 	
 	@Autowired
 	private CartService cartService;

@@ -58,5 +58,15 @@
 			#{cart}
 		</foreach>
 	</delete>
+	
+	<select id="findByCartNumList" parameterType="Map" resultType="CartDto">
+		select *
+		from cart
+		where cart_num in 
+		<foreach item="cart" collection="cartNumList"
+				 open="(" separator="," close=")">
+			#{cart}
+		</foreach>
+	</select>
 
 </mapper>

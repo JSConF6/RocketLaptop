@@ -44,6 +44,7 @@
 <script src="${pageContext.request.contextPath}/js/productDetailView.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/cartListView.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/orderView.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/userInfoView.js" type="text/javascript"></script>
 
 <!-- sweetalert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.5/dist/sweetalert2.all.min.js"></script>
@@ -85,7 +86,7 @@
 				<sec:authorize access="isAuthenticated()">
 					<div class="d-flex">
 						<sec:authorize access="hasRole('ROLE_USER')">
-							<sec:authentication property="principal.userDto.user_id" var="user_id"/>
+							<sec:authentication property="principal.userDto.user_id" var="user_id" />
 							<input type="hidden" value="${user_id}" id="user_id" />
 							<li class="nav-item position-relative">
 								<a href="/user/cart/list?user_id=${user_id}" class="nav-link d-flex flex-column align-items-center text-secondary" id="cart-icon"> 
@@ -94,8 +95,16 @@
 									<span class="fs-5 cart-icon-title">장바구니</span>
 								</a>
 							</li>
-							<li class="nav-item"><a href="#" class="nav-link d-flex flex-column align-items-center text-secondary" id="mypage-icon"> <i class="fa-solid fa-circle-user fa-2x"></i> <span class="fs-5 mypage-icon-title">마이페이지</span>
-							</a></li>
+							<li class="nav-item dropdown">
+								<a href="/user/mypage" class="nav-link d-flex flex-column align-items-center text-secondary" id="mypage-icon" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
+								<i class="fa-solid fa-circle-user fa-2x"></i> 
+									<span class="fs-5 mypage-icon-title">마이페이지</span>
+								</a>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="/user/mypage/userInfo?user_id=${user_id}">내정보</a></li>
+									<li><a class="dropdown-item" href="/user/mypage/orderList?user_id=${user_id}">주문목록</a></li>
+								</ul>
+							</li>
 						</sec:authorize>
 						<sec:authorize access="hasRole('ROLE_ADMIN')">
 							<li class="nav-item"><a href="/admin?pageName=home" class="nav-link d-flex flex-column align-items-center text-secondary" id="mypage-icon"> <i class="fa-solid fa-circle-user fa-2x"></i> <span class="fs-5 mypage-icon-title">관리자페이지</span>
@@ -122,7 +131,7 @@
 								<i class="fa-solid fa-bars fa-2x"></i> <span class="fs-4">&nbsp;&nbsp;카테고리</span>
 							</button>
 							<ul class="dropdown-menu category-menu">
-								
+
 							</ul>
 						</div>
 					</li>

@@ -7,7 +7,7 @@
 		<div class="register-container mx-auto">
 			<div class="register-form mx-auto">
 				<div class="d-flex justify-content-center align-items-center mb-5">
-					<img alt="Logo" src="../images/RocketLaptopLogo.svg" width="20%" height="10%"> <span class="fs-1">회원가입</span>
+					<img alt="Logo" src="/images/RocketLaptopLogo.svg" width="20%" height="10%"> <span class="fs-1">회원가입</span>
 				</div>
 				<form class="w-50 mx-auto" name="joinForm" id="joinForm" action="/registerProcess" method="POST">
 					<div class="row mb-3">
