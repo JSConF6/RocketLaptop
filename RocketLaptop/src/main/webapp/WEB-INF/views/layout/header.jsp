@@ -45,6 +45,7 @@
 <script src="${pageContext.request.contextPath}/js/cartListView.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/orderView.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/userInfoView.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/header.js" type="text/javascript"></script>
 
 <!-- sweetalert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.5/dist/sweetalert2.all.min.js"></script>
@@ -62,17 +63,14 @@
 			<a href="/" class="navbar-brand text-black" style="width: 210px"> <img alt="" src="/images/RocketLaptopLogo.svg" width="100%" height="100%">
 			</a>
 			<div class="input-group" id="search-bar">
-				<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-					<span>전체</span>
-				</button>
-				<ul class="dropdown-menu">
-					<li><a class="dropdown-item" href="#">전체</a></li>
-					<li><a class="dropdown-item" href="#">상품명</a></li>
-					<li><a class="dropdown-item" href="#">카테고리명</a></li>
-				</ul>
-				<input type="text" class="form-control" aria-label="Text input with 2 dropdown buttons" />
+				<select class="rounded-start search_field">
+					<option value="0" selected>상품명</option>
+					<option value="1">카테고리명</option>
+				</select> 
+				<input type="text" class="form-control search_word" placeholder="상품명을 입력해주세요"/>
 				<button class="btn btn-outline-secondary" type="button">
-					<a href="#"> <i class="fa-solid fa-magnifying-glass fa-2x"></i>
+					<a href="#"> 
+						<i class="fa-solid fa-magnifying-glass fa-2x"></i>
 					</a>
 				</button>
 			</div>
@@ -91,13 +89,12 @@
 							<li class="nav-item position-relative">
 								<a href="/user/cart/list?user_id=${user_id}" class="nav-link d-flex flex-column align-items-center text-secondary" id="cart-icon"> 
 									<i class="fa-solid fa-cart-shopping fa-2x"></i> 
-									<span class="position-absolute top-5 translate-middle badge rounded-pill bg-success" id="cart-badge">0</span> 
-									<span class="fs-5 cart-icon-title">장바구니</span>
+									<span class="position-absolute top-5 translate-middle badge rounded-pill bg-success" id="cart-badge">0</span> <span class="fs-5 cart-icon-title">장바구니</span>
 								</a>
 							</li>
 							<li class="nav-item dropdown">
 								<a href="/user/mypage" class="nav-link d-flex flex-column align-items-center text-secondary" id="mypage-icon" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
-								<i class="fa-solid fa-circle-user fa-2x"></i> 
+									<i class="fa-solid fa-circle-user fa-2x"></i> 
 									<span class="fs-5 mypage-icon-title">마이페이지</span>
 								</a>
 								<ul class="dropdown-menu">
@@ -107,11 +104,19 @@
 							</li>
 						</sec:authorize>
 						<sec:authorize access="hasRole('ROLE_ADMIN')">
-							<li class="nav-item"><a href="/admin?pageName=home" class="nav-link d-flex flex-column align-items-center text-secondary" id="mypage-icon"> <i class="fa-solid fa-circle-user fa-2x"></i> <span class="fs-5 mypage-icon-title">관리자페이지</span>
-							</a></li>
+							<li class="nav-item">
+								<a href="/admin?pageName=home" class="nav-link d-flex flex-column align-items-center text-secondary" id="mypage-icon"> 
+									<i class="fa-solid fa-circle-user fa-2x"></i> 
+									<span class="fs-5 mypage-icon-title">관리자페이지</span>
+								</a>
+							</li>
 						</sec:authorize>
-						<li class="nav-item"><a class="nav-link d-flex flex-column align-items-center text-secondary" id="cuser-icon" href="/logout"> <i class="fa-solid fa-right-from-bracket fa-2x"></i> <span class="fs-5 cuser-icon-title">로그아웃</span>
-						</a></li>
+						<li class="nav-item">
+							<a class="nav-link d-flex flex-column align-items-center text-secondary" id="cuser-icon" href="/logout"> 
+								<i class="fa-solid fa-right-from-bracket fa-2x"></i> 
+								<span class="fs-5 cuser-icon-title">로그아웃</span>
+							</a>
+						</li>
 					</div>
 				</sec:authorize>
 			</ul>

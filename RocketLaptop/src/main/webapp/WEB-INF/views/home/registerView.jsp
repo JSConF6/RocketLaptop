@@ -26,12 +26,12 @@
 					</div>
 					<div class="row mb-3">
 						<label for="register-birth" class="text-start ps-0">생년월일</label>
-						<input type="text" class="form-control" placeholder="-포함해서 입력해주세요. ex) 2022-01-01" required name="user_birth" id="register-birth"/>
+						<input type="text" class="form-control" placeholder="'-'빼고 입력해주세요. ex) 20220101" required name="user_birth" id="register-birth"/>
 						<span class="birth_message"></span>
 					</div>
 					<div class="row mb-3">
 						<label for="register-phone" class="text-start ps-0">휴대전화</label>
-						<input type="text" class="form-control" placeholder="-포함해서 입력해주세요. ex) 010-1111-2222" required name="user_phone" id="register-phone"/>
+						<input type="text" class="form-control" placeholder="'-'빼고 입력해주세요. ex) 01011112222" required name="user_phone" id="register-phone"/>
 						<span class="phone_message"></span>
 					</div>
 					<div class="row mb-3">

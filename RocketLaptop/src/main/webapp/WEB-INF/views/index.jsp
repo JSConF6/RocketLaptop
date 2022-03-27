@@ -33,7 +33,7 @@
 		<div class="col col-10">
 			<div class="d-flex justify-content-between mt-4 align-items-center">
 				<h1>새로운 상품</h1>
-				<a href="#" class="text-secondary"> <i class="fa-solid fa-angle-right fa-2x"></i>
+				<a href="/product/newProductList" class="text-secondary"> <i class="fa-solid fa-angle-right fa-2x"></i>
 				</a>
 			</div>
 		</div>
@@ -55,7 +55,7 @@
 									</h6>
 									<p class="card-text fs-5 mt-3">${newProduct.product_name}</p>
 									<fmt:formatNumber var="newProductPrice" value="${newProduct.product_price}" pattern="###,###,###" />
-									<a href="productDetail" class="btn btn-secondary">상세보기</a> &nbsp; <span class="card-text">${newProductPrice}원</span>
+									<a href="productDetail" class="btn btn-primary">상세보기</a> &nbsp; <span class="card-text">${newProductPrice}원</span>
 								</div>
 							</div>
 						</div>
@@ -73,7 +73,7 @@
 		<div class="col col-10">
 			<div class="d-flex justify-content-between mt-4 align-items-center">
 				<h1>베스트 상품</h1>
-				<a href="#" class="text-secondary"> <i class="fa-solid fa-angle-right fa-2x"></i>
+				<a href="/product/bestProductList" class="text-secondary"> <i class="fa-solid fa-angle-right fa-2x"></i>
 				</a>
 			</div>
 		</div>
@@ -95,7 +95,7 @@
 									</h6>
 									<p class="card-text fs-5 mt-3">${bestProduct.product_name}</p>
 									<fmt:formatNumber var="bestProductPrice" value="${bestProduct.product_price}" pattern="###,###,###" />
-									<a href="#" class="btn btn-secondary">상세보기</a> &nbsp; <span class="card-text">${bestProductPrice}원</span>
+									<a href="#" class="btn btn-primary">상세보기</a> &nbsp; <span class="card-text">${bestProductPrice}원</span>
 								</div>
 							</div>
 						</div>
