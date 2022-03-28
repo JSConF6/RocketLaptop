@@ -70,24 +70,21 @@ public class HomeController {
 	}
 	
 	@GetMapping("/login")
-	public ModelAndView login(ModelAndView mv,
+	public String login(Model model,
 			@CookieValue(value="saveId", required = false) Cookie readCookie,
 			@AuthenticationPrincipal PrincipalDetails principalDetails) {
 		logger.info("로그인 view로 이동");
 		
 		if(principalDetails != null) {
-			mv.addObject("duplicate", "duplicateLogin");
-			mv.setViewName("/duplicateLogin");
-			return mv;
+			return "redirect:/";
 		}
 		
 		if(readCookie != null) {
-			mv.addObject("saveId", readCookie.getValue());
+			model.addAttribute("saveId", readCookie.getValue());
 			logger.info("Cookie Time : " + readCookie.getMaxAge());
 		}
 		
-		mv.setViewName("/home/loginView");
-		return mv;
+		return "/home/loginView";
 	}
 	
 	@GetMapping("/loginFail")
@@ -118,7 +115,7 @@ public class HomeController {
 			return "redirect:login";
 		}else {
 			model.addAttribute("result", "fail");
-			return "refirect:register";
+			return "redirect:register";
 		}
 	}
 	
@@ -126,13 +123,6 @@ public class HomeController {
 	@GetMapping("/register/idcheck")
 	public int idCheck(@RequestParam("id") String id) {
 		return userService.isId(id);
-	}
-	
-	@GetMapping("/accessDenied")
-	public String accessDenied() {
-		logger.info("권한 없이 페이지 접속");
-		
-		return "/accessDeniedView";
 	}
 	
 	@GetMapping("/cart")
