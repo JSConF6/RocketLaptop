@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<link rel="icon" href="/images/favicon.ico">
+
 <!-- 제이쿼리 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" type=""></script>
 
@@ -48,6 +50,11 @@
 <script src="${pageContext.request.contextPath}/js/userInfoView.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/header.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/findIdPasswordView.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/noticeDetailView.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/questionDetailView.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/myQuestionListView.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/myQuestionDetailView.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/questionListView.js" type="text/javascript"></script>
 
 <!-- sweetalert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.5/dist/sweetalert2.all.min.js"></script>
@@ -101,7 +108,8 @@
 								</a>
 								<ul class="dropdown-menu">
 									<li><a class="dropdown-item" href="/user/mypage/userInfo?user_id=${user_id}">내정보</a></li>
-									<li><a class="dropdown-item" href="/user/mypage/orderList?user_id=${user_id}">주문목록</a></li>
+									<li><a class="dropdown-item" href="/user/mypage/order/list?user_id=${user_id}">주문목록</a></li>
+									<li><a class="dropdown-item" href="/user/mypage/question/list?user_id=${user_id}">내 문의글</a></li>
 								</ul>
 							</li>
 						</sec:authorize>
@@ -144,8 +152,8 @@
 					</li>
 					<li class="nav-item"><a href="/product/bestProductList" class="nav-link me-3 text-secondary fs-4">베스트상품</a></li>
 					<li class="nav-item"><a href="/product/newProductList" class="nav-link me-3 text-secondary fs-4">신규상품</a></li>
-					<li class="nav-item"><a class="nav-link me-3 text-secondary fs-4" href="/notice">공지사항</a></li>
-					<li class="nav-item"><a href="/question" class="nav-link me-3 text-secondary fs-4">문의사항</a></li>
+					<li class="nav-item"><a class="nav-link me-3 text-secondary fs-4" href="/notice/list">공지사항</a></li>
+					<li class="nav-item"><a href="/question/list" class="nav-link me-3 text-secondary fs-4">문의사항</a></li>
 				</ul>
 			</div>
 		</div>

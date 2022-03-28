@@ -43,5 +43,111 @@
 		insert into comment (qna_num, comment_content)
 		values(#{num}, #{comment_content})
 	</insert>
+	
+	<insert id="questionAdd" parameterType="QuestionDto">
+		insert into qna (user_id, qna_title, qna_content)
+		values (#{user_id}, #{qna_title}, #{qna_content})
+	</insert>
+	
+	<insert id="noticeAdd" parameterType="NoticeDto">
+		insert into notice (notice_title, notice_content)
+		values(#{notice_title}, #{notice_content})
+	</insert>
+	
+	<select id="getUserQuestionListCount" parameterType="String" resultType="int">
+		select count(*)
+		from qna
+		where user_id = #{user_id}
+	</select>
+	
+	<select id="getUserQuestionList" parameterType="Map" resultType="QuestionDto">
+		select qu.* 
+		from (select @ROWNUM := @ROWNUM + 1 AS rnum, qn.*
+	  		  from (select @ROWNUM:=0) AS r, 
+	  		  	   (select q.qna_num, q.user_id, q.qna_title, 
+	  		  	   		   q.qna_content, q.qna_readcount, q.qna_reg_date, c.comment_content
+	  		  	    from qna q left join comment c
+	  		  	   	on q.qna_num = c.qna_num
+	  		  	   	where user_id = #{user_id}
+	  		  	    order by q.qna_reg_date desc) qn) qu
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<select id="getUserQuestionDetail" parameterType="Map" resultType="QuestionDto">
+		select *
+		from qna
+		where qna_num = #{num}
+		and user_id = #{user_id}
+	</select>
+	
+	<select id="getAjaxQuestionListCount" parameterType="String" resultType="int">
+		select count(*)
+		from qna q left join comment c
+		on q.qna_num = c.qna_num
+		<choose>
+			<when test="commentState == '답변대기'">
+				where c.comment_content is null
+			</when>
+			<when test="commentState == '답변완료'">
+				where c.comment_content is not null
+			</when>
+		</choose>
+	</select>
+	
+	<select id="getAjaxQuestionList" parameterType="Map" resultType="QuestionDto">
+		select qu.* 
+		from (select @ROWNUM := @ROWNUM + 1 AS rnum, qn.*
+	  		  from (select @ROWNUM:=0) AS r, 
+	  		  	   (select q.qna_num, q.user_id, q.qna_title, 
+	  		  	   		   q.qna_content, q.qna_readcount, q.qna_reg_date, c.comment_content
+	  		  	    from qna q left join comment c
+	  		  	   	on q.qna_num = c.qna_num
+	  		  	   	<choose>
+	  		  	   		<when test="commentState == '답변대기'">
+	  		  	   			where c.comment_content is null
+	  		  	   		</when>
+	  		  	   		<when test="commentState == '답변완료'">
+	  		  	   			where c.comment_content is not null
+	  		  	   		</when>
+	  		  	   	</choose>
+	  		  	    order by q.qna_reg_date desc) qn) qu
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<select id="getAjaxUserQuestionListCount" parameterType="Map" resultType="int">
+		select count(*)
+		from qna q left join comment c
+		on q.qna_num = c.qna_num
+		where user_id = #{user_id}
+		<choose>
+			<when test="commentState == '답변대기'">
+				and c.comment_content is null
+			</when>
+			<when test="commentState == '답변완료'">
+				and c.comment_content is not null
+			</when>
+		</choose>
+	</select>
+	
+	<select id="getAjaxUserQuestionList" parameterType="Map" resultType="QuestionDto">
+		select qu.* 
+		from (select @ROWNUM := @ROWNUM + 1 AS rnum, qn.*
+	  		  from (select @ROWNUM:=0) AS r, 
+	  		  	   (select q.qna_num, q.user_id, q.qna_title, 
+	  		  	   		   q.qna_content, q.qna_readcount, q.qna_reg_date, c.comment_content
+	  		  	    from qna q left join comment c
+	  		  	   	on q.qna_num = c.qna_num
+	  		  	   	where user_id = user_id
+	  		  	   	<choose>
+	  		  	   		<when test="commentState == '답변대기'">
+	  		  	   			and c.comment_content is null
+	  		  	   		</when>
+	  		  	   		<when test="commentState == '답변완료'">
+	  		  	   			and c.comment_content is not null
+	  		  	   		</when>
+	  		  	   	</choose>
+	  		  	    order by q.qna_reg_date desc) qn) qu
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
 
 </mapper>

@@ -56,13 +56,17 @@ public class adminNoticeController {
 	}
 	
 	@PostMapping("/admin/noticeAdd")
-	public String noticeAdd(NoticeDto noticeDto, Model model) {
+	@ResponseBody
+	public ResponseDto<String> noticeAdd(NoticeDto noticeDto) {
 		logger.info("공지사항 등록");
 
 		int result = noticeService.noticeAdd(noticeDto);
 		
-		model.addAttribute("result", "등록성공");
-		return "redirect:/admin/noticeList";
+		if(result != 1) {
+			return new ResponseDto<String>(HttpStatus.BAD_REQUEST.value(), "공지사항 등록 실패");
+		}
+		
+		return new ResponseDto<String>(HttpStatus.OK.value(), "공지사항 등록 성공");
 	}
 	
 	@GetMapping("/admin/noticeDetail")

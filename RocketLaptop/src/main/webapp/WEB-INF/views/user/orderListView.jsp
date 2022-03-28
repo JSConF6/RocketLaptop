@@ -26,7 +26,7 @@
 				<tbody>
 					<c:forEach var="order" items="${orderList}">
 						<tr>
-							<td><a href="/user/mypage/orderDetail?order_id=${order.order_id}&user_id=${param.user_id}"><c:out value="${order.order_id}" /></a></td>
+							<td><a href="/user/mypage/order/detail?order_id=${order.order_id}&user_id=${param.user_id}"><c:out value="${order.order_id}" /></a></td>
 							<td>${order.order_name}</td>
 							<td><fmt:formatDate value="${order.order_date}" pattern="yyyy-MM-dd" /></td>
 							<td>${order.order_state}</td>

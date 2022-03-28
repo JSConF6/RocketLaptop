@@ -11,7 +11,7 @@
 		</div>
 		<div class="mt-3 d-flex justify-content-between align-items-center mb-3">
 			<span class="fs-5">공지사항 갯수 : ${pageHandler.listCount}개</span>
-			<button type="button" class="btn btn-primary text-end" data-bs-toggle="modal" data-bs-target="#staticBackdrop">공지사항 쓰기</button>
+			<button type="button" class="btn btn-primary text-end" data-bs-toggle="modal" data-bs-target="#adminNoticeAddModal">공지사항 쓰기</button>
 		</div>
 		<c:if test="${pageHandler.listCount > 0}">
 			<table class="table table-striped table-hover text-center">
@@ -74,7 +74,7 @@
 		</c:if>
 	</div>
 
-	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal fade" id="adminNoticeAddModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
 				<div class="modal-header">

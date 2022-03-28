@@ -24,5 +24,23 @@ public interface QuestionMapper {
 	int questionDelete(int num);
 
 	int commentAdd(Map<String, Object> map);
+
+	int questionAdd(QuestionDto questionDto);
+
+	int getUserQuestionListCount(String user_id);
+
+	List<QuestionDto> getUserQuestionList(Map<String, Object> map);
+
+	QuestionDto getUserQuestionDetail(Map<String, Object> map);
+
+	CommentDto getUserComment(Map<String, Object> map);
+
+	int getAjaxQuestionListCount(String commentState);
+
+	List<QuestionDto> getAjaxQuestionList(Map<String, Object> map);
+
+	int getAjaxUserQuestionListCount(Map<String, Object> map);
+
+	List<QuestionDto> getAjaxUserQuestionList(Map<String, Object> map);
 	
 }

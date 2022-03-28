@@ -27,12 +27,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rocket.laptop.config.auth.PrincipalDetails;
 import com.rocket.laptop.model.CategoryDto;
+import com.rocket.laptop.model.NoticeDto;
 import com.rocket.laptop.model.PageHandler;
 import com.rocket.laptop.model.ProductListDto;
 import com.rocket.laptop.model.ResponseDto;
 import com.rocket.laptop.model.UserDto;
 import com.rocket.laptop.service.CategoryService;
 import com.rocket.laptop.service.MailService;
+import com.rocket.laptop.service.NoticeService;
 import com.rocket.laptop.service.ProductService;
 import com.rocket.laptop.service.UserService;
 
@@ -52,6 +54,9 @@ public class HomeController {
 	
 	@Autowired
 	private MailService mailService;
+	
+	@Autowired
+	private NoticeService noticeService;
 	
 	@GetMapping("/")
 	public String home(Model model) {
@@ -174,17 +179,39 @@ public class HomeController {
 		return new ResponseDto<String>(HttpStatus.OK.value(), "가입한 메일로 임시비밀번호를 보냈습니다.");
 	}
 	
-	@GetMapping("/notice")
-	public String notice() {
-		logger.info("공지사항 view로 이동");
+	@GetMapping("/notice/list")
+	public String noticeView(@RequestParam(value="page", defaultValue = "1", required = false) int page, Model model) {
+		logger.info("공지사항 페이지로 이동");
 		
-		return "/home/noticeView";
+		int limit = 5;
+		logger.info("limit : " + limit);
+		
+		int listCount = noticeService.getNoticeListCount();
+		logger.info("총 공지사항 갯수 : " + listCount);
+		
+		PageHandler pageHandler = new PageHandler(page, listCount, limit);
+		
+		if(pageHandler.getEndPage() > pageHandler.getMaxPage()) {
+			pageHandler.setEndPage(pageHandler.getMaxPage());
+		}
+		
+		List<NoticeDto> noticeList = noticeService.getNoticeList(pageHandler);
+		logger.info("공지사항 리스트 갯수 : " + noticeList);
+		
+		model.addAttribute("pageHandler", pageHandler);
+		model.addAttribute("noticeList", noticeList);
+		
+		return "/home/noticeListView";
 	}
 	
-	@GetMapping("/question")
-	public String question() {
-		logger.info("문의사항 view로 이동");
+	@GetMapping("/notice/detail")
+	public String adminNoticeDetailView(@RequestParam(value="num") int num, Model model) {
+		logger.info("공지사항 상세 페이지로 이동");
 		
-		return "/home/questionView";
+		NoticeDto noticeDto = noticeService.getNoticeDetail(num);
+		
+		model.addAttribute("noticeDto", noticeDto);
+		
+		return "/home/noticeDetailView";
 	}
 }
