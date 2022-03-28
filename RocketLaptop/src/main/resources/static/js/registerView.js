@@ -137,7 +137,7 @@ $(function() {
 	$("#register-birth").on("keyup", function(){
 		$(".birth_message").empty();
 		
-		const pattern =  /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/;
+		const pattern =  /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
 		let registerBirth = $.trim($("#register-birth").val());
 		if(!pattern.test(registerBirth)){
 			$(".birth_message").css('color', 'red').html("생년월일 형식 맞지 않습니다.");
@@ -151,7 +151,7 @@ $(function() {
 	$("#register-phone").on("keyup", function(){
 		$(".phone_message").empty();
 		
-		const pattern = /^\d{3}-\d{3,4}-\d{4}$/;
+		const pattern = /^010\d{3,4}\d{4}$/;
 		let registerPhone = $.trim($("#register-phone").val());
 		if(!pattern.test(registerPhone)){
 			$(".phone_message").css('color', 'red').html("전화번호 형식 맞지 않습니다.");

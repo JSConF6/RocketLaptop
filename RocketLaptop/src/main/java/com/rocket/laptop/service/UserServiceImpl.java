@@ -85,4 +85,19 @@ public class UserServiceImpl implements UserService {
 		return result;
 	}
 
+	@Override
+	public UserDto findByUsernameAndEmail(UserDto userDto) {
+		return userMapper.findByUsernameAndEmail(userDto);
+	}
+
+	@Override
+	public UserDto findByIdAndUsernameAndEmail(UserDto userDto) {
+		return userMapper.findByIdAndUsernameAndEmail(userDto);
+	}
+
+	@Override
+	public void updateFindPassword(UserDto userDto) {
+		userMapper.updateFindPassword(userDto);
+	}
+
 }

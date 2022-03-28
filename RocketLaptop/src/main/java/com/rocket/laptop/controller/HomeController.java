@@ -1,13 +1,19 @@
 package com.rocket.laptop.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,8 +29,10 @@ import com.rocket.laptop.config.auth.PrincipalDetails;
 import com.rocket.laptop.model.CategoryDto;
 import com.rocket.laptop.model.PageHandler;
 import com.rocket.laptop.model.ProductListDto;
+import com.rocket.laptop.model.ResponseDto;
 import com.rocket.laptop.model.UserDto;
 import com.rocket.laptop.service.CategoryService;
+import com.rocket.laptop.service.MailService;
 import com.rocket.laptop.service.ProductService;
 import com.rocket.laptop.service.UserService;
 
@@ -41,6 +49,9 @@ public class HomeController {
 	
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+	private MailService mailService;
 	
 	@GetMapping("/")
 	public String home(Model model) {
@@ -125,11 +136,42 @@ public class HomeController {
 		return userService.isId(id);
 	}
 	
-	@GetMapping("/cart")
-	public String cart() {
-		logger.info("장바구니 view로 이동");
+	@GetMapping("/findIdPasswordView")
+	public String findIdPasswordView() {
+		logger.info("아이디 비밀번호 찾기 view로 이동");
 		
-		return "/user/cartView";
+		return "/home/findIdPasswordView";
+	}
+	
+	@PostMapping("/findProcess")
+	@ResponseBody
+	public ResponseDto<String> findProcess(UserDto userDto, @RequestParam("find") String find) throws Exception{
+		
+		if(find.equals("findId")) {
+			logger.info("아이디 찾기");
+			UserDto findUser = userService.findByUsernameAndEmail(userDto);
+			
+			if(findUser == null) {
+				return new ResponseDto<String>(HttpStatus.UNAUTHORIZED.value(), "해당하는 정보의 유저가 없습니다.");
+			}
+			
+			return new ResponseDto<String>(HttpStatus.OK.value(), findUser.getUser_id());
+		}else if(find.equals("findPassword")){
+			logger.info("비밀번호 찾기");
+			UserDto findUser = userService.findByIdAndUsernameAndEmail(userDto);
+			
+			if(findUser == null) {
+				return new ResponseDto<String>(HttpStatus.UNAUTHORIZED.value(), "해당하는 정보의 유저가 없습니다.");
+			}
+			
+			try {
+				mailService.sendMailPassword(userDto);
+			} catch (Exception e) {
+				return new ResponseDto<String>(HttpStatus.BAD_REQUEST.value(), "메일 전송 실패 다시 시도 해주세요.");
+			}
+		}
+		
+		return new ResponseDto<String>(HttpStatus.OK.value(), "가입한 메일로 임시비밀번호를 보냈습니다.");
 	}
 	
 	@GetMapping("/notice")
@@ -144,12 +186,5 @@ public class HomeController {
 		logger.info("문의사항 view로 이동");
 		
 		return "/home/questionView";
-	}
-	
-	@GetMapping("/mypage")
-	public String mypage() {
-		logger.info("마이페이지 view로 이동");
-		
-		return "/user/mypageView";
 	}
 }

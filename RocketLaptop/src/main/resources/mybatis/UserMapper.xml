@@ -42,5 +42,28 @@
 		set user_password = #{encPassword}
 		where user_id = #{user_id}
 	</update>
+	
+	<select id="findByUsernameAndEmail" parameterType="UserDto" resultType="UserDto">
+		select *
+		from user
+		where user_name = #{user_name}
+		and user_email = #{user_email}
+	</select>
+	
+	<select id="findByIdAndUsernameAndEmail" parameterType="UserDto" resultType="UserDto">
+		select *
+		from user
+		where user_id = #{user_id}
+		and user_name = #{user_name}
+		and user_email = #{user_email}
+	</select>
+	
+	<update id="updateFindPassword" parameterType="UserDto">
+		update user
+		set user_password = #{user_password}
+		where user_id = #{user_id}
+		and user_name = #{user_name}
+		and user_email = #{user_email}
+	</update>
 
 </mapper>

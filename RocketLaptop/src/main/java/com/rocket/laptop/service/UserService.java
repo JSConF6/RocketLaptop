@@ -21,4 +21,10 @@ public interface UserService {
 	public int userUpdate(UserDto userDto);
 
 	public int updatePassword(UserDto userDto, PasswordDto passwordDto);
+
+	public UserDto findByUsernameAndEmail(UserDto userDto);
+
+	public UserDto findByIdAndUsernameAndEmail(UserDto userDto);
+
+	public void updateFindPassword(UserDto userDto);
 }

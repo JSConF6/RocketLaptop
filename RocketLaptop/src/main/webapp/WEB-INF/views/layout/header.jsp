@@ -36,6 +36,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/cartView.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productListView.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/swiper.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/findIdPasswordView.css" type="text/css">
 
 <!-- JS -->
 <script src="${pageContext.request.contextPath}/js/registerView.js" type="text/javascript"></script>
@@ -46,6 +47,7 @@
 <script src="${pageContext.request.contextPath}/js/orderView.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/userInfoView.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/header.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/findIdPasswordView.js" type="text/javascript"></script>
 
 <!-- sweetalert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.5/dist/sweetalert2.all.min.js"></script>

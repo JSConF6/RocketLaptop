@@ -23,5 +23,11 @@ public interface UserMapper {
 	int userUpdate(UserDto userDto);
 
 	int updatePassword(Map<String, Object> map);
+
+	UserDto findByUsernameAndEmail(UserDto userDto);
+
+	UserDto findByIdAndUsernameAndEmail(UserDto userDto);
+
+	void updateFindPassword(UserDto userDto);
 	
 }

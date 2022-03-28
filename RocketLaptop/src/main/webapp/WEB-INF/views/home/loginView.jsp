@@ -40,10 +40,7 @@
 					<div class="mt-2 d-flex justify-content-center">
 						<a href="/register">회원가입</a>
 						&nbsp;/&nbsp;
-						<a href="#">아이디 비밀번호 찾기</a>
-					</div>
-					<div class="d-flex justify-content-center">
-						
+						<a href="/findIdPasswordView">아이디 비밀번호 찾기</a>
 					</div>
 				</form>
 			</div>
