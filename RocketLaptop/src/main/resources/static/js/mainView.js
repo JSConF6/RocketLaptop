@@ -9,7 +9,7 @@ $(function(){
 			$(".category > .category-menu").empty();
 			let output = "<li><button class='dropdown-item' type='button'><a href='/product/list'>전체</a></button></li>";
 			for(let i = 0; i < res.length; i++){
-				output += "<li><button class='dropdown-item' type='button'><a href=" + "/product/categoryList?" + "category_code=" + res[i].category_code + ">" + res[i].category_name + "</a></button></li>";
+				output += "<li><button class='dropdown-item' type='button'><a href=" + "/product/category/list?" + "category_code=" + res[i].category_code + ">" + res[i].category_name + "</a></button></li>";
 			}
 			$(".category > .category-menu").append(output);
 		}).fail(function(err) {
@@ -18,6 +18,10 @@ $(function(){
 	}
 	
 	MainCategoryList();
+	
+	if($("#user_id").val() !== undefined){
+		CartListCount();	
+	}
 	
 	function CartListCount(){
 		let user_id = $("#user_id").val();
@@ -32,6 +36,4 @@ $(function(){
 			console.log(err)
 		})
 	}
-	
-	CartListCount();
 });

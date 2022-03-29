@@ -26,4 +26,8 @@ public interface ProductMapper {
 	public void productModify(ProductDto productDto);
 
 	public List<ProductListDto> getBestProductList(Map<String, Object> map);
+
+	public int getCategoryProductListCount(int category_code);
+
+	public List<ProductListDto> getCategoryProductList(Map<String, Object> map);
 }

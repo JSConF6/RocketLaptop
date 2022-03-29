@@ -74,4 +74,20 @@ public class ProductServiceImpl implements ProductService {
 		return productMapper.getBestProductList(map);
 	}
 
+	@Override
+	public int getCategoryProductListCount(int category_code) {
+		return productMapper.getCategoryProductListCount(category_code);
+	}
+
+	@Override
+	public List<ProductListDto> getCategoryProductList(PageHandler pageHandler, int category_code) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("category_code", category_code);
+		map.put("start", pageHandler.getStartRow());
+		map.put("end", pageHandler.getEndRow());
+		
+		return productMapper.getCategoryProductList(map);
+	}
+
 }

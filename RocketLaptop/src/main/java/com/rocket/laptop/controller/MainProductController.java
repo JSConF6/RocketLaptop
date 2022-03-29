@@ -15,6 +15,7 @@ import com.rocket.laptop.model.FileDto;
 import com.rocket.laptop.model.PageHandler;
 import com.rocket.laptop.model.ProductDetailDto;
 import com.rocket.laptop.model.ProductListDto;
+import com.rocket.laptop.service.CategoryService;
 import com.rocket.laptop.service.FileService;
 import com.rocket.laptop.service.ProductService;
 
@@ -29,6 +30,34 @@ public class MainProductController {
 	
 	@Autowired
 	private FileService fileService;
+	
+	@Autowired
+	private CategoryService categoryService;
+	
+	@GetMapping("/list")
+	public String AllProductList(Model model, @RequestParam(value="page", defaultValue = "1", required = false) int page) {
+		logger.info("전체 상품 view로 이동");
+		
+		int limit = 8;
+		logger.info("limit : " + limit);
+		
+		int listCount = productService.getProductListCount();
+		logger.info("총 상품 갯수 : " + listCount);
+		
+		PageHandler pageHandler = new PageHandler(page, listCount, limit);
+		
+		if(pageHandler.getEndPage() > pageHandler.getMaxPage()) {
+			pageHandler.setEndPage(pageHandler.getMaxPage());
+		}
+		
+		List<ProductListDto> allProductList = productService.getProductList(pageHandler);
+		logger.info("전체 상품 리스트 갯수 : " + allProductList);
+		
+		model.addAttribute("pageHandler", pageHandler);
+		model.addAttribute("allProductList", allProductList);
+		
+		return "/product/AllProductListView";
+	}
 	
 	@GetMapping("/bestProductList")
 	public String bestProduct(Model model, @RequestParam(value="page", defaultValue = "1", required = false) int page) {
@@ -78,6 +107,36 @@ public class MainProductController {
 		model.addAttribute("newProductList", newProductList);
 		
 		return "/product/newProductListView";
+	}
+	
+	@GetMapping("/category/list")
+	public String newProduct(Model model, @RequestParam("category_code") int category_code,
+			@RequestParam(value="page", defaultValue = "1", required = false) int page) {
+		logger.info("카테고리 상품 view로 이동");
+		
+		int limit = 8;
+		logger.info("limit : " + limit);
+		
+		int listCount = productService.getCategoryProductListCount(category_code);
+		logger.info("총 상품 갯수 : " + listCount);
+		
+		PageHandler pageHandler = new PageHandler(page, listCount, limit);
+		
+		if(pageHandler.getEndPage() > pageHandler.getMaxPage()) {
+			pageHandler.setEndPage(pageHandler.getMaxPage());
+		}
+		
+		List<ProductListDto> categoryProductList = productService.getCategoryProductList(pageHandler, category_code);
+		logger.info("카테고리 상품 리스트 갯수 : " + categoryProductList);
+		
+		String categoryName = categoryService.getCategoryName(category_code);
+		logger.info("카테고리 이름 : " + categoryName);
+		
+		model.addAttribute("pageHandler", pageHandler);
+		model.addAttribute("categoryProductList", categoryProductList);
+		model.addAttribute("categoryName", categoryName);
+		
+		return "/product/categoryProductListView";
 	}
 	
 	@GetMapping("/detail")

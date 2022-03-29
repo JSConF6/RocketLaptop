@@ -24,4 +24,8 @@ public interface ProductService {
 	public List<ProductListDto> getNewProductList(PageHandler pageHandler);
 	
 	public List<ProductListDto> getBestProductList(PageHandler pageHandler);
+
+	public int getCategoryProductListCount(int category_code);
+
+	public List<ProductListDto> getCategoryProductList(PageHandler pageHandler, int category_code);
 }

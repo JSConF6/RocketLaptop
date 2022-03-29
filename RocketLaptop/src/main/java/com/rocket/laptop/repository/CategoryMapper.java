@@ -11,4 +11,6 @@ import com.rocket.laptop.model.CategoryDto;
 @Repository
 public interface CategoryMapper {
 	List<CategoryDto> getAllCategory();
+
+	String getCategoryName(int category_code);
 }
