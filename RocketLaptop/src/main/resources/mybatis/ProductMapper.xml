@@ -75,5 +75,36 @@
             		order by p.product_sales desc) p) pr
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
+	
+	<select id="getSearchProductListCount" resultType="int" parameterType="Map">
+		select count(*)
+		from product p, category c
+		where p.CATEGORY_CODE = c.CATEGORY_CODE
+		<include refid="search" />
+	</select>
+	
+	<select id="getSearchProductList" parameterType="Map" resultType="ProductListDto">
+		select pr.* 
+		from (select @ROWNUM := @ROWNUM + 1 AS rnum, p.*
+	  		  from (select @ROWNUM:=0) AS r, (select p.product_code, c.category_name, p.product_name, p.product_price, p.product_reg_date, i.product_img_name, i.product_img_original_name
+				    from product p, product_img i, category c
+					where p.product_code = i.product_code
+					and p.category_code = c.category_code
+					and i.product_img_type = 1
+					<include refid="search" />
+            		order by p.product_sales desc) p) pr
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<sql id="search">
+		<if test="search_field != null">
+			and
+			<choose>
+				<when test="search_field == 'product_name'">p.product_name</when>
+				<when test="search_field == 'category_name'">c.category_name</when>
+			</choose>
+			like #{search_word}
+		</if>
+	</sql>
 
 </mapper>

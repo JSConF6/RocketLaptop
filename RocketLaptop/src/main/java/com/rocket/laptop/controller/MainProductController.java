@@ -139,6 +139,38 @@ public class MainProductController {
 		return "/product/categoryProductListView";
 	}
 	
+	@GetMapping("/search/list")
+	public String productSearchList(Model model, @RequestParam("search_word") String search_word,
+			@RequestParam("search_field") int index,
+			@RequestParam(value="page", defaultValue = "1", required = false) int page) {
+		logger.info("상품 검색 view로 이동");
+		
+		String[] search_field = new String[]{"product_name", "category_name"};
+		
+		
+		int limit = 8;
+		logger.info("limit : " + limit);
+		
+		int listCount = productService.getSearchProductListCount(search_field[index], search_word);
+		logger.info("총 상품 갯수 : " + listCount);
+		
+		PageHandler pageHandler = new PageHandler(page, listCount, limit);
+		
+		if(pageHandler.getEndPage() > pageHandler.getMaxPage()) {
+			pageHandler.setEndPage(pageHandler.getMaxPage());
+		}
+		
+		List<ProductListDto> searchProductList = productService.getSearchProductList(pageHandler, search_field[index], search_word);
+		logger.info("검색 상품 리스트 갯수 : " + searchProductList);
+		
+		model.addAttribute("pageHandler", pageHandler);
+		model.addAttribute("searchProductList", searchProductList);
+		model.addAttribute("search_field", index);
+		model.addAttribute("search_word", search_word);
+		
+		return "/product/searchProductListView";
+	}
+	
 	@GetMapping("/detail")
 	public String productDetail(@RequestParam(value="product_code") String product_code, Model model) {
 		logger.info("상품 상세정보 페이지 이동");

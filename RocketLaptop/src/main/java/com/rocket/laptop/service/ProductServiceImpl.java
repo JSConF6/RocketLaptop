@@ -90,4 +90,26 @@ public class ProductServiceImpl implements ProductService {
 		return productMapper.getCategoryProductList(map);
 	}
 
+	@Override
+	public int getSearchProductListCount(String search_field, String search_word) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("search_field", search_field);
+		map.put("search_word", "%" + search_word + "%");
+		
+		return productMapper.getSearchProductListCount(map);
+	}
+
+	@Override
+	public List<ProductListDto> getSearchProductList(PageHandler pageHandler, String search_field, String search_word) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("search_field", search_field);
+		map.put("search_word", "%" + search_word + "%");
+		map.put("start", pageHandler.getStartRow());
+		map.put("end", pageHandler.getEndRow());
+		
+		return productMapper.getSearchProductList(map);
+	}
+
 }

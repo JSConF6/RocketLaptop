@@ -71,18 +71,19 @@
 		<div class="container-fluid pe-0">
 			<a href="/" class="navbar-brand text-black" style="width: 210px"> <img alt="" src="/images/RocketLaptopLogo.svg" width="100%" height="100%">
 			</a>
-			<div class="input-group" id="search-bar">
-				<select class="rounded-start search_field">
-					<option value="0" selected>상품명</option>
-					<option value="1">카테고리명</option>
-				</select> 
-				<input type="text" class="form-control search_word" placeholder="상품명을 입력해주세요"/>
-				<button class="btn btn-outline-secondary" type="button">
-					<a href="#"> 
-						<i class="fa-solid fa-magnifying-glass fa-2x"></i>
-					</a>
-				</button>
-			</div>
+			<input type="hidden" value="${search_field}" class="search_field">
+			<form action="/product/search/list" method="GET" id="search-bar">
+				<div class="input-group">
+					<select class="rounded-start product_search_field" name="search_field">
+						<option value="0" selected>상품명</option>
+						<option value="1">카테고리명</option>
+					</select> 
+					<input type="text" class="form-control search_word" placeholder="상품명을 입력해주세요" value="${search_word}" name="search_word"/>
+					<button class="btn btn-outline-secondary productSearchBtn" type="button">
+							<i class="fa-solid fa-magnifying-glass fa-2x"></i>
+					</button>
+				</div>
+			</form>
 			<ul class="nav">
 				<sec:authorize access="isAnonymous()">
 					<li class="nav-item"><a href="/login" class="nav-link d-flex flex-column align-items-center text-secondary" id="cuser-icon"> <i class="fa-solid fa-circle-user fa-2x"></i> <span class="fs-5 cuser-icon-title">로그인</span>

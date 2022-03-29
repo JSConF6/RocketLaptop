@@ -28,4 +28,8 @@ public interface ProductService {
 	public int getCategoryProductListCount(int category_code);
 
 	public List<ProductListDto> getCategoryProductList(PageHandler pageHandler, int category_code);
+
+	public int getSearchProductListCount(String string, String search_word);
+
+	public List<ProductListDto> getSearchProductList(PageHandler pageHandler, String string, String search_word);
 }

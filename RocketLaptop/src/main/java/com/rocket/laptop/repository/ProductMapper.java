@@ -30,4 +30,8 @@ public interface ProductMapper {
 	public int getCategoryProductListCount(int category_code);
 
 	public List<ProductListDto> getCategoryProductList(Map<String, Object> map);
+
+	public int getSearchProductListCount(Map<String, Object> map);
+
+	public List<ProductListDto> getSearchProductList(Map<String, Object> map);
 }
