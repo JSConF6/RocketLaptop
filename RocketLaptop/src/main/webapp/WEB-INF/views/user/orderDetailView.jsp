@@ -52,15 +52,15 @@
 							<div class="row g-0 d-flex align-items-center">
 								<div class="col">
 									<div class="card-body">
-										<p class="card-text fs-5 text-muted">
+										<p class="card-text fs-6 text-muted">
 											<span>받는사람</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<span>${orderDto.order_name}</span>
 										</p>
-										<p class="card-text fs-5 text-muted">
+										<p class="card-text fs-6 text-muted">
 											<span>연락처</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<span>${orderDto.order_phone}</span>
 										</p>
-										<p class="card-text fs-5 text-muted">
+										<p class="card-text fs-6 text-muted">
 											<span>받는주소</span>&nbsp;&nbsp;&nbsp;&nbsp;
 											<span>(${orderDto.user_address1}) ${orderDto.user_address2} ${orderDto.user_address3}</span> 
 										</p>
@@ -75,16 +75,16 @@
 							<div class="row g-0 d-flex align-items-center">
 								<div class="col">
 									<div class="card-body">
-										<p class="card-text fs-5 text-muted">
+										<p class="card-text fs-6 text-muted">
 											<span>총 상품가격</span>&nbsp;&nbsp;
 											<fmt:formatNumber var="orderTotalPrice" value="${orderDto.order_totalprice}" pattern="###,###,###" />
 											<span>${orderTotalPrice}원</span>
 										</p>
-										<p class="card-text fs-5 text-muted">
+										<p class="card-text fs-6 text-muted">
 											<span>배송비</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 											<span>0원</span>
 										</p>
-										<p class="card-text fs-5 text-muted">
+										<p class="card-text fs-6 text-muted">
 											<span>총 결제금액</span>&nbsp;&nbsp;
 											<fmt:formatNumber var="totalPrice" value="${orderDto.order_totalprice + 0}" pattern="###,###,###" />
 											<span>${totalPrice}원</span> 

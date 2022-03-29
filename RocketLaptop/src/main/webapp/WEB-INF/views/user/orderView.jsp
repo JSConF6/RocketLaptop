@@ -43,7 +43,7 @@
 
 					<!-- 연락처 -->
 					<div class="col-12">
-						<label for="order_phone" class="form-label">연락처</label> <input type="text" class="form-control" id="order_phone" name="order_phone" placeholder="'-'포함해서 입력해 주세요" required="required">
+						<label for="order_phone" class="form-label">연락처</label> <input type="text" class="form-control" id="order_phone" name="order_phone" placeholder="'-'빼고 입력해 주세요" required="required">
 					</div>
 
 					<!-- 우편번호 -->
@@ -68,7 +68,6 @@
 			<div class="col-md-5 col-lg-4 order-md-last border border-2 rounded border-secondary h-100">
 				<div class="col">
 					<div class="fs-3 border-bottom border-secondary border-2 mb-3 mt-3 pb-1">
-						<input type="hidden" id="orderCount" value="${orderViewListCount}" />
 						<h3>주문 상품 ${orderViewListCount}개</h3>
 					</div>
 					<div>
@@ -81,6 +80,7 @@
 										</div>
 										<div>
 											<input type="hidden" name="data" data-cartNum="${order.cart_num}" data-productCode="${order.product_code}" /> <span class="text-muted">${order.product_name}</span><br /> <span class="text-muted">카테고리 : ${order.category_name}</span><br />
+											<input type="hidden" id="orderCount" value="${order.order_de_amount}" />
 											<c:set var="orderTotalPrice" value="${orderTotalPrice + order.product_price * order.order_de_amount}" />
 											<fmt:formatNumber var="productTotalPrice" value="${order.product_price * order.order_de_amount}" pattern="###,###,###" />
 											<span class="text-muted">상품가격 : ${productTotalPrice}원 / ${order.order_de_amount}개</span>

@@ -128,4 +128,28 @@ public class OrderServiceImpl implements OrderService {
 		return orderMapper.getUserOrderDetail(map);
 	}
 
+	@Override
+	public List<OrderViewDto> getMainOrderViewList(String product_code) {
+		return orderMapper.getMainOrderViewList(product_code);
+	}
+
+	@Override
+	public void mainOrderAdd(OrderDto orderDto, String product_code, int order_de_amount, IamportClient iamportClient) throws IamportResponseException, IOException {
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("orderDto", orderDto);
+		map.put("product_code", product_code);
+		map.put("order_de_amount", order_de_amount);
+		
+		try {
+			orderMapper.orderAdd(orderDto);
+			
+			orderMapper.orderDetailAdd(map);
+		} catch (Exception e) {
+			CancelData cancelData = new CancelData(orderDto.getImpUid(), true);
+			iamportClient.cancelPaymentByImpUid(cancelData);
+			throw new OrderFailException("주문 실패 결제가 취소됩니다.");
+		}
+	}
+
 }

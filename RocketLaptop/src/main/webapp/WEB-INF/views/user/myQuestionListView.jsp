@@ -6,7 +6,7 @@
 
 <div class="container-fluid mb-5">
 	<div class="row">
-		<div class="col-8 mx-auto myQna-col">
+		<div class="col-8 mx-auto myQna-content">
 			<div class="d-flex align-items-center mt-5 mb-3">
 				<img alt="Logo" src="/images/RocketLaptopLogo.svg" width="20%" height="20%"> <span class="fs-1">내가 작성한 문의사항</span>
 			</div>
@@ -19,7 +19,7 @@
 				</select>
 			</div>
 			<c:if test="${pageHandler.listCount > 0}">
-				<table class="table table-striped table-hover text-center myQnaTable">
+				<table class="table table-striped table-hover text-center myQna_table">
 					<thead>
 						<tr>
 							<th>번호</th>
@@ -48,7 +48,7 @@
 				<div class="text-end myQuestionAddBtnDiv">
 					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myQuestionAddModal">문의사항 쓰기</button>
 				</div>
-				<nav class="d-flex justify-content-center myPagination-nav">
+				<nav class="d-flex justify-content-center myQna_Pagination_nav">
 					<ul class="pagination">
 						<c:if test="${pageHandler.page <= 1}">
 							<li class="page-item"><a class="page-link gray" aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
@@ -76,7 +76,7 @@
 				</nav>
 			</c:if>
 			<c:if test="${pageHandler.listCount == 0 || empty pageHandler.listCount}">
-				<div class="text-center mt-5 mb-5 myQnaNo">
+				<div class="text-center mt-5 mb-5 empty_myQna">
 					<h1>문의사항이 없습니다.</h1>
 				</div>
 			</c:if>

@@ -29,10 +29,10 @@ function myAjax(data){
 		$('#myComment_state').val(res.comment_state);
 		$(".myQuestionListCount").text("문의사항 갯수 : " + res.pageHandler.listCount) + "개";
 		if(res.pageHandler.listCount > 0){
-			$(".myQnaNo").remove();
-			$(".myQnaTable").remove();
+			$(".empty_myQna").remove();
+			$(".myQna_table").remove();
 			
-			let output = "<table class='table table-striped table-hover text-center myQnaTable'>";
+			let output = "<table class='table table-striped table-hover text-center myQna_table'>";
 				output += "<thead><tr><th>번호</th><th>제목</th><th>작성자</th><th>날짜</th></tr></thead><tbody>";
 				
 			let num = res.pageHandler.listCount - (res.pageHandler.page - 1) * res.pageHandler.limit;
@@ -62,10 +62,10 @@ function myAjax(data){
 			output += "<div class='text-end myQuestionAddBtnDiv'>"
 			output += "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#myQuestionAddModal'>문의사항 쓰기</button>";
 			output += "</div>";
-			$(".myQna-col").append(output);
+			$(".myQna-content").append(output);
 			
-			$(".myPagination-nav").remove();
-			output = '<nav class="d-flex justify-content-center myPagination-nav"><ul class="pagination">';
+			$(".myQna_Pagination_nav").remove();
+			output = '<nav class="d-flex justify-content-center myQna_Pagination_nav"><ul class="pagination">';
 			
 			digit = '&laquo;';
 			href = "";
@@ -102,16 +102,16 @@ function myAjax(data){
 			output += mySetPaging(href, digit, pageItem);
 			output += '</ul></nav>';
 			
-			$(".myQna-col").append(output);
+			$(".myQna-content").append(output);
 		}else if(res.pageHandler.listCount === 0){
 			output = '';
-			$(".myQnaTable").remove();
-			$(".myPagination-nav").remove();
-			$(".myQnaNo").remove();
+			$(".myQna_table").remove();
+			$(".myQna_Pagination_nav").remove();
+			$(".empty_myQna").remove();
 			let comment_state = $('#comment_state').val();
 			var message = ['문의사항이 없습니다.', '답변대기 글이 없습니다.', '답변완료 글이 없습니다.'];
-			output += '<div class="text-center mt-5 mb-5 myQnaNo"><h1>' + message[comment_state] + '</h1></div>';
-			$('.myQna-col').append(output);
+			output += '<div class="text-center mt-5 mb-5 empty_myQna"><h1>' + message[comment_state] + '</h1></div>';
+			$('.myQna-content').append(output);
 		}
 	}).fail(function(err){
 		console.log(err);

@@ -28,10 +28,10 @@ function ajax(data){
 		$('#comment_state').val(res.comment_state);
 		$(".questionListCount").text("문의사항 갯수 : " + res.pageHandler.listCount) + "개";
 		if(res.pageHandler.listCount > 0){
-			$(".qnaNo").remove();
-			$(".qnaTable").remove();
+			$(".empty_qna").remove();
+			$(".qna_table").remove();
 			
-			let output = "<table class='table table-striped table-hover text-center qnaTable'>";
+			let output = "<table class='table table-striped table-hover text-center qna_table'>";
 				output += "<thead><tr><th>번호</th><th>제목</th><th>작성자</th><th>날짜</th></tr></thead><tbody>";
 				
 			let num = res.pageHandler.listCount - (res.pageHandler.page - 1) * res.pageHandler.limit;
@@ -57,10 +57,10 @@ function ajax(data){
 				output += "<td>" + qna_date + "</td></tr>";
 			});
 			output += "</tbody></table>";
-			$(".qna-col").append(output);
+			$(".qna-content").append(output);
 			
-			$(".pagination-nav").remove();
-			output = '<nav class="d-flex justify-content-center pagination-nav"><ul class="pagination">';
+			$(".qna_pagination_nav").remove();
+			output = '<nav class="d-flex justify-content-center qna_pagination_nav"><ul class="pagination">';
 			
 			digit = '&laquo;';
 			href = "";
@@ -97,16 +97,16 @@ function ajax(data){
 			output += setPaging(href, digit, pageItem);
 			output += '</ul></nav>';
 			
-			$(".qna-col").append(output);
+			$(".qna-content").append(output);
 		}else if(res.pageHandler.listCount === 0){
 			output = '';
-			$(".qnaTable").remove();
-			$(".pagination-nav").remove();
-			$(".qnaNo").remove();
+			$(".qna_table").remove();
+			$(".qna_pagination_nav").remove();
+			$(".empty_qna").remove();
 			let comment_state = $('#comment_state').val();
 			var message = ['문의사항이 없습니다.', '답변대기 글이 없습니다.', '답변완료 글이 없습니다.'];
 			output += '<div class="text-center mt-5 mb-5 qnaNo"><h1>' + message[comment_state] + '</h1></div>';
-			$('.qna-col').append(output);
+			$('.qna-content').append(output);
 		}
 	}).fail(function(err){
 		console.log(err);

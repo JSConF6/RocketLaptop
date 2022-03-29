@@ -32,4 +32,8 @@ public interface OrderService {
 	public List<OrderDto> getAdminOrderList(PageHandler pageHandler);
 
 	public OrderDto getUserOrderDetail(String order_id, String user_id);
+
+	public List<OrderViewDto> getMainOrderViewList(String product_code);
+
+	public void mainOrderAdd(OrderDto orderDto, String product_code, int order_de_amount, IamportClient iamportClient) throws IamportResponseException, IOException;
 }

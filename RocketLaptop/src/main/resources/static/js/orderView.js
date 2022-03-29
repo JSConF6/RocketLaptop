@@ -43,7 +43,10 @@ $(function(){
 		
 		Array.from(dataList).forEach(data => {
 			productCode = $(data).attr("data-productCode");
-			cartNumList.push($(data).attr("data-cartNum"));
+			
+			if($("input[name='data']").attr("data-cartNum") !== '0'){
+				cartNumList.push($(data).attr("data-cartNum"));
+			}
 		})
 		
 		if($.trim($("#order_name").val()) === ""){
@@ -66,7 +69,7 @@ $(function(){
 			return false;
 		}
 		
-		const phoneReg = /^\d{3}-\d{3,4}-\d{4}$/;
+		const phoneReg = /^\d{3}\d{3,4}\d{4}$/;
 		if(!phoneReg.test($.trim($("#order_phone").val()))){
 			Swal.fire({
 				icon: "warning",
@@ -86,6 +89,9 @@ $(function(){
 			});
 			return false;
 		}
+		
+		console.log($("#orderCount").val());
+		console.log(cartNumList)
 		
 		const data = {
 			order_id : createOrderNum(),
@@ -137,7 +143,7 @@ $(function(){
 							text: res.data,
 							allowOutsideClick: false,
 						}).then(() => {
-							location.replace("/user/order/list?user_id=" + data.user_id);
+							location.replace("/user/mypage/order/list?user_id=" + data.user_id);
 						})
 					}else{
 						Swal.fire({
@@ -170,7 +176,7 @@ $(function(){
 		const month = ("0" + (date.getMonth() + 1)).slice(-2);
 		const day = ("0" + (date.getDate())).slice(-2);
 		
-		let orderNum = year + month + day + "_";
+		let orderNum = year + month + day;
 		for(let i = 0; i < 10; i++){
 			orderNum += Math.floor(Math.random() * 8);
 		}

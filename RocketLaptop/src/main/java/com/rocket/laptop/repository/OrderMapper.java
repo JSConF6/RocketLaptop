@@ -38,4 +38,6 @@ public interface OrderMapper {
 
 	OrderDto getUserOrderDetail(Map<String, Object> map);
 
+	List<OrderViewDto> getMainOrderViewList(String product_code);
+
 }

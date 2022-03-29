@@ -50,7 +50,7 @@
 					<p class="card-text pb-3 fs-3 text-start border-top pt-3 mb-0">무료배송</p>
 					<p class="card-text pb-3 fs-3 text-start border-top pt-3 mb-0">5일 이내 출고 (주말, 공휴일 제외)</p>
 					<div class="card-text border-top pt-3 pb-3">
-						<div class="row">
+						<div class="row align-items-center">
 							<div class="col-auto">
 								<label class="col-form-label fs-3">구매수량</label>
 							</div>
@@ -73,7 +73,8 @@
 							<button type="button" class="btn btn-lg btn-dark btn-outline-secondary text-white cartBtn">장바구니 담기</button>
 						</div>
 						<div class="col-6 d-grid p-1">
-							<button type="button" class="btn btn-lg btn-primary text-white">주문하기</button>
+							<form action="/user/order/mainOrderView" method="POST" id="productDetailOrderAdd"></form>
+							<button type="button" class="btn btn-lg btn-primary text-white productDetailOrderBtn">주문하기</button>
 						</div>
 					</div>
 				</div>

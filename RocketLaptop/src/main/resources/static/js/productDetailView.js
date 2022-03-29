@@ -1,6 +1,6 @@
 $(function(){
 	let price = $("#price").val();
-	let totalPrice = 0;
+	let totalPrice = price;
 	
 	$(".productTotalPrice").text(Number(price).toLocaleString("en") + "원");
 	
@@ -97,5 +97,36 @@ $(function(){
 		}).fail(function(err) {
 			console.log(err)
 		})
+	}
+	
+	$(".productDetailOrderBtn").on("click", function(e){
+		e.preventDefault();
+		
+		let product_code = $("#product_code").val();
+		let user_id = $("#user_id").val();
+		let order_de_amount = $(".productCount").val();
+		
+		if(user_id === undefined){
+			Swal.fire({
+				icon: "warning",
+				title: "상품 주문",
+				text: "로그인 후 상품을 주문 하실 수 있습니다.",
+				allowOutsideClick: false,
+			}).then(() => {
+				location.href = "/login";
+			})
+			return false;
+		}
+		
+		$("#productDetailOrderAdd").append(orderAddFromInputAdd("order_de_amount", order_de_amount));
+		$("#productDetailOrderAdd").append(orderAddFromInputAdd("user_id", user_id));
+		$("#productDetailOrderAdd").append(orderAddFromInputAdd("product_code", product_code));
+		
+		$("#productDetailOrderAdd").submit();
+	})
+	
+	function orderAddFromInputAdd(name, data){
+		let output = "<input type='hidden' value=" + data + " name=" + name + " />";
+		return output;
 	}
 });

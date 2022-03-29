@@ -76,6 +76,15 @@
 		</foreach>
 	</select>
 	
+	<select id="getMainOrderViewList" parameterType="String" resultType="OrderViewDto">
+		select p.product_code, ct.category_name, p.product_name, p.product_price, i.product_img_name
+		from product p, category ct, product_img i
+		where p.product_code = #{product_code}
+		and p.category_code = ct.category_code
+		and p.product_code = i.product_code
+		and i.product_img_type = 1
+	</select>
+	
 	<insert id="orderAdd" parameterType="OrderDto">
 		insert into order_tb (order_id, user_id, order_name, user_address1, user_address2, user_address3, order_phone, order_totalprice)
 		values(#{order_id}, #{user_id}, #{order_name}, #{user_address1}, #{user_address2}, #{user_address3}, #{order_phone}, #{order_totalprice})

@@ -75,10 +75,36 @@ public class OrderController {
 		return "/user/orderView";
 	}
 	
+	@PostMapping("/user/order/mainOrderView")
+	public String mainOrderView(@RequestParam("user_id") String user_id, Model model, 
+			@RequestParam("order_de_amount") int order_de_amount,
+			@RequestParam("product_code") String product_code) {
+		logger.info("주문 페이지 이동");
+		
+		List<OrderViewDto> orderViewList = orderService.getMainOrderViewList(product_code);
+		orderViewList.get(0).setOrder_de_amount(order_de_amount);
+		int orderViewListCount = orderViewList.size();
+		
+		UserDto userDto = userService.getUser(user_id);
+		
+		model.addAttribute("orderViewList", orderViewList);
+		model.addAttribute("orderViewListCount", orderViewListCount);
+		model.addAttribute("userDto", userDto);
+		
+		return "/user/orderView";
+	}
+	
 	@PostMapping("/user/order/payment/complete")
 	@ResponseBody
-	public ResponseDto<String> paymentComplete(OrderDto orderDto, int[] cartNumList) throws IamportResponseException, IOException{
+	public ResponseDto<String> paymentComplete(OrderDto orderDto, 
+			@RequestParam(value = "cartNumList", required = false) int[] cartNumList,
+			@RequestParam("order_de_amount") int order_de_amount,
+			@RequestParam("productCode") String product_code) throws IamportResponseException, IOException{
 		logger.info("상품 결제");
+		System.out.println(order_de_amount);
+		System.out.println(product_code);
+		System.out.println(cartNumList);
+		
 		Payment payment = iamportClient.paymentByImpUid(orderDto.getImpUid()).getResponse();
 		
 		if(!orderDto.getOrder_totalprice().equals(payment.getAmount())) {
@@ -87,9 +113,13 @@ public class OrderController {
 			return new ResponseDto<String>(HttpStatus.BAD_REQUEST.value(), "결제 금액 오류, 결제가 취소됩니다.");
 		}
 		
-		List<CartDto> cartDtoList = cartService.findByCartNumList(cartNumList);
-		
-		orderService.orderAdd(orderDto, cartDtoList, cartNumList, iamportClient);
+		if(cartNumList != null) {
+			List<CartDto> cartDtoList = cartService.findByCartNumList(cartNumList);
+			
+			orderService.orderAdd(orderDto, cartDtoList, cartNumList, iamportClient);
+		}else {
+			orderService.mainOrderAdd(orderDto, product_code, order_de_amount, iamportClient);
+		}
 		
 		return new ResponseDto<String>(HttpStatus.OK.value(), "주문이 완료되었습니다.");
 	}
