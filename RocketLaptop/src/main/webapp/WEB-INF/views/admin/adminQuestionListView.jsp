@@ -20,6 +20,7 @@
 						<th>제목</th>
 						<th>작성자</th>
 						<th>날짜</th>
+						<th>조회수</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -40,6 +41,7 @@
 							</td>
 							<td>${question.user_id}</td>
 							<td><fmt:formatDate value="${question.qna_reg_date}" pattern="yyyy-MM-dd"/></td>
+							<td>${question.qna_readcount}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

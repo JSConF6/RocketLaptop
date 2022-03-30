@@ -25,6 +25,9 @@
 		<fmt:formatDate var="qnaDate" value="${questionDto.qna_reg_date}" pattern="yyyy-MM-dd" />
 		<label for="question_reg_date" class="form-label">날짜</label> <input type="text" class="form-control" id="question_reg_date" disabled value="${qnaDate}" />
 	</div>
+	<div class="mb-3">
+		<label for="question_readcount" class="form-label">조회수</label> <input type="text" class="form-control" id="question_readcount" disabled value="${questionDto.qna_readcount}" />
+	</div>
 	<c:if test="${!empty commentDto}">
 		<div class="card">
 			<div class="card-header">답변</div>

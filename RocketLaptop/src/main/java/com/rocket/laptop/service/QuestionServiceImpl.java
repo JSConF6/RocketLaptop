@@ -36,6 +36,10 @@ public class QuestionServiceImpl implements QuestionService {
 
 	@Override
 	public QuestionDto getQuestionDetail(int num) {
+		if(setReadCountUpdate(num) != 1) {
+			return null;
+		}
+		
 		return questionMapper.getQuestionDetail(num);
 	}
 
@@ -82,6 +86,10 @@ public class QuestionServiceImpl implements QuestionService {
 
 	@Override
 	public QuestionDto getUserQuestionDetail(int num, String user_id) {
+		if(setReadCountUpdate(num) != 1) {
+			return null;
+		}
+		
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("user_id", user_id);
@@ -126,6 +134,11 @@ public class QuestionServiceImpl implements QuestionService {
 		map.put("end", pageHandler.getEndRow());
 		
 		return questionMapper.getAjaxUserQuestionList(map);
+	}
+
+	@Override
+	public int setReadCountUpdate(int num) {
+		return questionMapper.setReadCountUpdate(num);
 	}
 
 }

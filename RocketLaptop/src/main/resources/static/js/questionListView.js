@@ -32,7 +32,7 @@ function ajax(data){
 			$(".qna_table").remove();
 			
 			let output = "<table class='table table-striped table-hover text-center qna_table'>";
-				output += "<thead><tr><th>번호</th><th>제목</th><th>작성자</th><th>날짜</th></tr></thead><tbody>";
+				output += "<thead><tr><th>번호</th><th>제목</th><th>작성자</th><th>날짜</th><th>조회수</th></tr></thead><tbody>";
 				
 			let num = res.pageHandler.listCount - (res.pageHandler.page - 1) * res.pageHandler.limit;
 			$(res.questionList).each(function(index, item){
@@ -54,7 +54,8 @@ function ajax(data){
 				}
 				
 				output += "</td><td>" + item.user_id + "</td>";
-				output += "<td>" + qna_date + "</td></tr>";
+				output += "<td>" + qna_date + "</td>";
+				output += "<td>" + item.qna_readcount + "</td></tr>";
 			});
 			output += "</tbody></table>";
 			$(".qna-content").append(output);

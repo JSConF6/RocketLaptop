@@ -35,4 +35,6 @@ public interface QuestionService {
 	public int getAjaxUserQuestionListCount(String user_id, String commentState);
 
 	public List<QuestionDto> getAjaxUserQuestionList(String user_id, String commentState, PageHandler pageHandler);
+	
+	public int setReadCountUpdate(int num);
 }

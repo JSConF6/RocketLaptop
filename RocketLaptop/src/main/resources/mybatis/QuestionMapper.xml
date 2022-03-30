@@ -149,5 +149,11 @@
 	  		  	    order by q.qna_reg_date desc) qn) qu
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
+	
+	<update id="setReadCountUpdate" parameterType="int">
+		update qna
+		set qna_readcount = qna_readcount + 1
+		where qna_num = #{num}
+	</update>
 
 </mapper>

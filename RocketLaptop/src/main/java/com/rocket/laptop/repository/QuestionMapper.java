@@ -42,5 +42,7 @@ public interface QuestionMapper {
 	int getAjaxUserQuestionListCount(Map<String, Object> map);
 
 	List<QuestionDto> getAjaxUserQuestionList(Map<String, Object> map);
+
+	int setReadCountUpdate(int num);
 	
 }
