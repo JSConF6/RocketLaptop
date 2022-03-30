@@ -162,7 +162,7 @@ $(function(){
 					text: "문의사항 등록이 완료 되었습니다.",
 					allowOutsideClick: false,
 				}).then(() => {
-					location.replace("/question/list");
+					location.replace("/user/mypage/question/list?user_id=" + data.user_id);
 				})
 			}else{
 				Swal.fire({
@@ -171,7 +171,7 @@ $(function(){
 					text: "문의사항 등록을 실패 했습니다.",
 					allowOutsideClick: false,
 				}).then(() => {
-					location.replace("/question/list");
+					location.replace("/user/mypage/question/list?user_id=" + data.user_id);
 				})
 			}
 		}).fail(function(err) {

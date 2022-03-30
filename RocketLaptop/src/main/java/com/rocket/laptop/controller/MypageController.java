@@ -118,7 +118,7 @@ public class MypageController {
 	}
 	
 	@GetMapping("/user/mypage/order/detail")
-	public String userOrderList(@RequestParam("user_id") String user_id, @RequestParam("order_id") String order_id, Model model) {
+	public String userOrderDetail(@RequestParam("user_id") String user_id, @RequestParam("order_id") String order_id, Model model) {
 		logger.info("주문 상세 페이지로 이동");
 		
 		OrderDto orderDto = orderService.getUserOrderDetail(order_id, user_id);
@@ -131,7 +131,7 @@ public class MypageController {
 	}
 	
 	@GetMapping("/user/mypage/question/list")
-	public String adminQuestionView(@RequestParam("user_id") String user_id, Model model, 
+	public String myQuestionView(@RequestParam("user_id") String user_id, Model model, 
 			@RequestParam(value="page", defaultValue = "1", required = false) int page) {
 		logger.info("내 문의사항 페이지로 이동");
 		
@@ -158,7 +158,7 @@ public class MypageController {
 	
 	@PostMapping("/user/mypage/question/add")
 	@ResponseBody
-	public ResponseDto<String> questionAdd(QuestionDto questionDto) {
+	public ResponseDto<String> myQuestionAdd(QuestionDto questionDto) {
 		logger.info("문의사항 등록");
 
 		int result = questionService.questionAdd(questionDto);
@@ -171,7 +171,7 @@ public class MypageController {
 	}
 	
 	@GetMapping("/user/mypage/question/detail")
-	public String adminQuestionDetailView(@RequestParam("user_id") String user_id, @RequestParam(value="num") int num, Model model) {
+	public String myQuestionDetailView(@RequestParam("user_id") String user_id, @RequestParam(value="num") int num, Model model) {
 		logger.info("내 문의사항 상세 페이지로 이동");
 		
 		QuestionDto questionDto = questionService.getUserQuestionDetail(num, user_id);
@@ -183,9 +183,19 @@ public class MypageController {
 		return "/user/myQuestionDetailView";
 	}
 	
+	@PostMapping("/user/mypage/question/delete")
+	@ResponseBody
+	public int myQuestionDelete(@RequestParam(value="num") int num, Model model) {
+		logger.info("문의사항 삭제 처리");
+		
+		int result = questionService.questionDelete(num);
+		
+		return result;
+	}
+	
 	@PostMapping("/user/mypage/question/list/ajax")
 	@ResponseBody
-	public Map<String, Object> adminQuestionView(@RequestParam(value="page", defaultValue = "1", required = false) int page,
+	public Map<String, Object> myQuestionAjaxView(@RequestParam(value="page", defaultValue = "1", required = false) int page,
 				@RequestParam("comment_state") int comment_state, @RequestParam("user_id") String user_id) {
 		logger.info("문의사항 리스트 ajax 처리");
 		

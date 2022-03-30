@@ -43,6 +43,7 @@
 		</div>
 	</c:if>
 	<div class="d-flex justify-content-end mb-3 mt-3">
+		<button class="btn btn-danger me-3 myQuestionDetailDeleteBtn">삭제</button>
 		<button class="btn btn-primary myQuestionListBtn">목록</button>
 	</div>
 </div>
