@@ -8,7 +8,7 @@ $(function(){
 	$(".myQuestionDetailDeleteBtn").on("click", function(e){
 		e.preventDefault();
 		
-		let num = $("#question_num").val();
+		let num = $("#question_num").text();
 		let user_id = $("#user_id").val();
 		
 		Swal.fire({

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ include file="../layout/header.jsp"%>
 
@@ -31,7 +32,9 @@
 						<label for="update-gender" class="text-start ps-0">성별</label> <input type="text" class="form-control" id="update-gender" value="${userDto.user_gender}" readonly />
 					</div>
 					<div class="row mb-3">
-						<label for="update-birth" class="text-start ps-0">생년월일</label> <input type="text" class="form-control" id="update-birth" readonly value="${userDto.user_birth}" />
+						<c:set var="birth" value="${userDto.user_birth}"/>
+						<c:set var="user_birth" value="${fn:substring(birth, 0, 4)}-${fn:substring(birth, 4, 6)}-${fn:substring(birth, 6, 8)}" />
+						<label for="update-birth" class="text-start ps-0">생년월일</label> <input type="text" class="form-control" id="update-birth" readonly value="${user_birth}" />
 					</div>
 					<div class="row mb-3">
 						<button class="btn btn-secondary fs-4 userUpdateBtn">회원정보수정</button>

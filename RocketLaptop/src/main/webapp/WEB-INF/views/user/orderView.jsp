@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ include file="../layout/header.jsp"%>
 
@@ -28,7 +29,9 @@
 
 					<!-- 연락처 -->
 					<div class="col-12">
-						<label for="user_phone" class="form-label">연락처</label> <input type="text" class="form-control" value="${userDto.user_phone}" readonly="readonly">
+						<c:set var="phone" value="${userDto.user_phone}"/>
+						<c:set var="user_phone" value="${fn:substring(phone, 0, 3)}-${fn:substring(phone, 3, 7)}-${fn:substring(phone, 7, 11)}" />
+						<label for="user_phone" class="form-label">연락처</label> <input type="text" class="form-control" value="${user_phone}" readonly="readonly">
 					</div>
 				</div>
 

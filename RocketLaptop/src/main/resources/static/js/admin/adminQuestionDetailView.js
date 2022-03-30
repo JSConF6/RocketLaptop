@@ -3,7 +3,7 @@ $(function(){
 	$(".CommentAddBtn").on("click", function(e){
 		e.preventDefault();
 		
-		let num = $("#question_num").val();
+		let num = $("#question_num").text();
 		
 		let comment_content = $.trim($("#comment_content").val());
 		if(comment_content === ""){
@@ -41,7 +41,7 @@ $(function(){
 	$(".questionDetailDeleteBtn").on("click", function(e){
 		e.preventDefault();
 		
-		let num = $("#question_num").val();
+		let num = $("#question_num").text();
 		
 		Swal.fire({
 			title: "문의사항을 삭제하시겠습니까?",

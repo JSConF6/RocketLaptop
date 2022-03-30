@@ -13,31 +13,33 @@
 			<span class="fs-5">주문 갯수 : ${pageHandler.listCount}개</span>
 		</p>
 		<c:if test="${pageHandler.listCount > 0}">
-			<table class="table table-striped table-hover text-center">
-				<thead>
-					<tr>
-						<th>주문번호</th>
-						<th>수령인</th>
-						<th>주소</th>
-						<th>결제일</th>
-						<th>배송상태</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="order" items="${orderList}">
+			<div class="table-responsive">
+				<table class="table table-striped table-hover text-center">
+					<thead>
 						<tr>
-							<td>
-								<a href="/admin/orderDetail?order_id=${order.order_id}"><c:out value="${order.order_id}" /></a>
-							</td>
-							<td>${order.order_name}</td>
-							<c:set var="address" value="(${order.user_address1}) ${order.user_address2} ${order.user_address3}" />
-							<td><c:out value="${address}" /></td>
-							<td><fmt:formatDate value="${order.order_date}" pattern="yyyy-MM-dd"/></td>
-							<td>${order.order_state}</td>
+							<th>주문번호</th>
+							<th>수령인</th>
+							<th>주소</th>
+							<th>결제일</th>
+							<th>배송상태</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<c:forEach var="order" items="${orderList}">
+							<tr>
+								<td>
+									<a href="/admin/orderDetail?order_id=${order.order_id}"><c:out value="${order.order_id}" /></a>
+								</td>
+								<td>${order.order_name}</td>
+								<c:set var="address" value="(${order.user_address1}) ${order.user_address2} ${order.user_address3}" />
+								<td><c:out value="${address}" /></td>
+								<td><fmt:formatDate value="${order.order_date}" pattern="yyyy-MM-dd"/></td>
+								<td>${order.order_state}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 			<nav class="d-flex justify-content-center">
 				<ul class="pagination">
 					<c:if test="${pageHandler.page <= 1}">

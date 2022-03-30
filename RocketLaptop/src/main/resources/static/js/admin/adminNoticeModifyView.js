@@ -3,7 +3,7 @@ $(function(){
 	$(".noticeModifyBtn").on("click", function(e){
 		e.preventDefault();
 		
-		let notice_num = $("#notice_num").val();
+		let notice_num = $("#notice_num").text();
 		let notice_title = $("#notice_title").val();
 		let notice_content = $("#notice_content").val(); 
 		

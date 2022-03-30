@@ -82,7 +82,7 @@ public class adminNoticeController {
 	
 	@GetMapping("/admin/noticeModifyView")
 	public String adminNoticeModifyView(@RequestParam(value="num") int num, Model model) {
-		logger.info("공지사항 상세 페이지로 이동");
+		logger.info("공지사항 수정 페이지로 이동");
 		
 		NoticeDto noticeDto = noticeService.getNoticeDetail(num);
 		
@@ -92,8 +92,9 @@ public class adminNoticeController {
 	}
 	
 	@PostMapping("/admin/noticeModify")
+	@ResponseBody
 	public ResponseDto<String> adminNoticeModify(NoticeDto noticeDto, Model model) {
-		logger.info("공지사항 상세 페이지로 이동");
+		logger.info("공지사항 수정");
 		
 		int result = noticeService.noticeModify(noticeDto);
 		

@@ -3,7 +3,7 @@ $(function(){
 	$(".noticeDetailDeleteBtn").on("click", function(e){
 		e.preventDefault();
 		
-		let num = $("#notice_num").val();
+		let num = $("#notice_num").text();
 		
 		Swal.fire({
 			title: "공지사항을 삭제하시겠습니까?",

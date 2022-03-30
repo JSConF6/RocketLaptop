@@ -120,7 +120,7 @@ $(function(){
 		    merchant_uid : data.order_id, // 주문번호
 		    name :  data.productCode, // 상품명
 		    amount : Number(data.order_totalprice), //실제 결제되는 가격
-		    buyer_email : 'iamport@siot.do', // 이메일
+		    buyer_email : '', // 이메일
 		    buyer_name : data.order_name, // 이름
 		    buyer_tel : data.order_phone, // 연락처
 		    buyer_addr : data.order_address2 + " " + data.order_address3, // 주소

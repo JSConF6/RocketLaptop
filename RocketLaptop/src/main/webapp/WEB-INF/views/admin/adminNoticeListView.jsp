@@ -14,32 +14,34 @@
 			<button type="button" class="btn btn-primary text-end" data-bs-toggle="modal" data-bs-target="#adminNoticeAddModal">공지사항 쓰기</button>
 		</div>
 		<c:if test="${pageHandler.listCount > 0}">
-			<table class="table table-striped table-hover text-center">
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>날짜</th>
-						<th>삭제</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:set var="num" value="${pageHandler.listCount-(pageHandler.page - 1) * pageHandler.limit}" />
-					<c:forEach var="notice" items="${noticeList}">
+			<div class="table-responsive">
+				<table class="table table-striped table-hover text-center">
+					<thead>
 						<tr>
-							<td><c:out value="${num}" /> <c:set var="num" value="${num - 1}" /></td>
-							<td><a href="/admin/noticeDetail?num=${notice.notice_num}"> <c:out value="${notice.notice_title}" escapeXml="true" />
-							</a></td>
-							<td>관리자</td>
-							<td><fmt:formatDate value="${notice.notice_reg_date}" pattern="yyyy-MM-dd"/></td>
-							<td><button type="button" class="btn btn-danger noticeDeleteBtn">삭제</button>
-								<input type="hidden" value="${notice.notice_num}" class="notice_num">
-							</td>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>날짜</th>
+							<th>삭제</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<c:set var="num" value="${pageHandler.listCount-(pageHandler.page - 1) * pageHandler.limit}" />
+						<c:forEach var="notice" items="${noticeList}">
+							<tr>
+								<td><c:out value="${num}" /> <c:set var="num" value="${num - 1}" /></td>
+								<td><a href="/admin/noticeDetail?num=${notice.notice_num}"> <c:out value="${notice.notice_title}" escapeXml="true" />
+								</a></td>
+								<td>관리자</td>
+								<td><fmt:formatDate value="${notice.notice_reg_date}" pattern="yyyy-MM-dd"/></td>
+								<td><button type="button" class="btn btn-danger noticeDeleteBtn">삭제</button>
+									<input type="hidden" value="${notice.notice_num}" class="notice_num">
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 			<nav class="d-flex justify-content-center">
 				<ul class="pagination">
 					<c:if test="${pageHandler.page <= 1}">

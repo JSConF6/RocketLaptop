@@ -13,32 +13,34 @@
 			<span class="fs-5">유저수 : ${pageHandler.listCount}명</span>
 		</p>
 		<c:if test="${pageHandler.listCount > 0}">
-			<table class="table table-striped table-hover text-center">
-				<thead>
-					<tr>
-						<th>이름</th>
-						<th>아이디</th>
-						<th>이메일</th>
-						<th>권한</th>
-						<th>가입일</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="user" items="${userList}">
+			<div class="table-responsive">
+				<table class="table table-striped table-hover text-center">
+					<thead>
 						<tr>
-							<td>${user.user_name}</td>
-							<td>
-								<a href="/admin/userDetail?user_id=${user.user_id}"><c:out value="${user.user_id}" /></a>
-							</td>
-							<td>${user.user_email}</td>
-							<c:if test="${user.user_role == 'ROLE_USER'}">
-								<td>유저</td>
-							</c:if>
-							<td><fmt:formatDate value="${user.user_reg_date}" pattern="yyyy-MM-dd"/></td>
+							<th>이름</th>
+							<th>아이디</th>
+							<th>이메일</th>
+							<th>권한</th>
+							<th>가입일</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<c:forEach var="user" items="${userList}">
+							<tr>
+								<td>${user.user_name}</td>
+								<td>
+									<a href="/admin/userDetail?user_id=${user.user_id}"><c:out value="${user.user_id}" /></a>
+								</td>
+								<td>${user.user_email}</td>
+								<c:if test="${user.user_role == 'ROLE_USER'}">
+									<td>유저</td>
+								</c:if>
+								<td><fmt:formatDate value="${user.user_reg_date}" pattern="yyyy-MM-dd"/></td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 			<nav class="d-flex justify-content-center">
 				<ul class="pagination">
 					<c:if test="${pageHandler.page <= 1}">

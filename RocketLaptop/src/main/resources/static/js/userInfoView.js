@@ -35,7 +35,7 @@ $(function(){
 			return false;
 		}
 		
-		const phoneReg = /^\d{3}-\d{3,4}-\d{4}$/;
+		const phoneReg = /^\d{3}\d{3,4}\d{4}$/;
 		if(!phoneReg.test(phone)){
 			Swal.fire({
 				icon: "warning",

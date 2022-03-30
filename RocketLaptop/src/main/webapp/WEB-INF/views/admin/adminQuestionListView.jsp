@@ -13,39 +13,41 @@
 			<span class="fs-5">문의사항 갯수 : ${pageHandler.listCount}개</span>
 		</p>
 		<c:if test="${pageHandler.listCount > 0}">
-			<table class="table table-striped table-hover text-center">
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>날짜</th>
-						<th>조회수</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:set var="num" value="${pageHandler.listCount-(pageHandler.page - 1) * pageHandler.limit}" />
-					<c:forEach var="question" items="${questionList}">
+			<div class="table-responsive">
+				<table class="table table-striped table-hover text-center">
+					<thead>
 						<tr>
-							<td><c:out value="${num}" /> <c:set var="num" value="${num - 1}" /></td>
-							<td>
-								<a href="/admin/questionDetail?num=${question.qna_num}">
-									<c:out value="${question.qna_title}" escapeXml="true" />&nbsp;&nbsp;&nbsp;
-								</a>
-								<c:if test="${!empty question.comment_content}">
-									<span class="text-secondary">[답변완료]</span>
-								</c:if>
-								<c:if test="${empty question.comment_content}">
-									<span class="text-secondary">[답변대기]</span>
-								</c:if>
-							</td>
-							<td>${question.user_id}</td>
-							<td><fmt:formatDate value="${question.qna_reg_date}" pattern="yyyy-MM-dd"/></td>
-							<td>${question.qna_readcount}</td>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>날짜</th>
+							<th>조회수</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<c:set var="num" value="${pageHandler.listCount-(pageHandler.page - 1) * pageHandler.limit}" />
+						<c:forEach var="question" items="${questionList}">
+							<tr>
+								<td><c:out value="${num}" /> <c:set var="num" value="${num - 1}" /></td>
+								<td>
+									<a href="/admin/questionDetail?num=${question.qna_num}">
+										<c:out value="${question.qna_title}" escapeXml="true" />&nbsp;&nbsp;&nbsp;
+									</a>
+									<c:if test="${!empty question.comment_content}">
+										<span class="text-secondary">[답변완료]</span>
+									</c:if>
+									<c:if test="${empty question.comment_content}">
+										<span class="text-secondary">[답변대기]</span>
+									</c:if>
+								</td>
+								<td>${question.user_id}</td>
+								<td><fmt:formatDate value="${question.qna_reg_date}" pattern="yyyy-MM-dd"/></td>
+								<td>${question.qna_readcount}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 			<nav class="d-flex justify-content-center">
 				<ul class="pagination">
 					<c:if test="${pageHandler.page <= 1}">

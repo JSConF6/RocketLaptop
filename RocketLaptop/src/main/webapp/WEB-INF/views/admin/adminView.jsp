@@ -86,28 +86,30 @@
 								<a href="/admin/noticeList" class="text-secondary"><i class="fa-solid fa-angle-right fa-2x"></i> </a>
 							</div>
 							<c:if test="${noticePageHandler.listCount > 0}">
-								<table class="table bg-light text-center">
-									<thead>
-										<tr class="text-muted">
-											<th>번호</th>
-											<th>제목</th>
-											<th>작성자</th>
-											<th>날짜</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:set var="num" value="${noticePageHandler.listCount-(noticePageHandler.page - 1) * noticePageHandler.limit}" />
-										<c:forEach var="notice" items="${noticeList}">
-											<tr>
-												<td><c:out value="${num}" /> <c:set var="num" value="${num - 1}" /></td>
-												<td><a href="/admin/noticeDetail?num=${notice.notice_num}"> <c:out value="${notice.notice_title}" escapeXml="true" />
-												</a></td>
-												<td>관리자</td>
-												<td><fmt:formatDate value="${notice.notice_reg_date}" pattern="yyyy-MM-dd" /></td>
+								<div class="table-responsive">
+									<table class="table bg-light text-center">
+										<thead>
+											<tr class="text-muted">
+												<th>번호</th>
+												<th>제목</th>
+												<th>작성자</th>
+												<th>날짜</th>
 											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
+										</thead>
+										<tbody>
+											<c:set var="num" value="${noticePageHandler.listCount-(noticePageHandler.page - 1) * noticePageHandler.limit}" />
+											<c:forEach var="notice" items="${noticeList}">
+												<tr>
+													<td><c:out value="${num}" /> <c:set var="num" value="${num - 1}" /></td>
+													<td><a href="/admin/noticeDetail?num=${notice.notice_num}"> <c:out value="${notice.notice_title}" escapeXml="true" />
+													</a></td>
+													<td>관리자</td>
+													<td><fmt:formatDate value="${notice.notice_reg_date}" pattern="yyyy-MM-dd" /></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
 							</c:if>
 							<c:if test="${noticePageHandler.listCount == 0 || empty noticePageHandler.listCount}">
 								<div class="text-center mt-5 mb-5">
@@ -131,32 +133,34 @@
 								<a href="/admin/questionList" class="text-secondary"><i class="fa-solid fa-angle-right fa-2x"></i> </a>
 							</div>
 							<c:if test="${questionPageHandler.listCount > 0}">
-								<table class="table bg-light text-center">
-									<thead class="text-muted">
-										<tr>
-											<th>번호</th>
-											<th>제목</th>
-											<th>작성자</th>
-											<th>날짜</th>
-										</tr>
-									</thead>
-									<tbody>
-										<c:set var="num" value="${questionPageHandler.listCount-(questionPageHandler.page - 1) * questionPageHandler.limit}" />
-										<c:forEach var="question" items="${questionList}">
+								<div class="table-responsive">
+									<table class="table bg-light text-center">
+										<thead class="text-muted">
 											<tr>
-												<td><c:out value="${num}" /> <c:set var="num" value="${num - 1}" /></td>
-												<td><a href="/admin/questionDetail?num=${question.qna_num}"> <c:out value="${question.qna_title}" escapeXml="true" />&nbsp;&nbsp;&nbsp;
-												</a> <c:if test="${!empty question.comment_content}">
-														<span class="text-secondary">[답변완료]</span>
-													</c:if> <c:if test="${empty question.comment_content}">
-														<span class="text-secondary">[답변대기]</span>
-													</c:if></td>
-												<td>${question.user_id}</td>
-												<td><fmt:formatDate value="${question.qna_reg_date}" pattern="yyyy-MM-dd" /></td>
+												<th>번호</th>
+												<th>제목</th>
+												<th>작성자</th>
+												<th>날짜</th>
 											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
+										</thead>
+										<tbody>
+											<c:set var="num" value="${questionPageHandler.listCount-(questionPageHandler.page - 1) * questionPageHandler.limit}" />
+											<c:forEach var="question" items="${questionList}">
+												<tr>
+													<td><c:out value="${num}" /> <c:set var="num" value="${num - 1}" /></td>
+													<td><a href="/admin/questionDetail?num=${question.qna_num}"> <c:out value="${question.qna_title}" escapeXml="true" />&nbsp;&nbsp;&nbsp;
+													</a> <c:if test="${!empty question.comment_content}">
+															<span class="text-secondary">[답변완료]</span>
+														</c:if> <c:if test="${empty question.comment_content}">
+															<span class="text-secondary">[답변대기]</span>
+														</c:if></td>
+													<td>${question.user_id}</td>
+													<td><fmt:formatDate value="${question.qna_reg_date}" pattern="yyyy-MM-dd" /></td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
 							</c:if>
 							<c:if test="${questionPageHandler.listCount == 0 || empty questionPageHandler.listCount}">
 								<div class="text-center mt-5 mb-5">

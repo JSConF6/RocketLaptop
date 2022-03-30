@@ -4,7 +4,7 @@ $(function() {
 		e.preventDefault();
 		
 		let delivery_text = $(this).text();
-		let order_id = $("#orderId").val();
+		let order_id = $("#orderId").text();
 		
 		$.ajax({
 				url: "/admin/orderDeliveryUpdate",

@@ -9,19 +9,30 @@
 		<div class="d-flex align-items-center">
 			<img alt="Logo" src="../images/RocketLaptopLogo.svg" width="20%" height="30%"> <span class="fs-1">공지사항 - 상세정보</span>
 		</div>
-		<div class="mb-3">
-			<label for="notice_num" class="form-label">공지사항 번호</label> <input type="text" class="form-control" id="notice_num" disabled value="${noticeDto.notice_num}">
-		</div>
-		<div class="mb-3">
-			<label for="notice_title" class="form-label">공지사항 제목</label> <input type="text" class="form-control" id="notice_title" disabled value="${noticeDto.notice_title}">
-		</div>
-		<div class="mb-3">
-			<label for="notice_content" class="form-label">공지사항 내용</label>
-			<textarea class="form-control" id="notice_content" rows="10" disabled style="resize: none"><c:out value="${noticeDto.notice_content}" /></textarea>
-		</div>
-		<div class="mb-3">
-			<fmt:formatDate value="${noticeDto.notice_reg_date}" var="noticeDate" pattern="yyyy-MM-dd"/>
-			<label for="notice_reg_date" class="form-label">날짜</label> <input type="text" class="form-control" id="notice_reg_date" disabled value="${noticeDate}">
+		<div class="table-responsive">
+			<table class="table table-bordered">
+				<tr>
+					<th class="text-center">글번호</th>
+					<td><span id="notice_num">${noticeDto.notice_num}</span></td>
+				</tr>
+				<tr>
+					<th class="text-center">제목</th>
+					<td><span id="notice_title">${noticeDto.notice_title}</span></td>
+				</tr>
+				<tr>
+					<th class="text-center">작성일</th>
+					<fmt:formatDate var="noticeDate" value="${noticeDto.notice_reg_date}" pattern="yyyy-MM-dd" />
+					<td><span id="notice_reg_date">${noticeDate}</span></td>
+				</tr>
+				<tr>
+					<th class="text-center">작성자</th>
+					<td><span>관리자</span></td>
+				</tr>
+				<tr>
+					<th class="text-center">내용</th>
+					<td><textarea class="form-control" id="notice_content" rows="10" disabled style="resize: none"><c:out value="${noticeDto.notice_content}" /></textarea></td>
+				</tr>
+			</table>
 		</div>
 		<div class="d-flex justify-content-end mb-3 mt-3">
 			<a class="btn btn-secondary me-3" href="/admin/noticeModifyView?num=${noticeDto.notice_num}">수정</a>
