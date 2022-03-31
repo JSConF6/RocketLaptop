@@ -43,7 +43,7 @@ function myAjax(data){
 				
 				output += "<tr><td>" + num + "</td>";
 				num = num - 1;
-				output += "<td><a href='/user/mypage/question/detail?num=" + item.qna_num + "'>";
+				output += "<td><a href='/user/mypage/question/detail?user_id=" + item.user_id + "&num=" + item.qna_num + "'>";
 				output += item.qna_title + "&nbsp;&nbsp;&nbsp;</a>";
 				
 				if(item.comment_content === null){
@@ -108,9 +108,13 @@ function myAjax(data){
 			$(".myQna_table").remove();
 			$(".myQna_Pagination_nav").remove();
 			$(".empty_myQna").remove();
-			let comment_state = $('#comment_state').val();
+			$(".myQuestionAddBtnDiv").remove();
+			let comment_state = $('#myComment_state').val();
 			var message = ['문의사항이 없습니다.', '답변대기 글이 없습니다.', '답변완료 글이 없습니다.'];
 			output += '<div class="text-center mt-5 mb-5 empty_myQna"><h1>' + message[comment_state] + '</h1></div>';
+			output += "<div class='text-end myQuestionAddBtnDiv'>"
+			output += "<button type='button' class='btn btn-primary' data-bs-toggle='modal' data-bs-target='#myQuestionAddModal'>문의사항 쓰기</button>";
+			output += "</div>";
 			$('.myQna-content').append(output);
 		}
 	}).fail(function(err){

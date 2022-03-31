@@ -47,7 +47,7 @@
 								<div class="text-end pt-2 pe-2">
 									<span class="badge bg-primary fs-6">New</span>
 								</div>
-								<a href="#"> <img src="/upload${newProduct.product_img_name}" class="card-img-top" alt="..." />
+								<a href="/product/detail?product_code=${newProduct.product_code}"> <img src="/upload${newProduct.product_img_name}" class="card-img-top" alt="..." />
 								</a>
 								<div class="card-body">
 									<h6 class="card-title">
@@ -55,7 +55,7 @@
 									</h6>
 									<p class="card-text fs-5 mt-3">${newProduct.product_name}</p>
 									<fmt:formatNumber var="newProductPrice" value="${newProduct.product_price}" pattern="###,###,###" />
-									<a href="productDetail" class="btn btn-primary">상세보기</a> &nbsp; <span class="card-text">${newProductPrice}원</span>
+									<a href="/product/detail?product_code=${newProduct.product_code}" class="btn btn-primary">상세보기</a> &nbsp; <span class="card-text">${newProductPrice}원</span>
 								</div>
 							</div>
 						</div>
@@ -87,7 +87,7 @@
 								<div class="text-end pt-2 pe-2">
 									<span class="badge bg-danger fs-6">Best</span>
 								</div>
-								<a href="#"> <img src="/upload${bestProduct.product_img_name}" class="card-img-top" alt="..." />
+								<a href="/product/detail?product_code=${bestProduct.product_code}"> <img src="/upload${bestProduct.product_img_name}" class="card-img-top" alt="..." />
 								</a>
 								<div class="card-body">
 									<h6 class="card-title">
@@ -95,7 +95,7 @@
 									</h6>
 									<p class="card-text fs-5 mt-3">${bestProduct.product_name}</p>
 									<fmt:formatNumber var="bestProductPrice" value="${bestProduct.product_price}" pattern="###,###,###" />
-									<a href="#" class="btn btn-primary">상세보기</a> &nbsp; <span class="card-text">${bestProductPrice}원</span>
+									<a href="/product/detail?product_code=${bestProduct.product_code}" class="btn btn-primary">상세보기</a> &nbsp; <span class="card-text">${bestProductPrice}원</span>
 								</div>
 							</div>
 						</div>

@@ -11,7 +11,7 @@
 	  		  from (select @ROWNUM:=0) AS r, 
 	  	    	   (select * 
 	  			   from order_tb
-	  			   where user_id = user_id
+	  			   where user_id = #{user_id}
 	  		  	   order by order_date desc) o) ord
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>

@@ -22,7 +22,6 @@
 							<th>제목</th>
 							<th>작성자</th>
 							<th>날짜</th>
-							<th>삭제</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -34,9 +33,6 @@
 								</a></td>
 								<td>관리자</td>
 								<td><fmt:formatDate value="${notice.notice_reg_date}" pattern="yyyy-MM-dd"/></td>
-								<td><button type="button" class="btn btn-danger noticeDeleteBtn">삭제</button>
-									<input type="hidden" value="${notice.notice_num}" class="notice_num">
-								</td>
 							</tr>
 						</c:forEach>
 					</tbody>

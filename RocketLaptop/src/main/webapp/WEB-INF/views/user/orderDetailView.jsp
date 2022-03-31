@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ include file="../layout/header.jsp"%>
 
@@ -58,7 +59,9 @@
 										</p>
 										<p class="card-text fs-6 text-muted">
 											<span>연락처</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<span>${orderDto.order_phone}</span>
+											<c:set var="phone" value="${orderDto.order_phone}"/>
+											<c:set var="order_phone" value="${fn:substring(phone, 0, 3)}-${fn:substring(phone, 3, 7)}-${fn:substring(phone, 7, 11)}" />
+											<span>${order_phone}</span>
 										</p>
 										<p class="card-text fs-6 text-muted">
 											<span>받는주소</span>&nbsp;&nbsp;&nbsp;&nbsp;

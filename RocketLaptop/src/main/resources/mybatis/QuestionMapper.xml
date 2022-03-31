@@ -137,7 +137,7 @@
 	  		  	   		   q.qna_content, q.qna_readcount, q.qna_reg_date, c.comment_content
 	  		  	    from qna q left join comment c
 	  		  	   	on q.qna_num = c.qna_num
-	  		  	   	where user_id = user_id
+	  		  	   	where user_id = #{user_id}
 	  		  	   	<choose>
 	  		  	   		<when test="commentState == '답변대기'">
 	  		  	   			and c.comment_content is null

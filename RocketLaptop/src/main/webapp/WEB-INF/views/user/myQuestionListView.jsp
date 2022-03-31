@@ -79,6 +79,9 @@
 				<div class="text-center mt-5 mb-5 empty_myQna">
 					<h1>문의사항이 없습니다.</h1>
 				</div>
+				<div class="text-end myQuestionAddBtnDiv">
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myQuestionAddModal">문의사항 쓰기</button>
+				</div>
 			</c:if>
 		</div>
 	</div>
