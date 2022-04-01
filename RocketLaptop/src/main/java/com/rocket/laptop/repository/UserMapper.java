@@ -29,5 +29,7 @@ public interface UserMapper {
 	UserDto findByIdAndUsernameAndEmail(UserDto userDto);
 
 	void updateFindPassword(UserDto userDto);
+
+	int userDelete(String user_id);
 	
 }

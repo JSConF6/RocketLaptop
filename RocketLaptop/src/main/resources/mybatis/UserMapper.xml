@@ -65,5 +65,10 @@
 		and user_name = #{user_name}
 		and user_email = #{user_email}
 	</update>
+	
+	<delete id="userDelete" parameterType="String">
+		delete from user
+		where user_id = #{user_id}
+	</delete>
 
 </mapper>

@@ -13,7 +13,10 @@
 					</div>
 				</div>
 				<div class="w-50 mx-auto text-end">
-					<button type="button" class="btn btn-primary fs-5" data-bs-toggle="modal" data-bs-target="#userPasswordUpdateModal">비밀번호 변경</button>
+					<div class="w-100 ms-2">
+						<button type="button" class="btn btn-danger fs-6" data-bs-toggle="modal" data-bs-target="#userDeleteModal">회원탈퇴</button>
+						<button type="button" class="btn btn-primary fs-6" data-bs-toggle="modal" data-bs-target="#userPasswordUpdateModal">비밀번호 변경</button>
+					</div>
 				</div>
 				<form class="w-50 mx-auto">
 					<div class="row mb-3">
@@ -70,6 +73,33 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary passwordUpdateBtn">비밀번호 변경</button>
+				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">취소</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="userDeleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="staticBackdropLabel">회원탈퇴</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="mb-3">
+						<label for="userDeleteCurrentPassword" class="col-form-label">현재 비밀번호</label> 
+						<input type="password" class="form-control" id="userDeleteCurrentPassword" placeholder="현재 비밀번호를 입력해주세요.">
+					</div>
+					<div class="mb-3">
+						<label for="userDeleteNewPassword" class="col-form-label">비밀번호 확인</label> 
+						<input type="password" class="form-control" id="userDeleteNewPassword" placeholder="비밀번호를 다시 입력해주세요.">
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary userDeleteBtn">회원탈퇴</button>
 				<button type="button" class="btn btn-danger" data-bs-dismiss="modal">취소</button>
 			</div>
 		</div>

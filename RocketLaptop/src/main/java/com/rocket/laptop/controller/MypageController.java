@@ -117,6 +117,18 @@ public class MypageController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), result); 
 	}
 	
+	@PostMapping("/user/mypage/userDelete")
+	@ResponseBody
+	public ResponseDto<Integer> userDelete(@RequestParam("user_id") String user_id, PasswordDto passwordDto){
+		logger.info("회원탈퇴");
+		
+		UserDto userDto = userService.getUser(user_id);
+		
+		int result = userService.userDelete(userDto, passwordDto);
+		
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), result);
+	}
+	
 	@GetMapping("/user/mypage/order/detail")
 	public String userOrderDetail(@RequestParam("user_id") String user_id, @RequestParam("order_id") String order_id, Model model) {
 		logger.info("주문 상세 페이지로 이동");

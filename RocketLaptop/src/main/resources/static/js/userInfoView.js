@@ -157,4 +157,66 @@ $(function(){
 		})
 		
 	});
+	
+	$(".userDeleteBtn").on("click", function(e){
+		e.preventDefault();
+		
+		let currentPwd = $("#userDeleteCurrentPassword").val();
+		if(currentPwd === ""){
+			Swal.fire({
+				icon: "warning",
+				title: "회원탈퇴",
+				text: "현재 비밀번호를 입력해주세요.",
+				allowOutsideClick: false,
+			});
+			return false;
+		}
+		
+		let newPwd = $("#userDeleteNewPassword").val();
+		if(newPwd === ""){
+			Swal.fire({
+				icon: "warning",
+				title: "회원탈퇴",
+				text: "비밀번호를 다시 입력해주세요.",
+				allowOutsideClick: false,
+			});
+			return false;
+		}
+		
+		let data = {
+			"user_id" : $("#user_id").val(),
+			"currentPassword" : currentPwd,
+			"newPassword" : newPwd,
+		}
+		
+		$.ajax({
+			url: "/user/mypage/userDelete",
+			type: "POST",
+			data: data
+		}).done(function(res) {
+			console.log(res);
+			if(res.data === 1){
+				Swal.fire({
+					icon: "success",
+					title: "회원탈퇴",
+					text: "회원 탈퇴 되었습니다. 이용해주셔서 감사합니다.",
+					allowOutsideClick: false,
+				}).then(() => {
+					location.replace("/");
+				});
+			}else{
+				Swal.fire({
+					icon: "error",
+					title: "회원탈퇴",
+					text: "회원탈퇴 실패 다시 입력 해주세요.",
+					allowOutsideClick: false,
+				}).then(() => {
+					$("#userDeleteCurrentPassword").val("").focus();
+					$("#userDeleteNewPassword").val("").focus();
+				});
+			}
+		}).fail(function(err) {
+			console.log(err);
+		})
+	});
 });

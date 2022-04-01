@@ -68,6 +68,10 @@
 
 ![마이페이지 문의사항](https://user-images.githubusercontent.com/41312091/160993429-2cb203ad-d067-4653-93f7-c279556928e9.gif)
 
+#### 회원탈퇴
+
+![회원탈퇴](https://user-images.githubusercontent.com/41312091/161190444-23ec41e6-559d-447c-88f3-9f2234921c0b.gif)
+
 ### 9. 관리자 화면
 
 #### 관리자 페이지 메인 화면

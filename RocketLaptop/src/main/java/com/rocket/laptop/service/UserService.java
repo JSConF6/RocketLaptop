@@ -27,4 +27,6 @@ public interface UserService {
 	public UserDto findByIdAndUsernameAndEmail(UserDto userDto);
 
 	public void updateFindPassword(UserDto userDto);
+
+	public int userDelete(UserDto userDto, PasswordDto passwordDto);
 }
