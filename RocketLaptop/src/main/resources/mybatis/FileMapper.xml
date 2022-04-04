@@ -40,7 +40,7 @@
 			product_img_original_name = #{fileDto.product_img_original_name},
 			product_img_type = #{fileDto.product_img_type}
 		where product_code = #{product_code}
-		and product_img_num = #{fileNum}
+		and product_img_num = #{fileDto.product_img_num}
 	</update>
 
 </mapper>

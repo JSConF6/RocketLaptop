@@ -109,7 +109,7 @@ $(function(){
 		frm.append("product_name", product_name);
 		frm.append("product_price", product_price);
 		
-		frm.append("imageType", imageType);
+		frm.append("imageType", JSON.stringify(imageType));
 		
 		$.ajax({
 				url: "/admin/productModify",
@@ -186,24 +186,25 @@ $(function(){
 			if(value.includes("thumbnail")){
 				image_upload[0] = file;
 				check[0] = 1;
-				imageType[0] = filename + "/" + 1 + "/" + $("#file_thumbnail_num").val();
+				imageType[0] = {"image_name" : filename, "image_type" : 1, "image_num": $("#file_thumbnail_num").val()}
 			}else if(value.includes("image1")){
 				image_upload[1] = file;
 				check[1] = 1;
-				imageType[1] = filename + "/" + 2 + "/" + $("#file_image1_num").val();;
+				imageType[1] = {"image_name" : filename, "image_type" : 2, "image_num": $("#file_image1_num").val()}
 			}else if(value.includes("image2")){
 				image_upload[2] = file;
 				check[2] = 1;
-				imageType[2] = filename + "/" + 2 + "/" + $("#file_image2_num").val();
+				imageType[2] = {"image_name" : filename, "image_type" : 2, "image_num": $("#file_image2_num").val()}
 			}else if(value.includes("image3")){
 				image_upload[3] = file;
 				check[3] = 1;
-				imageType[3] = filename + "/" + 2 + "/" + $("#file_image3_num").val();
+				imageType[3] = {"image_name" : filename, "image_type" : 2, "image_num": $("#file_image3_num").val()}
 			}else if(value.includes("detail")){
 				image_upload[4] = file;
 				check[4] = 1;
-				imageType[4] = filename + "/" + 3 + "/" + $("#file_detail_num").val();
+				imageType[4] = {"image_name" : filename, "image_type" : 3, "image_num": $("#file_detail_num").val()}
 			}
+			console.log(imageType)
 			
 			$(value).text(filename);
 			show(value, remove);

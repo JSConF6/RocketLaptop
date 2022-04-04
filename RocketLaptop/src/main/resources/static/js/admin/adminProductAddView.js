@@ -1,6 +1,6 @@
 $(function(){
-	let imageType = new Array();
 	let image_upload = new Array();
+	let image_type = new Array();
 	
 	$(".productAddSubmitBtn").on("click", function(e){
 		e.preventDefault();
@@ -104,7 +104,7 @@ $(function(){
 		frm.append("product_name", product_name);
 		frm.append("product_price", product_price);
 		
-		frm.append("imageType", imageType)
+		frm.append("image_type", JSON.stringify(image_type));
 		
 		$.ajax({
 				url: "/admin/productAdd",
@@ -180,21 +180,21 @@ $(function(){
 		if(pattern.test(filename)){
 			if(value.includes("thumbnail")){
 				image_upload[0] = file;
-				imageType.push(filename + "/" + 1);
+				image_type[0] = {"image_name" : filename, "image_type" : 1};
 			}else if(value.includes("image1")){
 				image_upload[1] = file;
-				imageType.push(filename + "/" + 2);
+				image_type[1] = {"image_name" : filename, "image_type" : 2};
 			}else if(value.includes("image2")){
 				image_upload[2] = file;
-				imageType.push(filename + "/" + 2);
+				image_type[2] = {"image_name" : filename, "image_type" : 2};
 			}else if(value.includes("image3")){
 				image_upload[3] = file;
-				imageType.push(filename + "/" + 2);
+				image_type[3] = {"image_name" : filename, "image_type" : 2};
 			}else if(value.includes("detail")){
 				image_upload[4] = file;
-				imageType.push(filename + "/" + 3);
+				image_type[4] = {"image_name" : filename, "image_type" : 3};
 			}
-			console.log(imageType);
+			console.log(image_type);
 			
 			$(value).text(filename);
 			show(value, remove);
@@ -225,7 +225,7 @@ $(function(){
 	})
 	
 	function remove(value, upload, remove, num){
-		delete imageType[num];
+		delete image_type[num];
 		
 		delete image_upload[num] ;
 		console.log(image_upload)

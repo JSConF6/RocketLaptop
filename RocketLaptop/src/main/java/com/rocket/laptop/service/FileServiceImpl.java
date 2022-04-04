@@ -47,11 +47,10 @@ public class FileServiceImpl implements FileService {
 	}
 
 	@Override
-	public void fileModify(FileDto fileDto, int fileNum, String product_code) {
+	public void fileModify(FileDto fileDto, String product_code) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		map.put("fileDto", fileDto);
-		map.put("fileNum", fileNum);
 		map.put("product_code", product_code);
 		
 		fileMapper.fileModify(map);
