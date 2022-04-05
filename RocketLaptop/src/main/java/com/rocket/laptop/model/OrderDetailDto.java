@@ -12,4 +12,5 @@ public class OrderDetailDto {
 	private int order_de_amount;
 	private String product_img_name;
 	private String product_img_original_name;
+	private String review_yn;
 }

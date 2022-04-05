@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.rocket.laptop.repository.ReviewMapper">
+
+	<insert id="reviewAdd" parameterType="ReviewDto">
+		insert into review (user_id, product_code, review_content, review_star_rating)
+		values(#{user_id}, #{product_code}, #{review_content}, #{review_star_rating})
+	</insert>
+	
+	<select id="getReviewListCount" resultType="int" parameterType="String">
+		select count(*)
+		from review
+		where product_code = #{product_code}
+	</select>
+	
+	<select id="getReviewList" parameterType="Map" resultType="ReviewDto">
+		select rv.* 
+		from (select @ROWNUM := @ROWNUM + 1 AS rnum, r.*
+	  		  from (select @ROWNUM:=0) AS re, 
+	  		  		(select re.*, p.product_name
+				    from review re, product p
+					where re.product_code = p.product_code
+					and re.product_code = #{product_code}
+            		order by re.review_reg_date desc) r) rv
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<update id="orderReviewUpdate" parameterType="Map">
+		update order_detail
+		set review_yn = 'Y'
+		where order_id = #{order_id}
+		and product_code = #{reviewDto.product_code}
+	</update>
+
+</mapper>

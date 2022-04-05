@@ -26,10 +26,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.rocket.laptop.config.auth.PrincipalDetails;
 import com.rocket.laptop.model.CategoryDto;
 import com.rocket.laptop.model.CommentDto;
+import com.rocket.laptop.model.FileDto;
 import com.rocket.laptop.model.OrderDetailDto;
 import com.rocket.laptop.model.OrderDto;
 import com.rocket.laptop.model.PageHandler;
 import com.rocket.laptop.model.PasswordDto;
+import com.rocket.laptop.model.ProductDetailDto;
 import com.rocket.laptop.model.ProductListDto;
 import com.rocket.laptop.model.QuestionDto;
 import com.rocket.laptop.model.ResponseDto;
@@ -135,6 +137,18 @@ public class MypageController {
 		
 		OrderDto orderDto = orderService.getUserOrderDetail(order_id, user_id);
 		List<OrderDetailDto> orderDetailList = orderService.getOrderDetail(order_id);
+		
+		int y = 0;
+		
+		for(OrderDetailDto orderDetail: orderDetailList) {
+			if(orderDetail.getReview_yn().equals("Y")) {
+				y++;
+			}
+		}
+		
+		if(y != orderDetailList.size()) {
+			model.addAttribute("reviewBtn", true);
+		}
 		
 		model.addAttribute("orderDto", orderDto);
 		model.addAttribute("orderDetailList", orderDetailList);

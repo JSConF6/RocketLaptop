@@ -45,7 +45,7 @@
 	
 	<select id="getOrderDetail" parameterType="String" resultType="OrderDetailDto">
 		select p.PRODUCT_CODE, p.CATEGORY_CODE, c.CATEGORY_NAME, p.PRODUCT_NAME, 
-	   		   p.PRODUCT_PRICE, o.order_de_amount, i.product_img_name, i.PRODUCT_IMG_ORIGINAL_NAME
+	   		   p.PRODUCT_PRICE, o.order_de_amount, i.product_img_name, i.PRODUCT_IMG_ORIGINAL_NAME, o.review_yn
 		from product p, order_detail o, product_img i, category c
 		where p.product_code = o.product_code
 		and o.order_id = #{order_id}

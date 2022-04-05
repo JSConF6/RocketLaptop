@@ -14,8 +14,14 @@
 		<p class="mt-3">
 			<fmt:formatDate value="${orderDto.order_date}" var="orderDate" pattern="yy-MM-dd" />
 			<span class="fs-5 text-muted">${orderDate} 주문</span>&nbsp;<span class="text-muted fs-5">(${orderDto.order_state})</span>
-			<div>
+			<div class="d-flex justify-content-between align-items-center">
+				<input type="hidden" value="${orderDto.order_id}" id="myOrder_id" />
 				<span class="text-muted fs-5">주문번호 ${orderDto.order_id}</span>
+				<c:if test="${orderDto.order_state == '배송 완료'}">
+					<c:if test="${reviewBtn == true}">
+						<button type="button" class="btn btn-primary reviewBoxBtn" data-bs-toggle="modal" data-bs-target="#review_box">리뷰쓰기</button>
+					</c:if>
+				</c:if>
 			</div>
 		</p>
 		<div>
@@ -101,5 +107,37 @@
 		</div>
 	</div>
 </main>
+
+<div class="modal fade" id="review_box" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">리뷰등록</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      	<select class="form-select mb-2 productReview">
+      		<c:forEach var="orderDetail" items="${orderDetailList}">
+      			<c:if test="${orderDetail.review_yn == 'N'}">
+      				<option value="${orderDetail.product_code}">${orderDetail.product_name}</option>
+      			</c:if>	
+      		</c:forEach>
+		</select>
+		 <div class="mb-3 star-rating">
+		  	<span class="star star1" data-val=1><i class="fa-solid fa-star"></i></span>
+		  	<span class="star star2" data-val=2><i class="fa-solid fa-star"></i></span>
+		  	<span class="star star3" data-val=3><i class="fa-solid fa-star"></i></span>
+		  	<span class="star star4" data-val=4><i class="fa-solid fa-star"></i></span>
+		  	<span class="star star5" data-val=5><i class="fa-solid fa-star"></i></span>
+		 </div>
+		 <textarea class="w-100 review-content" rows="3"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary reviewAddBtn">리뷰등록</button>
+        <button type="button" class="btn btn-danger reviewCancelBtn" data-bs-dismiss="modal">취소</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%@ include file="../layout/footer.jsp"%>

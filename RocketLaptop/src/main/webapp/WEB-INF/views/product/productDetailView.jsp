@@ -82,13 +82,132 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-12 bg-secondary mt-5 mb-5">
-			<h2 class="text-white pt-3 pb-3 mb-0 text-center">상세설명</h2>
-		</div>
-		<div class="col-12 d-flex justify-content-center">
-			<img class="img-fluid" src="/upload${fileList[4].product_img_name}" />
+		<div class="col-12 p-0 mt-5 mb-5 productDetailsNav">
+			<ul class="nav nav-tabs nav-pills text-center justify-content-evenly bg-secondary align-items-center" id="myTab" role="tablist">
+			  <li class="nav-item w-25" role="presentation">
+			    <a class="nav-link text-white rounded-1" id="details_tab" data-bs-toggle="tab" data-bs-target="#productDetails" type="button" role="tab" aria-selected="true">상세설명</a>
+			  </li>
+			  <li class="nav-item w-25" role="presentation">
+			    <a class="nav-link text-white rounded-1" id="review_tab" data-bs-toggle="tab" data-bs-target="#productReview" type="button" role="tab" aria-selected="false">상품리뷰 <span class="fs-6 reviewListCount">${reviewListCount}</span></a>
+			  </li>
+			  <li class="nav-item w-25" role="presentation">
+			    <a class="nav-link text-white rounded-1" id="qna_tab" data-bs-toggle="tab" data-bs-target="#productQnA" type="button" role="tab" aria-selected="false">상품문의 <span class="fs-6">13</span></a>
+			  </li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+			  <div class="tab-pane fade show active" id="productDetails" role="tabpanel">
+			  	<div class="col-12 d-flex justify-content-center">
+					<img class="img-fluid" src="/upload${fileList[4].product_img_name}" />
+				</div>
+			  </div>
+			  <div class="tab-pane fade" id="productReview" role="tabpanel">
+			  	<div class="col-12 d-flex justify-content-center">
+			  		<div class="product-review mt-5">
+			  			<h1>상품리뷰</h1>
+						<table class="table review-table border-top border-bottom mt-3">
+							<tbody>
+								<tr>
+									<td>
+										<div class="d-flex justify-content-between">
+											<div class="d-flex">
+												<div>
+													<span class="star1-view" data-val=1><i class="fa-solid fa-star"></i></span>
+											  		<span class="star2-view" data-val=2><i class="fa-solid fa-star"></i></span>
+											  		<span class="star3-view" data-val=3><i class="fa-solid fa-star"></i></span>
+											  		<span class="star4-view" data-val=4><i class="fa-solid fa-star"></i></span>
+											  		<span class="star5-view" data-val=5><i class="fa-solid fa-star"></i></span>
+										  		</div>
+										  		<div class="d-flex flex-column ms-5">
+													<div><span class="text-muted">15;(1종)오드데일리점퍼 카키88(2900원)[1개]</span></div>
+													<div>추천 합니다. 배송이 빠릅니다.</div>
+												</div>
+										  	</div>
+											<div class="d-flex flex-column">
+												<div><span class="text-muted">작성자 : jsconf</span></div>
+												<div><span class="text-muted">등록일 : 2022-03-03</span></div>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<nav class="d-flex justify-content-center reviewPagination"></nav>
+					</div>
+			  	</div>
+			  </div>
+			  <div class="tab-pane fade" id="productQnA" role="tabpanel">
+			  	<div class="col-12 d-flex justify-content-center">
+			  		<div class="product-qna mt-5">
+			  			<h1>상품문의</h1>
+			  			<div class="mt-3 text-center"><span class="fs-3">등록된 상품문의가 없습니다.</span></div>
+						<table class="table qna-table mt-3">
+							<thead>
+								<tr>
+									<th>번호</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>날짜</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>1</td>
+									<td><span class="">제목&nbsp;&nbsp;&nbsp;<span class="text-secondary">[답변완료]</span></span></td>
+									<td>작성자</td>
+									<td>2022-02-02</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="mt-3 text-end">
+							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#qna_box">문의사항 쓰기</button>
+						</div>
+					</div>
+			  	</div>
+			  </div>
+			</div>
 		</div>
 	</div>
+</div>
+
+<div class="modal fade" id="qna_box" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">상품문의</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      	<form>
+          <div class="mb-3">
+            <label for="qnaProductName" class="col-form-label">상품명</label>
+            <input type="text" class="form-control" id="qnaProductName" value="${productDetail.product_name}" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="qnaUserName" class="col-form-label">이름</label>
+            <input type="text" class="form-control" id="qnaUserName" disabled>
+          </div>
+          <div class="mb-3">
+            <label for="qnaTitle" class="col-form-label">제목</label>
+            <input type="text" class="form-control" id="qnaTitle">
+          </div>
+          <div class="mb-3">
+            <label for="qnaContent" class="col-form-label">내용</label>
+            <textarea class="form-control" id="qnaContent"></textarea>
+          </div>
+          <div class="form-check">
+			  <input class="form-check-input" type="checkbox" value="secret" id="secretCheckBox">
+			  <label class="form-check-label" for="secretCheckBox">
+			    비밀글
+			  </label>
+		  </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">확인</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">취소</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <%@ include file="../layout/footer.jsp"%>

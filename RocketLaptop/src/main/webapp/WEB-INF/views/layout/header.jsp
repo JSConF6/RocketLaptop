@@ -39,6 +39,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productListView.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/swiper.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/findIdPasswordView.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/productDetailView.css" type="text/css">
 
 <!-- JS -->
 <script src="${pageContext.request.contextPath}/js/registerView.js" type="text/javascript"></script>
@@ -55,6 +56,7 @@
 <script src="${pageContext.request.contextPath}/js/myQuestionListView.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/myQuestionDetailView.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/questionListView.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/myOrderDetailView.js" type="text/javascript"></script>
 
 <!-- sweetalert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.5/dist/sweetalert2.all.min.js"></script>

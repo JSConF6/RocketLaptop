@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+.productDetailsNav ul{
+	height : 70px;
+}
+
+#qna_tab, #details_tab, #review_tab{
+	font-size : 1.5rem
+}
+
+.productDetailsNav .nav-pills .nav-item .nav-link.active{
+	background: #858f9a
+}
+
+textarea{
+	resize : none;
+}
+
+.star{
+	cursor: pointer;
+}
+
+.star-checked{
+	color : orange;
+}
+
+.review-table{
+	table-layout : fixed;
+	width : 1000px;
+}
+
+.product-review{
+	position:relative;
+	width:1000px;
+}
+
+.product-qna{
+	position:relative;
+	width:1000px;
+}
+
+.qna-table{
+	table-layout : fixed;
+	width : 1000px;
+}
+
+@media (max-width: 675px) {
+  .nav .nav-item .nav-link#qna_tab, .nav .nav-item .nav-link#details_tab, .nav .nav-item .nav-link#review_tab{
+  	font-size : 1rem;
+  }
+}
