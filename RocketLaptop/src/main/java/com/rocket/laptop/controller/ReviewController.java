@@ -70,7 +70,7 @@ public class ReviewController {
 			@RequestParam(value="page", defaultValue = "1", required = false) int page) {
 		logger.info("상품 리뷰 리스트");
 		
-		int limit = 8;
+		int limit = 10;
 		logger.info("limit : " + limit);
 		
 		int listCount = reviewService.getReviewListCount(product_code);

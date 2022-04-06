@@ -155,11 +155,17 @@ $(function(){
 					let date = item.review_reg_date.substring(0, 10);
 					
 					output += "<tr><td><div class='d-flex justify-content-between'><div class='d-flex'><div>";
-					starRating = item.review_star_rating;
-					for(let i = 0; i < 5; i++){
-						output += "<span class='star" + (i + 1) + "-view'>";
+					
+					for(let i = 0; i < item.review_star_rating; i++){
+						output += "<span class='star-checked'>";
 						output += "<i class='fa-solid fa-star'></i></span>";
 					}
+					
+					for(let j = 0; j < (5 - item.review_star_rating); j++){
+						output += "<span>";
+						output += "<i class='fa-solid fa-star'></i></span>";
+					}
+					
 					output += "</div>";
 					output += "<div class='d-flex flex-column ms-5'>";
 					output += "<div><span class='text-muted'>" + item.product_name + "</span></div>";
@@ -213,10 +219,6 @@ $(function(){
 				output += '</ul></nav>';
 				
 				$(".product-review").append(output);
-				
-				for(let i = 0; i < starRating; i++){
-					$(".star" + (i + 1) + "-view").addClass("star-checked");
-				}
 			}else if(res.data.pageHandler.listCount === 0){
 				$(".review-table").remove();
 				$(".empty_review").remove();
@@ -270,9 +272,13 @@ function reviewAjax(data){
 				let date = item.review_reg_date.substring(0, 10);
 				
 				output += "<tr><td><div class='d-flex justify-content-between'><div class='d-flex'><div>";
-				starRating = item.review_star_rating;
-				for(let i = 0; i < 5; i++){
-					output += "<span class='star" + (i + 1) + "-view'>";
+				for(let i = 0; i < item.review_star_rating; i++){
+					output += "<span class='star-checked'>";
+					output += "<i class='fa-solid fa-star'></i></span>";
+				}
+					
+				for(let j = 0; j < (5 - item.review_star_rating); j++){
+					output += "<span>";
 					output += "<i class='fa-solid fa-star'></i></span>";
 				}
 				output += "</div>";
@@ -328,10 +334,6 @@ function reviewAjax(data){
 			output += '</ul></nav>';
 			
 			$(".product-review").append(output);
-			
-			for(let i = 0; i < starRating; i++){
-				$(".star" + (i + 1) + "-view").addClass("star-checked");
-			}
 		}else if(res.data.pageHandler.listCount === 0){
 			$(".review-table").remove();
 			$(".empty_review").remove();
