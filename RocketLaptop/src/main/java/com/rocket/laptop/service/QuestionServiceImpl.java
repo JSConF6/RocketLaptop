@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.rocket.laptop.model.CommentDto;
 import com.rocket.laptop.model.PageHandler;
 import com.rocket.laptop.model.QuestionDto;
+import com.rocket.laptop.model.ReviewDto;
 import com.rocket.laptop.repository.QuestionMapper;
 
 @Service
@@ -36,10 +37,6 @@ public class QuestionServiceImpl implements QuestionService {
 
 	@Override
 	public QuestionDto getQuestionDetail(int num) {
-		if(setReadCountUpdate(num) != 1) {
-			return null;
-		}
-		
 		return questionMapper.getQuestionDetail(num);
 	}
 
@@ -86,9 +83,6 @@ public class QuestionServiceImpl implements QuestionService {
 
 	@Override
 	public QuestionDto getUserQuestionDetail(int num, String user_id) {
-		if(setReadCountUpdate(num) != 1) {
-			return null;
-		}
 		
 		Map<String, Object> map = new HashMap<>();
 		
@@ -137,8 +131,29 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
-	public int setReadCountUpdate(int num) {
-		return questionMapper.setReadCountUpdate(num);
+	public int getProductQuestionListCount(String product_code) {
+		return questionMapper.getProductQuestionListCount(product_code);
+	}
+
+	@Override
+	public List<QuestionDto> getProductQuestionList(PageHandler pageHandler, String product_code) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("start", pageHandler.getStartRow());
+		map.put("end", pageHandler.getEndRow());
+		map.put("product_code", product_code);
+		
+		return questionMapper.getProductQuestionList(map);
+	}
+
+	@Override
+	public QuestionDto getProductQuestionDetail(int num) {
+		return questionMapper.getProductQuestionDetail(num);
+	}
+
+	@Override
+	public void updateQnaCommentYN(int num) {
+		questionMapper.updateQnaCommentYN(num);
 	}
 
 }

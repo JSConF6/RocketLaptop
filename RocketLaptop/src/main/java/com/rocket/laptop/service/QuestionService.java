@@ -35,6 +35,12 @@ public interface QuestionService {
 	public int getAjaxUserQuestionListCount(String user_id, String commentState);
 
 	public List<QuestionDto> getAjaxUserQuestionList(String user_id, String commentState, PageHandler pageHandler);
-	
-	public int setReadCountUpdate(int num);
+
+	public int getProductQuestionListCount(String product_code);
+
+	public List<QuestionDto> getProductQuestionList(PageHandler pageHandler, String product_code);
+
+	public QuestionDto getProductQuestionDetail(int num);
+
+	public void updateQnaCommentYN(int num);
 }

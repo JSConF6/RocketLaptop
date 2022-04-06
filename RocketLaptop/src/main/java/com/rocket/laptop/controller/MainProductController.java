@@ -18,6 +18,7 @@ import com.rocket.laptop.model.ProductListDto;
 import com.rocket.laptop.service.CategoryService;
 import com.rocket.laptop.service.FileService;
 import com.rocket.laptop.service.ProductService;
+import com.rocket.laptop.service.QuestionService;
 import com.rocket.laptop.service.ReviewService;
 
 @Controller
@@ -37,6 +38,9 @@ public class MainProductController {
 	
 	@Autowired
 	private ReviewService reviewService;
+	
+	@Autowired
+	private QuestionService questionService;
 	
 	@GetMapping("/list")
 	public String AllProductList(Model model, @RequestParam(value="page", defaultValue = "1", required = false) int page) {
@@ -183,10 +187,12 @@ public class MainProductController {
 		List<FileDto> fileList = fileService.getProductDetailFile(product_code);
 		
 		int reviewListCount = reviewService.getReviewListCount(product_code);
+		int questionListCount = questionService.getProductQuestionListCount(product_code);
 		
 		model.addAttribute("productDetail", productDetailDto);
 		model.addAttribute("fileList", fileList);
 		model.addAttribute("reviewListCount", reviewListCount);
+		model.addAttribute("questionListCount", questionListCount);
 		
 		return "/product/productDetailView";
 	}

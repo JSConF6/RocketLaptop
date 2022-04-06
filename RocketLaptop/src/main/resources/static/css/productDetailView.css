@@ -44,6 +44,35 @@ textarea{
 	width : 1000px;
 }
 
+.focusPointer{
+	cursor : pointer;
+}
+
+.focusDefault{
+	cursor : default;
+}
+
+.answerBox{
+	display : none;
+}
+
+.answerBox td{
+	padding: 16px 22px 16px 380px;
+    line-height: 22px;
+    color: #5e636d;
+    background: #fafafa;
+}
+
+.answerBox .answer{
+	margin-top : 24px;
+}
+
+.regInfo{
+	padding-left: 20px;
+    padding-top: 10px;
+    color: #3f51b5;
+}
+
 @media (max-width: 675px) {
   .nav .nav-item .nav-link#qna_tab, .nav .nav-item .nav-link#details_tab, .nav .nav-item .nav-link#review_tab{
   	font-size : 1rem;

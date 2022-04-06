@@ -14,8 +14,8 @@
 		select qu.* 
 		from (select @ROWNUM := @ROWNUM + 1 AS rnum, qn.*
 	  		  from (select @ROWNUM:=0) AS r, 
-	  		  	   (select q.qna_num, q.user_id, q.qna_title, 
-	  		  	   		   q.qna_content, q.qna_readcount, q.qna_reg_date, c.comment_content
+	  		  	   (select q.qna_num, q.user_id, q.product_code, q.qna_title, q.qna_content,
+			    		   c.comment_content, q.qna_secret, q.qna_comment_yn, c.comment_reg_date, q.qna_reg_date
 	  		  	    from qna q left join comment c
 	  		  	   	 on q.qna_num = c.qna_num
 	  		  	    order by q.qna_reg_date desc) qn) qu
@@ -24,8 +24,9 @@
 	
 	<select id="getQuestionDetail" parameterType="int" resultType="QuestionDto">
 		select *
-		from qna
+		from qna q, product p
 		where qna_num = #{num}
+		and q.product_code = p.product_code
 	</select>
 	
 	<delete id="questionDelete" parameterType="int">
@@ -44,14 +45,15 @@
 		values(#{num}, #{comment_content})
 	</insert>
 	
-	<insert id="questionAdd" parameterType="QuestionDto">
-		insert into qna (user_id, qna_title, qna_content)
-		values (#{user_id}, #{qna_title}, #{qna_content})
-	</insert>
+	<update id="updateQnaCommentYN" parameterType="int">
+		update qna
+		set qna_comment_yn = 'Y'
+		where qna_num = #{num}
+	</update>
 	
-	<insert id="noticeAdd" parameterType="NoticeDto">
-		insert into notice (notice_title, notice_content)
-		values(#{notice_title}, #{notice_content})
+	<insert id="questionAdd" parameterType="QuestionDto">
+		insert into qna (user_id, product_code, qna_title, qna_content, qna_secret)
+		values (#{user_id}, #{product_code}, #{qna_title}, #{qna_content}, #{qna_secret})
 	</insert>
 	
 	<select id="getUserQuestionListCount" parameterType="String" resultType="int">
@@ -64,8 +66,8 @@
 		select qu.* 
 		from (select @ROWNUM := @ROWNUM + 1 AS rnum, qn.*
 	  		  from (select @ROWNUM:=0) AS r, 
-	  		  	   (select q.qna_num, q.user_id, q.qna_title, 
-	  		  	   		   q.qna_content, q.qna_readcount, q.qna_reg_date, c.comment_content
+	  		  	   (select q.qna_num, q.user_id, q.product_code, q.qna_title, 
+	  		  	   		   q.qna_content, q.qna_secret, q.qna_comment_yn, q.qna_reg_date, c.comment_content
 	  		  	    from qna q left join comment c
 	  		  	   	on q.qna_num = c.qna_num
 	  		  	   	where user_id = #{user_id}
@@ -75,8 +77,9 @@
 	
 	<select id="getUserQuestionDetail" parameterType="Map" resultType="QuestionDto">
 		select *
-		from qna
+		from qna q, product p
 		where qna_num = #{num}
+		and q.product_code = p.product_code
 		and user_id = #{user_id}
 	</select>
 	
@@ -150,10 +153,31 @@
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	
-	<update id="setReadCountUpdate" parameterType="int">
-		update qna
-		set qna_readcount = qna_readcount + 1
-		where qna_num = #{num}
-	</update>
+	<select id="getProductQuestionListCount" resultType="int" parameterType="String">
+		select count(*)
+		from qna
+		where product_code = #{product_code}
+	</select>
+	
+	<select id="getProductQuestionList" resultType="QuestionDto" parameterType="Map">
+		select qu.* 
+		from (select @ROWNUM := @ROWNUM + 1 AS rnum, qn.*
+	  		  from (select @ROWNUM:=0) AS r, 
+	  		  	   (select q.qna_num, q.user_id, q.product_code, q.qna_title, 
+	  		  	   		   q.qna_content, q.qna_secret, q.qna_comment_yn, q.qna_reg_date, c.comment_content
+	  		  	    from qna q left join comment c
+	  		  	   	on q.qna_num = c.qna_num
+	  		  	   	where q.product_code = #{product_code}
+	  		  	    order by q.qna_reg_date desc) qn) qu
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<select id="getProductQuestionDetail" parameterType="int" resultType="QuestionDto">
+		select q.qna_num, q.user_id, q.product_code, q.qna_title, q.qna_content,
+			    c.comment_content, q.qna_secret, q.qna_comment_yn, c.comment_reg_date, q.qna_reg_date
+		from qna q left join comment c
+		on q.qna_num = c.qna_num
+		where q.qna_num = #{num}
+	</select>
 
 </mapper>

@@ -82,7 +82,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-12 p-0 mt-5 mb-5 productDetailsNav">
+		<div class="col-12 p-0 mt-5 productDetailsNav">
 			<ul class="nav nav-tabs nav-pills text-center justify-content-evenly bg-secondary align-items-center" id="myTab" role="tablist">
 			  <li class="nav-item w-25" role="presentation">
 			    <a class="nav-link text-white rounded-1" id="details_tab" data-bs-toggle="tab" data-bs-target="#productDetails" type="button" role="tab" aria-selected="true">상세설명</a>
@@ -91,7 +91,7 @@
 			    <a class="nav-link text-white rounded-1" id="review_tab" data-bs-toggle="tab" data-bs-target="#productReview" type="button" role="tab" aria-selected="false">상품리뷰 <span class="fs-6 reviewListCount">${reviewListCount}</span></a>
 			  </li>
 			  <li class="nav-item w-25" role="presentation">
-			    <a class="nav-link text-white rounded-1" id="qna_tab" data-bs-toggle="tab" data-bs-target="#productQnA" type="button" role="tab" aria-selected="false">상품문의 <span class="fs-6">13</span></a>
+			    <a class="nav-link text-white rounded-1" id="qna_tab" data-bs-toggle="tab" data-bs-target="#productQnA" type="button" role="tab" aria-selected="false">상품문의 <span class="fs-6 qnaListCount">${questionListCount}</span></a>
 			  </li>
 			</ul>
 			<div class="tab-content" id="myTabContent">
@@ -139,11 +139,11 @@
 			  	<div class="col-12 d-flex justify-content-center">
 			  		<div class="product-qna mt-5">
 			  			<h1>상품문의</h1>
-			  			<div class="mt-3 text-center"><span class="fs-3">등록된 상품문의가 없습니다.</span></div>
 						<table class="table qna-table mt-3">
 							<thead>
 								<tr>
 									<th>번호</th>
+									<th>답변상태</th>
 									<th>제목</th>
 									<th>작성자</th>
 									<th>날짜</th>
@@ -152,15 +152,29 @@
 							<tbody>
 								<tr>
 									<td>1</td>
+									<td>답변대기</td>
 									<td><span class="">제목&nbsp;&nbsp;&nbsp;<span class="text-secondary">[답변완료]</span></span></td>
 									<td>작성자</td>
 									<td>2022-02-02</td>
 								</tr>
+								<tr class="answerBox">
+									<td colspan="5">
+										<div class="question">question</div>
+										<div class="answer">answer</div>
+										<div class="regInfo">
+											<span>답변</span>
+											<span>등록일 : 2022-03-03</span>
+										</div>
+									</td>
+								</tr>
 							</tbody>
 						</table>
-						<div class="mt-3 text-end">
-							<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#qna_box">문의사항 쓰기</button>
-						</div>
+						<c:if test="${!empty user_id}">
+							<div class="mt-3 text-end qnaAddBox">
+								<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#qna_box">문의사항 쓰기</button>
+							</div>
+						</c:if>
+						<nav class="d-flex justify-content-center qnaPagination"></nav>
 					</div>
 			  	</div>
 			  </div>
@@ -184,7 +198,7 @@
           </div>
           <div class="mb-3">
             <label for="qnaUserName" class="col-form-label">이름</label>
-            <input type="text" class="form-control" id="qnaUserName" disabled>
+            <input type="text" class="form-control" id="qnaUserName" value="${user_id}" disabled>
           </div>
           <div class="mb-3">
             <label for="qnaTitle" class="col-form-label">제목</label>
@@ -195,7 +209,7 @@
             <textarea class="form-control" id="qnaContent"></textarea>
           </div>
           <div class="form-check">
-			  <input class="form-check-input" type="checkbox" value="secret" id="secretCheckBox">
+			  <input class="form-check-input" type="checkbox" id="qnaSecretCheckBox">
 			  <label class="form-check-label" for="secretCheckBox">
 			    비밀글
 			  </label>
@@ -203,7 +217,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">확인</button>
+        <button type="button" class="btn btn-primary productQnaAddBtn">확인</button>
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">취소</button>
       </div>
     </div>

@@ -80,6 +80,7 @@ public class adminQuestionController {
 		logger.info("답글 등록");
 
 		int result = questionService.commentAdd(num, comment_content);
+		questionService.updateQnaCommentYN(num);
 		
 		return result;
 	}

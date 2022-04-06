@@ -21,6 +21,10 @@
 					<td colspan="3"><span id="question_title">${questionDto.qna_title}</span></td>
 				</tr>
 				<tr>
+					<th class="text-center">문의사항 쓴 상품</th>
+					<td colspan="3"><span id="question_product_code">${questionDto.product_name}</span></td>
+				</tr>
+				<tr>
 					<th class="text-center">작성일</th>
 					<fmt:formatDate var="qnaDate" value="${questionDto.qna_reg_date}" pattern="yyyy-MM-dd" />
 					<td colspan="3"><span id="question_reg_date">${qnaDate}</span></td>
@@ -28,8 +32,6 @@
 				<tr>
 					<th class="text-center">작성자</th>
 					<td><span id="question_user_id">${questionDto.user_id}</span></td>
-					<th class="text-center">조회수</th>
-					<td><span id="question_readcount">${questionDto.qna_readcount}</span></td>
 				</tr>
 				<tr>
 					<th class="text-center">내용</th>
@@ -37,7 +39,7 @@
 				</tr>
 			</table>
 		</div>
-		<c:if test="${!empty commentDto}">
+		<c:if test="${questionDto.qna_comment_yn == 'Y'}">
 			<div class="card">
 				<div class="card-header">답변</div>
 				<div class="card-body">
@@ -47,7 +49,7 @@
 				<div class="card-footer">답변한 날짜 ${commentDate}</div>
 			</div>
 		</c:if>
-		<c:if test="${empty commentDto}">
+		<c:if test="${questionDto.qna_comment_yn == 'N'}">
 			<div class="card">
 				<div class="card-body text-center">
 					<p class="card-text">답변대기</p>
@@ -55,7 +57,7 @@
 			</div>
 		</c:if>
 		<div class="d-flex justify-content-end mb-3 mt-3">
-			<c:if test="${empty commentDto}">
+			<c:if test="${questionDto.qna_comment_yn == 'N'}">
 				<button type="button" class="btn btn-primary me-3" data-bs-toggle="modal" data-bs-target="#staticBackdrop">답변달기</button>
 			</c:if>
 			<button class="btn btn-danger me-3 questionDetailDeleteBtn">삭제</button>

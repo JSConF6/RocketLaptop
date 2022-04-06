@@ -45,4 +45,9 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewMapper.getReviewList(map);
 	}
 
+	@Override
+	public int getUserReviewListCount(String user_id) {
+		return reviewMapper.getUserReviewListCount(user_id);
+	}
+
 }

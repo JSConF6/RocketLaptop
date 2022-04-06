@@ -8,17 +8,17 @@
 		<div class="mx-auto">
 			<div class="mx-auto">
 				<div class="justify-content-center d-flex align-items-center mt-4">
-					<div class="w-50 d-flex align-items-center me-5">
-						<img alt="Logo" src="/images/RocketLaptopLogo.svg" width="25%" height="10%"> <span class="fs-1">내정보</span>
+					<div class="w-75 d-flex align-items-center me-5">
+						<img alt="Logo" src="/images/RocketLaptopLogo.svg" width="300px" height="10%"> <span class="fs-1">내정보</span>
 					</div>
 				</div>
-				<div class="w-50 mx-auto text-end">
+				<div class="w-75 mx-auto text-end">
 					<div class="w-100 ms-2">
 						<button type="button" class="btn btn-danger fs-6" data-bs-toggle="modal" data-bs-target="#userDeleteModal">회원탈퇴</button>
 						<button type="button" class="btn btn-primary fs-6" data-bs-toggle="modal" data-bs-target="#userPasswordUpdateModal">비밀번호 변경</button>
 					</div>
 				</div>
-				<form class="w-50 mx-auto">
+				<form class="w-75 mx-auto">
 					<div class="row mb-3">
 						<label for="update-id" class="text-start ps-0">아이디</label> <input type="text" class="form-control" id="update-id" value="${userDto.user_id}" readonly>
 					</div>

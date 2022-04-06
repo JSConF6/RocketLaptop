@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.rocket.laptop.config.auth.PrincipalDetails;
+import com.rocket.laptop.model.AddressDto;
 import com.rocket.laptop.model.CategoryDto;
 import com.rocket.laptop.model.CommentDto;
 import com.rocket.laptop.model.FileDto;
@@ -36,6 +37,7 @@ import com.rocket.laptop.model.ProductListDto;
 import com.rocket.laptop.model.QuestionDto;
 import com.rocket.laptop.model.ResponseDto;
 import com.rocket.laptop.model.UserDto;
+import com.rocket.laptop.service.AddressService;
 import com.rocket.laptop.service.CategoryService;
 import com.rocket.laptop.service.OrderService;
 import com.rocket.laptop.service.ProductService;
@@ -55,6 +57,24 @@ public class MypageController {
 	
 	@Autowired
 	private QuestionService questionService;
+	
+	@GetMapping("/user/mypage")
+	public String myPage(@RequestParam("user_id") String user_id, Model model) {
+		logger.info("마이페이지로 이동");
+		
+		UserDto userDto = userService.getUser(user_id);
+		
+		model.addAttribute(userDto);
+		
+		return "/user/myPageView";
+	}
+	
+	@GetMapping("/user/mypage/activity/list")
+	public String myWriteListView(@RequestParam("user_id") String user_id, Model model) {
+		logger.info("나의활동 목록으로 이동");
+		
+		return "/user/myActivityView";
+	}
 	
 	@GetMapping("/user/mypage/userInfo")
 	public String userInfo(@RequestParam("user_id") String user_id, Model model) {
@@ -157,7 +177,8 @@ public class MypageController {
 	}
 	
 	@GetMapping("/user/mypage/question/list")
-	public String myQuestionView(@RequestParam("user_id") String user_id, Model model, 
+	@ResponseBody
+	public ResponseDto<Map<String, Object>> myQuestionView(@RequestParam("user_id") String user_id, Model model, 
 			@RequestParam(value="page", defaultValue = "1", required = false) int page) {
 		logger.info("내 문의사항 페이지로 이동");
 		
@@ -176,10 +197,12 @@ public class MypageController {
 		List<QuestionDto> questionList = questionService.getUserQuestionList(user_id, pageHandler);
 		logger.info("내 문의사항 리스트 갯수 : " + questionList);
 		
-		model.addAttribute("pageHandler", pageHandler);
-		model.addAttribute("questionList", questionList);
+		Map<String, Object> map = new HashMap<>();
 		
-		return "/user/myQuestionListView";
+		map.put("pageHandler", pageHandler);
+		map.put("questionList", questionList);
+		
+		return new ResponseDto<Map<String, Object>> (HttpStatus.OK.value(), map);
 	}
 	
 	@PostMapping("/user/mypage/question/add")

@@ -44,5 +44,13 @@ public interface QuestionMapper {
 	List<QuestionDto> getAjaxUserQuestionList(Map<String, Object> map);
 
 	int setReadCountUpdate(int num);
+
+	int getProductQuestionListCount(String product_code);
+
+	List<QuestionDto> getProductQuestionList(Map<String, Object> map);
+
+	QuestionDto getProductQuestionDetail(int num);
+
+	void updateQnaCommentYN(int num);
 	
 }

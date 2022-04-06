@@ -40,6 +40,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/swiper.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/findIdPasswordView.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/productDetailView.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/myPageView.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/orderListView.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/addressListView.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/myActivityView.css" type="text/css">
 
 <!-- JS -->
 <script src="${pageContext.request.contextPath}/js/registerView.js" type="text/javascript"></script>
@@ -57,6 +61,12 @@
 <script src="${pageContext.request.contextPath}/js/myQuestionDetailView.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/questionListView.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/myOrderDetailView.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/productReview.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/productQna.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/mypageView.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/addressListView.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/myQuestionView.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/myReviewView.js" type="text/javascript"></script>
 
 <!-- sweetalert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.5/dist/sweetalert2.all.min.js"></script>
@@ -105,18 +115,15 @@
 								</a>
 							</li>
 							<li class="nav-item dropdown">
-								<a href="/user/mypage" class="nav-link d-flex flex-column align-items-center text-secondary" id="mypage-icon" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
+								<a href="/user/mypage?user_id=${user_id}" class="nav-link d-flex flex-column align-items-center text-secondary" id="mypage-icon"> 
 									<i class="fa-solid fa-circle-user fa-2x"></i> 
 									<span class="fs-5 mypage-icon-title">마이페이지</span>
 								</a>
-								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" href="/user/mypage/userInfo?user_id=${user_id}">내정보</a></li>
-									<li><a class="dropdown-item" href="/user/mypage/order/list?user_id=${user_id}">주문목록</a></li>
-									<li><a class="dropdown-item" href="/user/mypage/question/list?user_id=${user_id}">내 문의글</a></li>
-								</ul>
 							</li>
 						</sec:authorize>
 						<sec:authorize access="hasRole('ROLE_ADMIN')">
+							<sec:authentication property="principal.userDto.user_role" var="user_role"/>
+							<input type="hidden" value="${user_role}" id="user_role"/>
 							<li class="nav-item">
 								<a href="/admin?pageName=home" class="nav-link d-flex flex-column align-items-center text-secondary" id="mypage-icon"> 
 									<i class="fa-solid fa-circle-user fa-2x"></i> 

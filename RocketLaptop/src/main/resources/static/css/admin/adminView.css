@@ -20,6 +20,35 @@ a{
 	text-decoration: none;
 }
 
+.focusPointer{
+	cursor : pointer;
+}
+
+.focusDefault{
+	cursor : default;
+}
+
+.adminAnswerBox{
+	display : none;
+}
+
+.adminAnswerBox td{
+	padding: 16px 180px 16px 0px;
+    line-height: 22px;
+    color: #5e636d;
+    background: #fafafa;
+}
+
+.adminAnswerBox .adminAnswer{
+	margin-top : 24px;
+}
+
+.adminRegInfo{
+	padding-left: 20px;
+    padding-top: 10px;
+    color: #3f51b5;
+}
+
 @media (max-width: 710px) {
   header {
     display: none;

@@ -20,6 +20,7 @@ import com.rocket.laptop.model.NoticeDto;
 import com.rocket.laptop.model.PageHandler;
 import com.rocket.laptop.model.QuestionDto;
 import com.rocket.laptop.model.ResponseDto;
+import com.rocket.laptop.model.ReviewDto;
 import com.rocket.laptop.service.QuestionService;
 
 @Controller
@@ -38,7 +39,7 @@ public class QuestionController {
 		logger.info("limit : " + limit);
 		
 		int listCount = questionService.getQuestionListCount();
-		logger.info("총 게시물 갯수 : " + listCount);
+		logger.info("총 문의사항 갯수 : " + listCount);
 		
 		PageHandler pageHandler = new PageHandler(page, listCount, limit);
 		
@@ -47,7 +48,6 @@ public class QuestionController {
 		}
 		
 		List<QuestionDto> questionList = questionService.getQuestionList(pageHandler);
-		logger.info("문의사항 리스트 갯수 : " + questionList);
 		
 		model.addAttribute("pageHandler", pageHandler);
 		model.addAttribute("questionList", questionList);
@@ -100,5 +100,57 @@ public class QuestionController {
 		map.put("comment_state", comment_state);
 		
 		return map;
+	}
+	
+	@PostMapping("/user/product/question/add")
+	@ResponseBody
+	public ResponseDto<String> productQuestionAdd(QuestionDto questionDto) {
+		logger.info("문의사항 등록");
+
+		int result = questionService.questionAdd(questionDto);
+		
+		if(result != 1) {
+			return new ResponseDto<String>(HttpStatus.BAD_REQUEST.value(), "문의사항 등록 실패");
+		}
+		
+		return new ResponseDto<String>(HttpStatus.OK.value(), "문의사항 등록 완료");
+	}
+	
+	@GetMapping("/product/questionList")
+	@ResponseBody
+	public ResponseDto<Map<String, Object>> reviewList(@RequestParam("product_code") String product_code,
+			@RequestParam(value="page", defaultValue = "1", required = false) int page) {
+		logger.info("상품 문의사항 리스트");
+		
+		int limit = 10;
+		logger.info("limit : " + limit);
+		
+		int listCount = questionService.getProductQuestionListCount(product_code);
+		logger.info("총 문의사항 갯수 : " + listCount);
+		
+		PageHandler pageHandler = new PageHandler(page, listCount, limit);
+		
+		if(pageHandler.getEndPage() > pageHandler.getMaxPage()) {
+			pageHandler.setEndPage(pageHandler.getMaxPage());
+		}
+		
+		List<QuestionDto> questionList = questionService.getProductQuestionList(pageHandler, product_code);
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("questionList", questionList);
+		map.put("pageHandler", pageHandler);
+		
+		return new ResponseDto<Map<String, Object>> (HttpStatus.OK.value(), map);
+	}
+	
+	@GetMapping("/product/question/detail")
+	@ResponseBody
+	public ResponseDto<QuestionDto> productQuestionDetail(@RequestParam(value="num") int num) {
+		logger.info("상품문의 답변");
+		
+		QuestionDto questionDto = questionService.getProductQuestionDetail(num);
+		
+		return new ResponseDto<QuestionDto> (HttpStatus.OK.value(), questionDto);
 	}
 }

@@ -7,7 +7,7 @@
 	<div class="row">
 		<div class="login-container mx-auto">
 			<div class="mx-auto login-form">
-				<img alt="Logo" src="../images/RocketLaptopLogo.svg" width="40%" height="20%">
+				<img alt="Logo" src="../images/RocketLaptopLogo.svg" width="300px" height="20%">
 				<h1 class="text-start">Login</h1>
 				<form name="loginform" action="/login" method="POST">
 					<div class="row mb-3">

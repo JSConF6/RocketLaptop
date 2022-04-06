@@ -10,3 +10,7 @@
 .login-container {
   width: 1200px;
 }
+
+.login-form img{
+	padding-right: 65px;
+}

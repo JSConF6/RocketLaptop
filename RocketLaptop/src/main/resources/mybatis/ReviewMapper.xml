@@ -34,5 +34,11 @@
 		where order_id = #{order_id}
 		and product_code = #{reviewDto.product_code}
 	</update>
+	
+	<select id="getUserReviewListCount" parameterType="String" resultType="int">
+		select count(*)
+		from review
+		where user_id = #{user_id}
+	</select>
 
 </mapper>

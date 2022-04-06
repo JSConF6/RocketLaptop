@@ -35,7 +35,7 @@ $(function(){
 							text: "문의사항 삭제 완료되었습니다.",
 							allowOutsideClick: false,
 						}).then(() => {
-							location.replace("/user/mypage/question/list?user_id=" + user_id);
+							location.replace("/user/mypage/activity/list?user_id=" + user_id);
 						})
 					}
 				}).fail(function(err) {

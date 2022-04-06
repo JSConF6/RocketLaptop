@@ -5,9 +5,9 @@
 <%@ include file="../layout/header.jsp"%>
 
 <main>
-	<div class="container">
+	<div class="mypage_orderlist_container">
 		<div class="d-flex mt-5 align-items-center justify-content-start mb-3">
-			<img alt="Logo" src="/images/RocketLaptopLogo.svg" width="15%" height="20%">
+			<img alt="Logo" src="/images/RocketLaptopLogo.svg" width="300px" height="20%">
 			<h1>주문목록</h1>
 		</div>
 		<p class="mt-3 mb-0">

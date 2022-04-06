@@ -18,10 +18,10 @@
 					<thead>
 						<tr>
 							<th>번호</th>
+							<th>답변상태</th>
 							<th>제목</th>
 							<th>작성자</th>
 							<th>날짜</th>
-							<th>조회수</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -30,19 +30,20 @@
 							<tr>
 								<td><c:out value="${num}" /> <c:set var="num" value="${num - 1}" /></td>
 								<td>
-									<a href="/admin/questionDetail?num=${question.qna_num}">
-										<c:out value="${question.qna_title}" escapeXml="true" />&nbsp;&nbsp;&nbsp;
-									</a>
-									<c:if test="${!empty question.comment_content}">
-										<span class="text-secondary">[답변완료]</span>
+									<c:if test="${question.qna_comment_yn == 'N'}">
+										<span>답변대기</span>
 									</c:if>
-									<c:if test="${empty question.comment_content}">
-										<span class="text-secondary">[답변대기]</span>
+									<c:if test="${question.qna_comment_yn == 'Y'}">
+										<span>답변완료</span>
 									</c:if>
 								</td>
+								<td>
+									<a href="/admin/questionDetail?num=${question.qna_num}"> 
+										<c:out value="${question.qna_title}" escapeXml="true" />&nbsp;&nbsp;&nbsp;
+									</a>
+								</td>
 								<td>${question.user_id}</td>
-								<td><fmt:formatDate value="${question.qna_reg_date}" pattern="yyyy-MM-dd"/></td>
-								<td>${question.qna_readcount}</td>
+								<td><fmt:formatDate value="${question.qna_reg_date}" pattern="yyyy-MM-dd" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>
