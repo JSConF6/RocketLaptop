@@ -50,4 +50,15 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewMapper.getUserReviewListCount(user_id);
 	}
 
+	@Override
+	public List<ReviewDto> getUserReviewList(String user_id, PageHandler pageHandler) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("start", pageHandler.getStartRow());
+		map.put("end", pageHandler.getEndRow());
+		map.put("user_id", user_id);
+		
+		return reviewMapper.getUserReviewList(map);
+	}
+
 }

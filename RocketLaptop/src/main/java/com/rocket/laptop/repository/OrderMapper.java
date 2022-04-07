@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.rocket.laptop.model.OrderDetailDto;
 import com.rocket.laptop.model.OrderDto;
 import com.rocket.laptop.model.OrderViewDto;
+import com.rocket.laptop.model.UserOrderDto;
 
 @Mapper
 @Repository
@@ -39,5 +40,21 @@ public interface OrderMapper {
 	OrderDto getUserOrderDetail(Map<String, Object> map);
 
 	List<OrderViewDto> getMainOrderViewList(String product_code);
+
+	List<UserOrderDto> getUserOrderList(String user_id);
+
+	List<UserOrderDto> getUserOrderListCount(String user_id);
+
+	int getUserOrderListCountTo(String user_id);
+
+	int getDeliveryCount(Map<String, Object> map);
+
+	List<OrderDto> getAjaxOrderList(Map<String, Object> map);
+
+	List<UserOrderDto> getAjaxUserOrderList(Map<String, Object> map);
+
+	List<UserOrderDto> getAjaxUserOrderListCount(Map<String, Object> map);
+
+	int getAjaxOrderListCount(Map<String, Object> map);
 
 }

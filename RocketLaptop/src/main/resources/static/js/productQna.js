@@ -125,7 +125,7 @@ $(function(){
 		let user_role = $("#user_role").val();
 		
 		$.ajax({
-			url: "/product/questionList",
+			url: "/product/question/list",
 			type: "GET",
 			data: {"product_code" : product_code}
 		}).done(function(res) {
@@ -264,7 +264,7 @@ function qnaAjax(data){
 	let user_role = $("#user_role").val();
 	
 	$.ajax({
-		url: "/product/questionList",
+		url: "/product/question/list",
 		type: "GET",
 		data: data
 	}).done(function(res) {

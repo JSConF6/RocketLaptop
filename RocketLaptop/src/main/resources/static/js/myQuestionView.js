@@ -12,7 +12,7 @@ $(function(){
 			if(res.data.pageHandler.listCount > 0){
 				$(".my-question-table").remove();
 				
-				$(".myQuestionListCount").text("내가 쓴 문의사항 갯수 : " + res.data.pageHandler.listCount)
+				$(".myQuestionListCount").text("내가 쓴 문의사항 갯수 : " + res.data.pageHandler.listCount + "개")
 				
 				let output = "<table class='table my-question-table mt-3 text-center'>";
 				output += "<thead><tr><th>번호</th><th>답변상태</th><th>제목</th><th>작성자</th><th>등록일</th></tr></thead><tbody>";
@@ -36,7 +36,7 @@ $(function(){
 				});
 				output += "</tbody></table>";
 				
-				$(".my-question").append(output);
+				$("#myQuestion").append(output);
 				
 				$(".myQuestionPagination").remove();
 				output = '<nav class="d-flex justify-content-center myQuestionPagination"><ul class="pagination">';
@@ -76,19 +76,24 @@ $(function(){
 				output += myQnaSetPaging(href, digit, pageItem);
 				output += '</ul></nav>';
 				
-				$(".my-question").append(output);
+				$("#myQuestion").append(output);
 			}else if(res.data.pageHandler.listCount === 0){
 				$(".my-question-table").remove();
 				$(".empty_myQna").remove();
 				$(".myQuestionPagination").remove();
-				let output  = "<div class='mt-3 text-center empty_myQna'><span class='fs-3'>등록된 문의사항이 없습니다.</span></div>";
-				$(".my-question").append(output);
+				$(".myQuestionHeader").remove();
+				let output  = "<div class='mt-5 text-center empty_myQna'><span class='fs-3'>등록하신 문의사항이 없습니다.</span></div>";
+				$("#myQuestion").append(output);
 			}
 		}).fail(function(err) {
 			console.log(err)
 		})
 	}
 	questionList();
+	
+	$("#my-question-tab").on("click", function(){
+		questionList();	
+	})
 });
 
 function myQnaGo(page){
@@ -124,7 +129,7 @@ function myQnaAjax(data){
 		if(res.data.pageHandler.listCount > 0){
 			$(".my-question-table").remove();
 			
-			$(".myQuestionListCount").text(res.data.pageHandler.listCount)
+			$(".myQuestionListCount").text("내가 쓴 문의사항 갯수 : " + res.data.pageHandler.listCount + "개")
 			
 			output = "<table class='table my-question-table mt-3 text-center'>";
 			output += "<thead><tr><th>번호</th><th>답변상태</th><th>제목</th><th>작성자</th><th>등록일</th></tr></thead><tbody>";
@@ -148,7 +153,7 @@ function myQnaAjax(data){
 			});
 			output += "</tbody></table>";
 			
-			$(".my-question").append(output);
+			$("#myQuestion").append(output);
 			
 			$(".myQuestionPagination").remove();
 			output = '<nav class="d-flex justify-content-center myQuestionPagination"><ul class="pagination">';
@@ -188,13 +193,14 @@ function myQnaAjax(data){
 			output += myQnaSetPaging(href, digit, pageItem);
 			output += '</ul></nav>';
 			
-			$(".my-question").append(output);
+			$("#myQuestion").append(output);
 		}else if(res.data.pageHandler.listCount === 0){
 			$(".my-question-table").remove();
 			$(".empty_myQna").remove();
 			$(".myQuestionPagination").remove();
-			let output  = "<div class='mt-3 text-center empty_myQna'><span class='fs-3'>등록된 문의사항이 없습니다.</span></div>";
-			$(".my-question").append(output);
+			$(".myQuestionHeader").remove();
+			let output  = "<div class='mt-5 text-center empty_myQna'><span class='fs-3'>등록하신 문의사항이 없습니다.</span></div>";
+			$("#myQuestion").append(output);
 		}
 	}).fail(function(err) {
 		console.log(err)

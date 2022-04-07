@@ -15,41 +15,25 @@
 			<div class="mypage_orderstate_item border-end border-secondary d-flex justify-content-center align-items-center flex-column border-start">
 				<div class="fs-6">배송준비중</div>
 				<div class="text-black fw-bold fs-5">
-					<a>0</a>
+					<a href="/user/mypage/order/list?user_id=${param.user_id}">${deliveryReadyCount}</a>
 				</div>
 			</div>
 			<div class="mypage_orderstate_item border-end border-secondary d-flex justify-content-center align-items-center flex-column">
 				<div class="fs-6">배송중</div>
 				<div class="text-black fw-bold fs-5">
-					<a>0</a>
+					<a href="/user/mypage/order/list?user_id=${param.user_id}">${deliveryCount}</a>
 				</div>
 			</div>
 			<div class="mypage_orderstate_item border-end border-secondary d-flex justify-content-center align-items-center flex-column">
 				<div class="fs-6">배송완료</div>
 				<div class="text-black fw-bold fs-5">
-					<a>0</a>
-				</div>
-			</div>
-			<div class="mypage_orderstate_item border-end border-secondary d-flex justify-content-center align-items-center flex-column">
-				<div class="fs-6">주문취소</div>
-				<div class="text-black fw-bold fs-5">
-					<a>0</a>
+					<a href="/user/mypage/order/list?user_id=${param.user_id}">${deliveryComCount}</a>
 				</div>
 			</div>
 		</div>
 	</div>
 	
 	<div class="mypage_main d-flex justify-content-between mt-5">
-		<div class="mypage_main_item ps-1 pe-1 mypageOrder">
-			<div class="pt-1 pb-1 text-center item_caption">주문</div>
-			<div class="fs-6 text-gray text-center item_content">
-				<i class="fa-solid fa-file-lines fa-3x"></i>
-				<div class="mt-3">
-					고객님의 주문내역을<br>확인하실 수 있습니다.
-				</div>
-			</div>
-		</div>
-		
 		<div class="mypage_main_item ps-1 pe-1 mypageUserInfo">
 			<div class="pt-1 pb-1 text-center item_caption">내정보</div>
 			<div class="fs-6 text-gray text-center item_content">
@@ -60,7 +44,17 @@
 			</div>
 		</div>
 		
-		<div class="mypage_main_item ps-1 pe-1 mypageWrite">
+		<div class="mypage_main_item ps-1 pe-1 mypageOrder">
+			<div class="pt-1 pb-1 text-center item_caption">주문</div>
+			<div class="fs-6 text-gray text-center item_content">
+				<i class="fa-solid fa-file-lines fa-3x"></i>
+				<div class="mt-3">
+					고객님의 주문내역을<br>확인하실 수 있습니다.
+				</div>
+			</div>
+		</div>
+		
+		<div class="mypage_main_item ps-1 pe-1 mypageActivity">
 			<div class="pt-1 pb-1 text-center item_caption">나의활동</div>
 			<div class="fs-6 text-gray text-center item_content">
 				<i class="fa-solid fa-clipboard-list fa-3x"></i>

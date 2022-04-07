@@ -8,43 +8,47 @@
 		<img alt="Logo" src="/images/RocketLaptopLogo.svg" width="300px" height="10%"> 
 		<div class="pt-5 pb-5 fw-bold fs-1">나의활동</div>
 	</div>
-	<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+	<ul class="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
 	  <li class="nav-item" role="presentation">
-	    <button class="nav-link active" id="my-question-tab" data-bs-toggle="pill" data-bs-target="#myQuestion" type="button" role="tab" aria-selected="true">나의문의사항</button>
+	    <button class="nav-link active" id="my-question-tab" data-bs-toggle="pill" data-bs-target="#myQuestion" type="button" role="tab" aria-selected="true">내가 쓴 문의사항</button>
 	  </li>
 	  <li class="nav-item" role="presentation">
-	    <button class="nav-link" id="my-review-tab" data-bs-toggle="pill" data-bs-target="#myReview" type="button" role="tab" aria-selected="false">나의리뷰</button>
+	    <button class="nav-link" id="my-review-tab" data-bs-toggle="pill" data-bs-target="#myReview" type="button" role="tab" aria-selected="false">내가 쓴 리뷰</button>
 	  </li>
 	</ul>
 	<div class="tab-content" id="pills-tabContent">
 	  <div class="tab-pane fade show active" id="myQuestion" role="tabpanel">
-	  	<div class="my-question">
-		  	<div class="myQuestionListCount"></div>
-		  	<table class="table my-question-table mt-3">
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>답변상태</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>날짜</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>1</td>
-						<td>답변대기</td>
-						<td><span class="">제목&nbsp;&nbsp;&nbsp;<span class="text-secondary">[답변완료]</span></span></td>
-						<td>작성자</td>
-						<td>2022-02-02</td>
-					</tr>
-				</tbody>
-			</table>
-			<nav class="d-flex justify-content-center myQuestionPagination"></nav>
+		 <div class="d-flex justify-content-between myQuestionHeader">
+			<span class="fs-5 myQuestionListCount">내가 쓴 문의사항 갯수</span>
 		</div>
+		 <table class="table my-question-table mt-3">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>답변상태</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>날짜</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>1</td>
+					<td>답변대기</td>
+					<td><span class="">제목&nbsp;&nbsp;&nbsp;<span class="text-secondary">[답변완료]</span></span></td>
+					<td>작성자</td>
+					<td>2022-02-02</td>
+				</tr>
+			</tbody>
+		</table>
+		<nav class="d-flex justify-content-center myQuestionPagination"></nav>
 	  </div>
+	  
 	  <div class="tab-pane fade" id="myReview" role="tabpanel">
-	  	<table class="table border-top border-bottom mt-3">
+	  	<div class="d-flex justify-content-between myReviewHeader">
+			<span class="fs-5 myReviewListCount">내가 쓴 리뷰 갯수</span>
+		</div>
+	  	<table class="table border-top border-bottom mt-3 myReviewTable">
 			<tbody>
 				<tr>
 					<td>
@@ -71,7 +75,7 @@
 				</tr>
 			</tbody>
 		</table>
-		<nav class="d-flex justify-content-center reviewPagination"></nav>
+		<nav class="d-flex justify-content-center myReviewPagination"></nav>
 	  </div>
 	</div>
 </main>

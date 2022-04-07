@@ -8,7 +8,7 @@
 	<div class="row">
 		<div class="col-10 mx-auto">
 			<div class="d-flex align-items-center mt-4 mb-4">
-				<img alt="Logo" src="../images/RocketLaptopLogo.svg" width="10%" height="20%"> <span class="fs-1">새로운 상품</span>
+				<img alt="Logo" src="../images/RocketLaptopLogo.svg" width="200px" height="20%"> <span class="fs-1">새로운 상품</span>
 			</div>
 			<c:if test="${pageHandler.listCount > 0}">
 				<div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">

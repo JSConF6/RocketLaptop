@@ -8,6 +8,7 @@ import com.rocket.laptop.model.OrderDetailDto;
 import com.rocket.laptop.model.OrderDto;
 import com.rocket.laptop.model.OrderViewDto;
 import com.rocket.laptop.model.PageHandler;
+import com.rocket.laptop.model.UserOrderDto;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 
@@ -36,4 +37,18 @@ public interface OrderService {
 	public List<OrderViewDto> getMainOrderViewList(String product_code);
 
 	public void mainOrderAdd(OrderDto orderDto, String product_code, int order_de_amount, IamportClient iamportClient) throws IamportResponseException, IOException;
+
+	public List<UserOrderDto> getUserOrderList(String user_id);
+
+	public List<UserOrderDto> getUserOrderListCount(String user_id);
+
+	public int getDeliveryCount(String user_id, String string);
+
+	public List<OrderDto> getAjaxOrderList(String user_id, PageHandler pageHandler, String order_state);
+
+	public List<UserOrderDto> getAjaxUserOrderList(String user_id, String order_state);
+
+	public List<UserOrderDto> getAjaxUserOrderListCount(String user_id, String order_state);
+
+	public int getAjaxOrderListCount(String user_id, String string);
 }

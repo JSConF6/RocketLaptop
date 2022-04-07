@@ -101,5 +101,89 @@
 		where order_id = #{order_id}
 		and user_id = #{user_id}
 	</select>
-
+	
+	<select id="getUserOrderList" parameterType="String" resultType="UserOrderDto">
+		select o.order_id, o.ORDER_STATE, p.PRODUCT_CODE, p.PRODUCT_NAME, 
+			   p.PRODUCT_PRICE, ot.ORDER_DE_AMOUNT, c.CATEGORY_NAME, i.PRODUCT_IMG_NAME, o.ORDER_DATE 
+		from order_tb o, order_detail ot, product p, category c, product_img i
+		where o.ORDER_ID  = ot.ORDER_ID
+		and ot.PRODUCT_CODE = p.PRODUCT_CODE
+		and p.CATEGORY_CODE = c.CATEGORY_CODE
+		and p.PRODUCT_CODE = i.PRODUCT_CODE
+		and i.PRODUCT_IMG_TYPE = 1
+		and o.user_id = #{user_id}
+	</select>
+	
+	<select id="getUserOrderListCount" parameterType="String" resultType="UserOrderDto">
+		select o.order_id, count(*) as count
+		from order_tb o, order_detail ot, product p, category c, product_img i
+		where o.ORDER_ID  = ot.ORDER_ID
+		and ot.PRODUCT_CODE = p.PRODUCT_CODE
+		and p.CATEGORY_CODE = c.CATEGORY_CODE
+		and p.PRODUCT_CODE = i.PRODUCT_CODE
+		and i.PRODUCT_IMG_TYPE = 1
+		and o.user_id = #{user_id}
+		group by o.ORDER_ID
+	</select>
+	
+	<select id="getDeliveryCount" parameterType="Map" resultType="int">
+		select count(*)
+		from order_tb
+		where user_id = #{user_id}
+		and order_state = #{order_state}
+	</select>
+	
+	<select id="getAjaxOrderListCount" parameterType="Map" resultType="int">
+		select count(*)
+		from order_tb
+		where user_id = #{user_id}
+		<if test="order_state != '전체'">
+			and order_state = #{order_state}
+		</if>
+	</select>
+	
+	<select id="getAjaxOrderList" parameterType="Map" resultType="OrderDto">
+		select ord.* 
+		from (select @ROWNUM := @ROWNUM + 1 AS rnum, o.*
+	  		  from (select @ROWNUM:=0) AS r, 
+	  	    	   (select * 
+	  			   from order_tb
+	  			   where user_id = #{user_id}
+	  			   <if test="order_state != '전체'">
+					and order_state = #{order_state}
+				   </if>
+	  		  	   order by order_date desc) o) ord
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<select id="getAjaxUserOrderList" parameterType="Map" resultType="UserOrderDto">
+		select o.order_id, o.ORDER_STATE, p.PRODUCT_CODE, p.PRODUCT_NAME, 
+			   p.PRODUCT_PRICE, ot.ORDER_DE_AMOUNT, c.CATEGORY_NAME, i.PRODUCT_IMG_NAME, o.ORDER_DATE 
+		from order_tb o, order_detail ot, product p, category c, product_img i
+		where o.ORDER_ID  = ot.ORDER_ID
+		and ot.PRODUCT_CODE = p.PRODUCT_CODE
+		and p.CATEGORY_CODE = c.CATEGORY_CODE
+		and p.PRODUCT_CODE = i.PRODUCT_CODE
+		and i.PRODUCT_IMG_TYPE = 1
+		and o.user_id = #{user_id}
+		<if test="order_state != '전체'">
+			and o.order_state = #{order_state}
+		</if>
+	</select>
+	
+	<select id="getAjaxUserOrderListCount" parameterType="String" resultType="UserOrderDto">
+		select o.order_id, count(*) as count
+		from order_tb o, order_detail ot, product p, category c, product_img i
+		where o.ORDER_ID  = ot.ORDER_ID
+		and ot.PRODUCT_CODE = p.PRODUCT_CODE
+		and p.CATEGORY_CODE = c.CATEGORY_CODE
+		and p.PRODUCT_CODE = i.PRODUCT_CODE
+		and i.PRODUCT_IMG_TYPE = 1
+		and o.user_id = #{user_id}
+		<if test="order_state != '전체'">
+			and o.order_state = #{order_state}
+		</if>
+		group by o.ORDER_ID
+	</select>
+	
 </mapper>

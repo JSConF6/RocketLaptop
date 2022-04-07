@@ -91,4 +91,35 @@ public class ReviewController {
 		
 		return new ResponseDto<Map<String, Object>> (HttpStatus.OK.value(), map);
 	}
+	
+
+	
+	@GetMapping("/user/mypage/review/list")
+	@ResponseBody
+	public ResponseDto<Map<String, Object>> myReviewList(@RequestParam("user_id") String user_id, Model model, 
+			@RequestParam(value="page", defaultValue = "1", required = false) int page) {
+		logger.info("내가 쓴 리뷰 리스트");
+		
+		int limit = 5;
+		logger.info("limit : " + limit);
+		
+		int listCount = reviewService.getUserReviewListCount(user_id);
+		logger.info("총 리뷰 갯수 : " + listCount);
+		
+		PageHandler pageHandler = new PageHandler(page, listCount, limit);
+		
+		if(pageHandler.getEndPage() > pageHandler.getMaxPage()) {
+			pageHandler.setEndPage(pageHandler.getMaxPage());
+		}
+		
+		List<ReviewDto> reviewList = reviewService.getUserReviewList(user_id, pageHandler);
+		logger.info("내 리뷰 리스트 갯수 : " + reviewList);
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("pageHandler", pageHandler);
+		map.put("reviewList", reviewList);
+		
+		return new ResponseDto<Map<String, Object>> (HttpStatus.OK.value(), map);
+	}
 }

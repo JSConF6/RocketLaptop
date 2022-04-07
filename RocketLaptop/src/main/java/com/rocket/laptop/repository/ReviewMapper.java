@@ -22,5 +22,7 @@ public interface ReviewMapper {
 	void orderReviewUpdate(Map<String, Object> map);
 
 	int getUserReviewListCount(String user_id);
+
+	List<ReviewDto> getUserReviewList(Map<String, Object> map);
 	
 }

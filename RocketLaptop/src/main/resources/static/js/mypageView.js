@@ -9,7 +9,7 @@ $(function(){
 		location.href="/user/mypage/userInfo?user_id=" + user_id;
 	});
 	
-	$(".mypageWrite").on("click", function(){
+	$(".mypageActivity").on("click", function(){
 		location.href="/user/mypage/activity/list?user_id=" + user_id;
 	});
 	

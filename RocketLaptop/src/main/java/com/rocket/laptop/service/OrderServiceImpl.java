@@ -15,6 +15,7 @@ import com.rocket.laptop.model.OrderDetailDto;
 import com.rocket.laptop.model.OrderDto;
 import com.rocket.laptop.model.OrderViewDto;
 import com.rocket.laptop.model.PageHandler;
+import com.rocket.laptop.model.UserOrderDto;
 import com.rocket.laptop.repository.CartMapper;
 import com.rocket.laptop.repository.OrderMapper;
 import com.siot.IamportRestClient.IamportClient;
@@ -150,6 +151,68 @@ public class OrderServiceImpl implements OrderService {
 			iamportClient.cancelPaymentByImpUid(cancelData);
 			throw new OrderFailException("주문 실패 결제가 취소됩니다.");
 		}
+	}
+
+	@Override
+	public List<UserOrderDto> getUserOrderList(String user_id) {
+		return orderMapper.getUserOrderList(user_id);
+	}
+
+	@Override
+	public List<UserOrderDto> getUserOrderListCount(String user_id) {
+		return orderMapper.getUserOrderListCount(user_id);
+	}
+
+	@Override
+	public int getDeliveryCount(String user_id, String order_state) {
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("user_id", user_id);
+		map.put("order_state", order_state);
+		
+		return orderMapper.getDeliveryCount(map);
+	}
+
+	@Override
+	public List<OrderDto> getAjaxOrderList(String user_id, PageHandler pageHandler, String order_state) {
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("user_id", user_id);
+		map.put("start", pageHandler.getStartRow());
+		map.put("end", pageHandler.getEndRow());
+		map.put("order_state", order_state);
+		
+		return orderMapper.getAjaxOrderList(map);
+	}
+
+	@Override
+	public List<UserOrderDto> getAjaxUserOrderList(String user_id, String order_state) {
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("user_id", user_id);
+		map.put("order_state", order_state);
+		
+		return orderMapper.getAjaxUserOrderList(map);
+	}
+
+	@Override
+	public List<UserOrderDto> getAjaxUserOrderListCount(String user_id, String order_state) {
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("user_id", user_id);
+		map.put("order_state", order_state);
+		
+		return orderMapper.getAjaxUserOrderListCount(map);
+	}
+
+	@Override
+	public int getAjaxOrderListCount(String user_id, String order_state) {
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("user_id", user_id);
+		map.put("order_state", order_state);
+		
+		return orderMapper.getAjaxOrderListCount(map);
 	}
 
 }

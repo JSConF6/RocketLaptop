@@ -13,4 +13,6 @@ public interface ReviewService {
 	public int getReviewListCount(String product_code);
 
 	public int getUserReviewListCount(String user_id);
+
+	public List<ReviewDto> getUserReviewList(String user_id, PageHandler pageHandler);
 }

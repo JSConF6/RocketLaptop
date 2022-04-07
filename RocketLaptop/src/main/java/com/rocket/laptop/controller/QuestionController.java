@@ -31,77 +31,6 @@ public class QuestionController {
 	@Autowired
 	private QuestionService questionService;
 	
-	@GetMapping("/question/list")
-	public String adminQuestionView(Model model, @RequestParam(value="page", defaultValue = "1", required = false) int page) {
-		logger.info("문의사항 페이지로 이동");
-		
-		int limit = 6;
-		logger.info("limit : " + limit);
-		
-		int listCount = questionService.getQuestionListCount();
-		logger.info("총 문의사항 갯수 : " + listCount);
-		
-		PageHandler pageHandler = new PageHandler(page, listCount, limit);
-		
-		if(pageHandler.getEndPage() > pageHandler.getMaxPage()) {
-			pageHandler.setEndPage(pageHandler.getMaxPage());
-		}
-		
-		List<QuestionDto> questionList = questionService.getQuestionList(pageHandler);
-		
-		model.addAttribute("pageHandler", pageHandler);
-		model.addAttribute("questionList", questionList);
-		
-		return "/home/questionListView";
-	}
-	
-	@GetMapping("/question/detail")
-	public String adminQuestionDetailView(@RequestParam(value="num") int num, Model model) {
-		logger.info("문의사항 상세 페이지로 이동");
-		
-		QuestionDto questionDto = questionService.getQuestionDetail(num);
-		CommentDto commentDto = questionService.getComment(num);
-		
-		model.addAttribute("questionDto", questionDto);
-		model.addAttribute("commentDto", commentDto);
-		
-		return "/home/questionDetailView";
-	}
-	
-	@PostMapping("/question/list/ajax")
-	@ResponseBody
-	public Map<String, Object> adminQuestionView(@RequestParam(value="page", defaultValue = "1", required = false) int page,
-				@RequestParam("comment_state") int comment_state) {
-		logger.info("문의사항 리스트 ajax 처리");
-		
-		String[] commentStateList = {"전체", "답변대기", "답변완료"};
-		
-		String commentState = commentStateList[comment_state];
-		
-		int limit = 6;
-		logger.info("limit : " + limit);
-		
-		int listCount = questionService.getAjaxQuestionListCount(commentState);
-		logger.info("총 문의사항 갯수 : " + listCount);
-		
-		PageHandler pageHandler = new PageHandler(page, listCount, limit);
-		
-		if(pageHandler.getEndPage() > pageHandler.getMaxPage()) {
-			pageHandler.setEndPage(pageHandler.getMaxPage());
-		}
-		
-		List<QuestionDto> questionList = questionService.getAjaxQuestionList(commentState, pageHandler);
-		logger.info("문의사항 리스트 갯수 : " + questionList);
-		
-		Map<String, Object> map = new HashMap<>();
-		
-		map.put("pageHandler", pageHandler);
-		map.put("questionList", questionList);
-		map.put("comment_state", comment_state);
-		
-		return map;
-	}
-	
 	@PostMapping("/user/product/question/add")
 	@ResponseBody
 	public ResponseDto<String> productQuestionAdd(QuestionDto questionDto) {
@@ -116,7 +45,7 @@ public class QuestionController {
 		return new ResponseDto<String>(HttpStatus.OK.value(), "문의사항 등록 완료");
 	}
 	
-	@GetMapping("/product/questionList")
+	@GetMapping("/product/question/list")
 	@ResponseBody
 	public ResponseDto<Map<String, Object>> reviewList(@RequestParam("product_code") String product_code,
 			@RequestParam(value="page", defaultValue = "1", required = false) int page) {
@@ -152,5 +81,57 @@ public class QuestionController {
 		QuestionDto questionDto = questionService.getProductQuestionDetail(num);
 		
 		return new ResponseDto<QuestionDto> (HttpStatus.OK.value(), questionDto);
+	}
+	
+	@GetMapping("/user/mypage/question/list")
+	@ResponseBody
+	public ResponseDto<Map<String, Object>> myQuestionView(@RequestParam("user_id") String user_id, Model model, 
+			@RequestParam(value="page", defaultValue = "1", required = false) int page) {
+		logger.info("내 문의사항 페이지로 이동");
+		
+		int limit = 6;
+		logger.info("limit : " + limit);
+		
+		int listCount = questionService.getUserQuestionListCount(user_id);
+		logger.info("총 문의사항 갯수 : " + listCount);
+		
+		PageHandler pageHandler = new PageHandler(page, listCount, limit);
+		
+		if(pageHandler.getEndPage() > pageHandler.getMaxPage()) {
+			pageHandler.setEndPage(pageHandler.getMaxPage());
+		}
+		
+		List<QuestionDto> questionList = questionService.getUserQuestionList(user_id, pageHandler);
+		logger.info("내 문의사항 리스트 갯수 : " + questionList);
+		
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("pageHandler", pageHandler);
+		map.put("questionList", questionList);
+		
+		return new ResponseDto<Map<String, Object>> (HttpStatus.OK.value(), map);
+	}
+	
+	@GetMapping("/user/mypage/question/detail")
+	public String myQuestionDetailView(@RequestParam("user_id") String user_id, @RequestParam(value="num") int num, Model model) {
+		logger.info("내 문의사항 상세 페이지로 이동");
+		
+		QuestionDto questionDto = questionService.getUserQuestionDetail(num, user_id);
+		CommentDto commentDto = questionService.getComment(num);
+		
+		model.addAttribute("questionDto", questionDto);
+		model.addAttribute("commentDto", commentDto);
+		
+		return "/user/myQuestionDetailView";
+	}
+	
+	@PostMapping("/user/mypage/question/delete")
+	@ResponseBody
+	public int myQuestionDelete(@RequestParam(value="num") int num, Model model) {
+		logger.info("문의사항 삭제 처리");
+		
+		int result = questionService.questionDelete(num);
+		
+		return result;
 	}
 }

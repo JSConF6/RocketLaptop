@@ -67,6 +67,7 @@
 <script src="${pageContext.request.contextPath}/js/addressListView.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/myQuestionView.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/myReviewView.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/js/orderListView.js" type="text/javascript"></script>
 
 <!-- sweetalert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.5/dist/sweetalert2.all.min.js"></script>
@@ -114,11 +115,18 @@
 									<span class="position-absolute top-5 translate-middle badge rounded-pill bg-success" id="cart-badge">0</span> <span class="fs-5 cart-icon-title">장바구니</span>
 								</a>
 							</li>
-							<li class="nav-item dropdown">
-								<a href="/user/mypage?user_id=${user_id}" class="nav-link d-flex flex-column align-items-center text-secondary" id="mypage-icon"> 
-									<i class="fa-solid fa-circle-user fa-2x"></i> 
-									<span class="fs-5 mypage-icon-title">마이페이지</span>
-								</a>
+							<li class="nav-item">
+								<div class="mypage-dropdown">
+									<a href="/user/mypage?user_id=${user_id}" class="nav-link d-flex flex-column align-items-center text-secondary" id="mypage-icon"> 
+										<i class="fa-solid fa-circle-user fa-2x"></i> 
+										<span class="fs-5 mypage-icon-title">마이페이지</span>
+									</a>
+									<ul class="mypage-menu">
+								    	<li class="mypage-item"><a href="/user/mypage/order/list?user_id=${user_id}">주문목록</a></li>
+								    	<li class="mypage-item"><a href="/user/mypage/activity/list?user_id=${user_id}">나의활동</a></li>
+								    	<li class="mypage-item"><a href="/user/mypage/address/list?user_id=${user_id}">배송지관리</a></li>
+									</ul>
+								</div>
 							</li>
 						</sec:authorize>
 						<sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -163,7 +171,6 @@
 					<li class="nav-item"><a href="/product/bestProductList" class="nav-link me-3 text-secondary fs-4">베스트상품</a></li>
 					<li class="nav-item"><a href="/product/newProductList" class="nav-link me-3 text-secondary fs-4">신규상품</a></li>
 					<li class="nav-item"><a class="nav-link me-3 text-secondary fs-4" href="/notice/list">공지사항</a></li>
-					<li class="nav-item"><a href="/question/list" class="nav-link me-3 text-secondary fs-4">문의사항</a></li>
 				</ul>
 			</div>
 		</div>

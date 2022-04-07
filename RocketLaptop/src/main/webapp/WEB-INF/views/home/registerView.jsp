@@ -13,7 +13,7 @@
 					<div class="row mb-3">
 						<label for="register_id" class="text-start ps-0">아이디</label>
 						<input type="text" class="form-control" placeholder="영문자 숫자 _로 5~12자 입력하세요." required maxlength="12" name="user_id" id="register-id"/>
-						<span class="id_message"></span>
+						<span class="id_message text-center"></span>
 					</div>
 					<div class="row mb-3">
 						<label for="register-username" class="text-start ps-0">이름</label>
@@ -22,17 +22,17 @@
 					<div class="row mb-3">
 						<label for="register-email" class="text-start ps-0">이메일</label>
 						<input type="email" class="form-control" placeholder="이메일 주소를 입력해주세요. ex) rocket@naver.com" required name="user_email" id="register-email"/>
-						<span class="email_message"></span>
+						<span class="email_message text-center"></span>
 					</div>
 					<div class="row mb-3">
 						<label for="register-birth" class="text-start ps-0">생년월일</label>
 						<input type="text" class="form-control" placeholder="'-'빼고 입력해주세요. ex) 20220101" required name="user_birth" id="register-birth"/>
-						<span class="birth_message"></span>
+						<span class="birth_message text-center"></span>
 					</div>
 					<div class="row mb-3">
 						<label for="register-phone" class="text-start ps-0">휴대전화</label>
 						<input type="text" class="form-control" placeholder="'-'빼고 입력해주세요. ex) 01011112222" required name="user_phone" id="register-phone"/>
-						<span class="phone_message"></span>
+						<span class="phone_message text-center"></span>
 					</div>
 					<div class="row mb-3">
 						<label for="register-password" class="text-start ps-0">비밀번호</label>

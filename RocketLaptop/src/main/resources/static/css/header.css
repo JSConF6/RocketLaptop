@@ -31,6 +31,10 @@ text-decoration : none;
   #mypage-icon > .mypage-icon-title {
     display: none;
   }
+  
+  .mypage-menu{
+  	right : 25px;
+  }
 
   #cart-icon > #cart-badge {
     left: 55px;
@@ -65,4 +69,42 @@ text-decoration : none;
 a {
   color: gray;
   text-decoration: none;
+}
+
+.mypage-menu{
+	position : absolute;
+	z-index : 1000;
+	width : 124px;
+	margin : 0;
+	padding : 0;
+	font-size : 1rem;
+	background-color: #FFF;
+	border : 1px solid rgba(0,0,0,.15);
+	border-radius : 0.25rem;
+	list-style : none;
+	display: none;
+}
+
+.mypage-item{
+	display: block;
+    width: 100%;
+    clear: both;
+    padding: 5px 15px;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: transparent;
+    border: 0;
+    cursor : pointer;
+}
+
+.mypage-item:focus,
+.mypage-item:hover{
+	background-color: #e9ecef;
+}
+
+.mypage-dropdown:hover .mypage-menu{
+	display : block;
 }

@@ -53,56 +53,59 @@
 				</c:forEach>
 			</div>
 			<div class="row row-cols-1 row-cols-md-2 g-4">
-					<div class="col">
-					<h4 class="mb-3">받는사람 정보</h4>
-						<div class="card mb-3">
-							<div class="row g-0 d-flex align-items-center">
-								<div class="col">
-									<div class="card-body">
-										<p class="card-text fs-6 text-muted">
-											<span>받는사람</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<span>${orderDto.order_name}</span>
-										</p>
-										<p class="card-text fs-6 text-muted">
-											<span>연락처</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<c:set var="phone" value="${orderDto.order_phone}"/>
-											<c:set var="order_phone" value="${fn:substring(phone, 0, 3)}-${fn:substring(phone, 3, 7)}-${fn:substring(phone, 7, 11)}" />
-											<span>${order_phone}</span>
-										</p>
-										<p class="card-text fs-6 text-muted">
-											<span>받는주소</span>&nbsp;&nbsp;&nbsp;&nbsp;
-											<span>(${orderDto.user_address1}) ${orderDto.user_address2} ${orderDto.user_address3}</span> 
-										</p>
-									</div>
+				<div class="col">
+				<h4 class="mb-3">받는사람 정보</h4>
+					<div class="card mb-3">
+						<div class="row g-0 d-flex align-items-center">
+							<div class="col">
+								<div class="card-body">
+									<p class="card-text fs-6 text-muted">
+										<span>받는사람</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<span>${orderDto.order_name}</span>
+									</p>
+									<p class="card-text fs-6 text-muted">
+										<span>연락처</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<c:set var="phone" value="${orderDto.order_phone}"/>
+										<c:set var="order_phone" value="${fn:substring(phone, 0, 3)}-${fn:substring(phone, 3, 7)}-${fn:substring(phone, 7, 11)}" />
+										<span>${order_phone}</span>
+									</p>
+									<p class="card-text fs-6 text-muted">
+										<span>받는주소</span>&nbsp;&nbsp;&nbsp;&nbsp;
+										<span>(${orderDto.user_address1}) ${orderDto.user_address2} ${orderDto.user_address3}</span> 
+									</p>
 								</div>
 							</div>
 						</div>
 					</div>
-					<div class="col">
-						<h4 class="mb-3">결제정보</h4>
-						<div class="card mb-3">
-							<div class="row g-0 d-flex align-items-center">
-								<div class="col">
-									<div class="card-body">
-										<p class="card-text fs-6 text-muted">
-											<span>총 상품가격</span>&nbsp;&nbsp;
-											<fmt:formatNumber var="orderTotalPrice" value="${orderDto.order_totalprice}" pattern="###,###,###" />
-											<span>${orderTotalPrice}원</span>
-										</p>
-										<p class="card-text fs-6 text-muted">
-											<span>배송비</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-											<span>0원</span>
-										</p>
-										<p class="card-text fs-6 text-muted">
-											<span>총 결제금액</span>&nbsp;&nbsp;
-											<fmt:formatNumber var="totalPrice" value="${orderDto.order_totalprice + 0}" pattern="###,###,###" />
-											<span>${totalPrice}원</span> 
-										</p>
-									</div>
+				</div>
+				<div class="col">
+					<h4 class="mb-3">결제정보</h4>
+					<div class="card mb-3">
+						<div class="row g-0 d-flex align-items-center">
+							<div class="col">
+								<div class="card-body">
+									<p class="card-text fs-6 text-muted">
+										<span>총 상품가격</span>&nbsp;&nbsp;
+										<fmt:formatNumber var="orderTotalPrice" value="${orderDto.order_totalprice}" pattern="###,###,###" />
+										<span>${orderTotalPrice}원</span>
+									</p>
+									<p class="card-text fs-6 text-muted">
+										<span>배송비</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<span>0원</span>
+									</p>
+									<p class="card-text fs-6 text-muted">
+										<span>총 결제금액</span>&nbsp;&nbsp;
+										<fmt:formatNumber var="totalPrice" value="${orderDto.order_totalprice + 0}" pattern="###,###,###" />
+										<span>${totalPrice}원</span> 
+									</p>
 								</div>
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+			<div class="text-end">
+				<a class="btn btn-primary" href="/user/mypage/order/list?user_id=${param.user_id}">주문목록보기</a>
 			</div>
 		</div>
 	</div>
