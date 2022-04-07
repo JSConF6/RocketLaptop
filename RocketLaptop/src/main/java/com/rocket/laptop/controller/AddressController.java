@@ -89,4 +89,24 @@ public class AddressController {
 		
 		return new ResponseDto<String> (HttpStatus.OK.value(), "배송지 삭제 성공");
 	}
+	
+	@GetMapping("/user/address/list")
+	@ResponseBody
+	public ResponseDto<List<AddressDto>> orderAddressList(@RequestParam("user_id") String user_id) {
+		logger.info("주문 페이지 배송지목록");
+		
+		List<AddressDto> addressList = addressService.getAddressList(user_id);
+		
+		return new ResponseDto<List<AddressDto>> (HttpStatus.OK.value(), addressList);
+	}
+	
+	@GetMapping("/user/address/choice")
+	@ResponseBody
+	public ResponseDto<AddressDto> orderAddressChoice(AddressDto addressDto) {
+		logger.info("주문 페이지 배송지 선택");
+		
+		AddressDto address = addressService.getAddressDetail(addressDto);
+		
+		return new ResponseDto<AddressDto> (HttpStatus.OK.value(), address);
+	}
 }

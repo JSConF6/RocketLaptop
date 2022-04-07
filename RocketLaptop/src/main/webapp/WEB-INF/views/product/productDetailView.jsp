@@ -73,7 +73,7 @@
 							<button type="button" class="btn btn-lg btn-dark btn-outline-secondary text-white cartBtn">장바구니 담기</button>
 						</div>
 						<div class="col-6 d-grid p-1">
-							<form action="/user/order/mainOrderView" method="POST" id="productDetailOrderAdd"></form>
+							<form action="/user/order/orderView" method="POST" id="productDetailOrderAdd"></form>
 							<button type="button" class="btn btn-lg btn-primary text-white productDetailOrderBtn">주문하기</button>
 						</div>
 					</div>

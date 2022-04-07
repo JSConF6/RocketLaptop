@@ -61,4 +61,9 @@ public class CartServiceImpl implements CartService {
 		return cartMapper.findByCartNumList(map);
 	}
 
+	@Override
+	public void updateOrderDeAmount(CartDto cartDto) {
+		cartMapper.updateOrderDeAmount(cartDto);
+	}
+
 }

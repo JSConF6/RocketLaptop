@@ -137,14 +137,7 @@ $(function(){
 				}).done(function(res) {
 					console.log(res);
 					if(res.status === 200){
-						Swal.fire({
-							icon: "success",
-							title: "상품 주문",
-							text: res.data,
-							allowOutsideClick: false,
-						}).then(() => {
-							location.replace("/user/mypage/order/list?user_id=" + data.user_id);
-						})
+						location.replace("/user/order/complete?user_id=" + data.user_id + "&order_id=" + res.data);
 					}else{
 						Swal.fire({
 							icon: "warning",
@@ -169,6 +162,58 @@ $(function(){
 			}
 		});
 	}
+	
+	$(".addressListBtn").on("click", function(){
+		let user_id = $("#user_id").val();
+		
+		$.ajax({
+			url: "/user/address/list",
+			type: "GET",
+			data: {"user_id": user_id}
+		}).done(function(res) {
+			console.log(res);
+			$(".address-list").remove();
+			
+			let output = "<ul class='address-list'>";
+			
+			$(res.data).each(function(index, item){
+				let phone = item.address_phone;
+				let order_phone = phone.substring(0, 3) + "-" + phone.substring(3, 7) + "-" + phone.substring(7, 11)
+				
+				output += "<li class='address-form p-3 mb-2'><strong>" + item.address_recipient + "</strong>&nbsp;";
+				output += "<span>(" + item.address_name + ")</span>";
+				output += "<div class='form-check p-0'><span class='choice fs-2'><input class='form-check-input' type='radio' name='address' value='" + item.address_num + "'/>";
+				output += "</span><p class='mt-3'>[<span>" + item.address_zipcode + "</span>] " + "<span>" + item.address_city + "</span>";
+				output += "<br><span>" + item.address_street + "</span></p>";
+				output += "<p class='mb-0'><span>" + order_phone + "</span></p></div></li>";
+			});
+			$(".address-body").append(output);
+		}).fail(function(err) {
+			console.log(err)
+		})
+	});
+	
+	$(".addressChoiceBtn").on("click", function(){
+		let address_num = $("input[name='address']:checked").val();
+		let user_id = $("#user_id").val();
+		
+		$.ajax({
+			url: "/user/address/choice",
+			type: "GET",
+			data: {"address_num": address_num, "user_id" : user_id}
+		}).done(function(res) {
+			console.log(res);
+			$("#order_name").val(res.data.address_recipient);
+			$("#order_phone").val(res.data.address_phone);
+			$("#user_address1").val(res.data.address_zipcode);
+			$("#user_address2").val(res.data.address_city);
+			$("#user_address3").val(res.data.address_street);
+			
+			$("#addressListModal").modal('hide');
+		}).fail(function(err) {
+			console.log(err)
+		})
+	});
 	
 	function createOrderNum(){
 		const date = new Date();

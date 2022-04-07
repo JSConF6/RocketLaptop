@@ -35,28 +35,28 @@
 					<c:set var="index" value="0" />
 					<c:forEach var="orderDto" items="${orderList}" varStatus="status">
 						<c:forEach var="userOrder" items="${userOrderList}">
-							<tr>
-								<c:if test="${orderDto.order_id == userOrder.order_id}"> 
-									<c:if test="${index == 0}">
-										<c:set var="index" value="${index + 1}" />
-										<c:forEach var="count" items="${userOrderListGroupCount}">
-											<c:if test="${count.order_id == userOrder.order_id}">
-												<fmt:formatDate value="${userOrder.order_date}" var="order_date" pattern="yyyy-MM-dd"/>
-												<td rowspan="${count.count}">${order_date}<br>[<a href="/user/mypage/order/detail?user_id=${param.user_id}&order_id=${userOrder.order_id}">${userOrder.order_id}</a>]</td>
-											</c:if>
-										</c:forEach>
-									</c:if>
-									<c:if test="${index != 0}">
-										<td style="display:none"></td>
-									</c:if>
-									<td><a href="/product/detail?product_code=${userOrder.product_code}"><img src="/upload${userOrder.product_img_name}" width="80px" height="80px"></a></td>
-									<td><a href="/product/detail?product_code=${userOrder.product_code}">${userOrder.product_name}</a><br>[카테고리 : ${userOrder.category_name}]</td>
-									<td>${userOrder.order_de_amount}</td>
-									<c:set var="orderProductTotalPrice" value="${userOrder.product_price * userOrder.order_de_amount}" />
-									<td>${orderProductTotalPrice}원</td>
-									<td>${userOrder.order_state}</td>
+								<c:if test="${orderDto.order_id == userOrder.order_id}">
+									<tr> 
+										<c:if test="${index == 0}">
+											<c:set var="index" value="${index + 1}" />
+											<c:forEach var="count" items="${userOrderListGroupCount}">
+												<c:if test="${count.order_id == userOrder.order_id}">
+													<fmt:formatDate value="${userOrder.order_date}" var="order_date" pattern="yyyy-MM-dd"/>
+													<td rowspan="${count.count}">${order_date}<br>[<a href="/user/mypage/order/detail?user_id=${param.user_id}&order_id=${userOrder.order_id}">${userOrder.order_id}</a>]</td>
+												</c:if>
+											</c:forEach>
+										</c:if>
+										<c:if test="${index != 0}">
+											<td style="display:none"></td>
+										</c:if>
+										<td><a href="/product/detail?product_code=${userOrder.product_code}"><img src="/upload${userOrder.product_img_name}" width="80px" height="80px"></a></td>
+										<td><a href="/product/detail?product_code=${userOrder.product_code}">${userOrder.product_name}</a><br>[카테고리 : ${userOrder.category_name}]</td>
+										<td>${userOrder.order_de_amount}</td>
+										<c:set var="orderProductTotalPrice" value="${userOrder.product_price * userOrder.order_de_amount}" />
+										<td>${orderProductTotalPrice}원</td>
+										<td>${userOrder.order_state}</td>
+									</tr>
 								</c:if>
-							</tr>
 						</c:forEach>
 						<c:set var="index" value="0" />
 					</c:forEach>

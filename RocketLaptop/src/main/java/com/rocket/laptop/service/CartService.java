@@ -19,4 +19,6 @@ public interface CartService {
 	public int cartAllDelete(String user_id, int[] cartNumList);
 
 	public List<CartDto> findByCartNumList(int[] cartNumList);
+
+	public void updateOrderDeAmount(CartDto cartDto);
 }

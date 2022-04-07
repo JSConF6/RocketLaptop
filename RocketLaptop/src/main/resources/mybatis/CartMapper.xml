@@ -68,5 +68,12 @@
 			#{cart}
 		</foreach>
 	</select>
+	
+	<update id="updateOrderDeAmount" parameterType="CartDto">
+		update cart
+		set order_de_amount = order_de_amount + #{order_de_amount}
+		where cart_num = #{cart_num}
+		and product_code = #{product_code}
+	</update>
 
 </mapper>

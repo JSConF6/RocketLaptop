@@ -2,7 +2,9 @@ package com.rocket.laptop.controller;
 
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,7 +64,7 @@ public class OrderController {
 							@RequestParam("user_id") String user_id, 
 							Model model) {
 		logger.info("주문 페이지 이동");
-
+		
 		List<OrderViewDto> orderViewList = orderService.getOrderViewList(user_id, cartNumList);
 		int orderViewListCount = orderViewList.size();
 		
@@ -76,22 +78,50 @@ public class OrderController {
 	}
 	
 	@PostMapping("/user/order/mainOrderView")
-	public String mainOrderView(@RequestParam("user_id") String user_id, Model model, 
-			@RequestParam("order_de_amount") int order_de_amount,
-			@RequestParam("product_code") String product_code) {
+	public String mainOrderView(CartDto cartDto, Model model) {
 		logger.info("주문 페이지 이동");
 		
-		List<OrderViewDto> orderViewList = orderService.getMainOrderViewList(product_code);
-		orderViewList.get(0).setOrder_de_amount(order_de_amount);
+		List<OrderViewDto> orderViewList = orderService.getMainOrderViewList(cartDto.getProduct_code());
+		orderViewList.get(0).setOrder_de_amount(cartDto.getOrder_de_amount());
 		int orderViewListCount = orderViewList.size();
 		
-		UserDto userDto = userService.getUser(user_id);
+		UserDto userDto = userService.getUser(cartDto.getUser_id());
 		
 		model.addAttribute("orderViewList", orderViewList);
 		model.addAttribute("orderViewListCount", orderViewListCount);
 		model.addAttribute("userDto", userDto);
 		
 		return "/user/orderView";
+	}
+	
+	@GetMapping("/user/order/cartCheck")
+	@ResponseBody
+	public ResponseDto<Map<String, Object>> cartCheck(CartDto cartDto) {
+		logger.info("주문 전 카트담기");
+		
+		Map<String, Object> map = new HashMap<>();
+
+		CartDto cart = cartService.findByProductCode(cartDto.getProduct_code());
+		
+		if(cart != null) {
+			cartDto.setCart_num(cart.getCart_num());
+			cartService.updateOrderDeAmount(cartDto);
+			
+			CartDto cartCheck = cartService.findByProductCode(cartDto.getProduct_code());
+			
+			map.put("cartDto", cartCheck);
+			
+			return new ResponseDto<Map<String, Object>>(HttpStatus.OK.value(), map);
+		}
+		
+		int result = cartService.cartAdd(cartDto);
+		logger.info("result : " + result);
+		
+		CartDto cartCheck = cartService.findByProductCode(cartDto.getProduct_code());
+		
+		map.put("cartDto", cartCheck);
+		
+		return new ResponseDto<Map<String, Object>>(HttpStatus.OK.value(), map);
 	}
 	
 	@PostMapping("/user/order/payment/complete")
@@ -113,14 +143,21 @@ public class OrderController {
 			return new ResponseDto<String>(HttpStatus.BAD_REQUEST.value(), "결제 금액 오류, 결제가 취소됩니다.");
 		}
 		
-		if(cartNumList != null) {
-			List<CartDto> cartDtoList = cartService.findByCartNumList(cartNumList);
+		List<CartDto> cartDtoList = cartService.findByCartNumList(cartNumList);
 			
-			orderService.orderAdd(orderDto, cartDtoList, cartNumList, iamportClient);
-		}else {
-			orderService.mainOrderAdd(orderDto, product_code, order_de_amount, iamportClient);
-		}
+		orderService.orderAdd(orderDto, cartDtoList, cartNumList, iamportClient);
 		
-		return new ResponseDto<String>(HttpStatus.OK.value(), "주문이 완료되었습니다.");
+		return new ResponseDto<String>(HttpStatus.OK.value(), orderDto.getOrder_id());
+	}
+	
+	@GetMapping("/user/order/complete")
+	public String orderComplete(@RequestParam("user_id") String user_id, @RequestParam("order_id") String order_id, Model model) {
+		logger.info("주문 성공 페이지 이동");
+		
+		OrderDto orderDto = orderService.getOrder(order_id);
+		
+		model.addAttribute("orderDto", orderDto);
+		
+		return "/user/order_complete";
 	}
 }

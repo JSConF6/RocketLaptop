@@ -36,8 +36,11 @@
 				</div>
 
 				<hr class="my-4">
-
+				
 				<h2 class="mb-3">받는사람정보</h2>
+				<div class="text-end">
+					<button type="button" class="btn btn-primary addressListBtn" data-bs-toggle="modal" data-bs-target="#addressListModal">배송지목록</button>
+				</div>
 				<div class="row g-3">
 					<!-- 주문자 -->
 					<div class="col-12">
@@ -115,5 +118,38 @@
 		</div>
 	</div>
 </main>
+
+<div class="modal fade" id="addressListModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">배송지목록</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body address-body">
+        <ul class="address-list">
+        	<li class="address-form">
+        		<strong>정진섭</strong>
+        		<div class="form-check p-0">
+        			<span class="choice fs-2">
+        				<input class="form-check-input" type="radio" />
+        			</span>
+        			<p class="mt-3">
+        				[<span>36273</span>] <span>서울 강남구 가로수길 9 (신사동)</span><br> <span>아파트 101호</span>
+        			</p>
+        			<p>
+        				<span>010-3333-2222</span>
+        			</p>
+        		</div>
+        	</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary addressChoiceBtn">선택</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%@ include file="../layout/footer.jsp"%>

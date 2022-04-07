@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+.order-complete-container{
+	width : 1320px;
+	margin : 0 auto;
+}
+
+.delivery_info table th{
+	width : 120px;
+}
+
+.bottomBtn{
+	padding : 10px 50px;
+}

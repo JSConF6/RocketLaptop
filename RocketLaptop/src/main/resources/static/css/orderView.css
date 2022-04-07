@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+.address-list{
+	list-style: none;
+	padding : 0;
+}
+
+.choice{
+	position: absolute;
+    right: 25px;
+}
+
+.address-form{
+	border : 1px solid gray;
+}

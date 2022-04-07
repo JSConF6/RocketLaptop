@@ -106,6 +106,8 @@ $(function(){
 		let user_id = $("#user_id").val();
 		let order_de_amount = $(".productCount").val();
 		
+		let cartNumList = new Array();
+		
 		if(user_id === undefined){
 			Swal.fire({
 				icon: "warning",
@@ -118,11 +120,29 @@ $(function(){
 			return false;
 		}
 		
-		$("#productDetailOrderAdd").append(orderAddFromInputAdd("order_de_amount", order_de_amount));
-		$("#productDetailOrderAdd").append(orderAddFromInputAdd("user_id", user_id));
-		$("#productDetailOrderAdd").append(orderAddFromInputAdd("product_code", product_code));
+		let data = {
+			"order_de_amount" : order_de_amount,
+			"user_id" : user_id,
+			"product_code" : product_code,
+		}
 		
-		$("#productDetailOrderAdd").submit();
+		$.ajax({
+			url: "/user/order/cartCheck",
+			type: "GET",
+			data: data
+		}).done(function(res) {
+			console.log(res);
+			if(res.status === 200){
+				cartNumList.push(res.data.cartDto.cart_num);
+				console.log(cartNumList)
+				$("#productDetailOrderAdd").append(orderAddFromInputAdd("cartNumList", cartNumList));
+				$("#productDetailOrderAdd").append(orderAddFromInputAdd("user_id", user_id));
+		
+				$("#productDetailOrderAdd").submit();
+			}
+		}).fail(function(err) {
+			console.log(err)
+		})
 	})
 	
 	function orderAddFromInputAdd(name, data){
