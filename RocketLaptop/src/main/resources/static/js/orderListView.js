@@ -47,9 +47,8 @@ function orderAjax(data){
 				$(res.data.userOrderList).each(function(userOrderIndex, userOrder){
 					let date  = userOrder.order_date.substring(0, 10);
 					
-					output += "<tr>";
-					
 					if(orderDto.order_id === userOrder.order_id){
+						output += "<tr>";
 						if(num == 0){
 							num = num + 1;
 							$(res.data.userOrderListGroupCount).each(function(groupCountIndex, groupCount){
@@ -71,6 +70,7 @@ function orderAjax(data){
 						let price = userOrder.product_price * userOrder.order_de_amount;
 						output += "<td>" + price + "원</td>";
 						output += "<td>" + userOrder.order_state + "</td>";
+						output += "</tr>";
 					}
 				});
 				num = 0;

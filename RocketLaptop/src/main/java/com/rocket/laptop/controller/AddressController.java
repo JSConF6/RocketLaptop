@@ -1,6 +1,8 @@
 package com.rocket.laptop.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,12 +94,17 @@ public class AddressController {
 	
 	@GetMapping("/user/address/list")
 	@ResponseBody
-	public ResponseDto<List<AddressDto>> orderAddressList(@RequestParam("user_id") String user_id) {
+	public ResponseDto<Map<String, Object>> orderAddressList(@RequestParam("user_id") String user_id) {
 		logger.info("주문 페이지 배송지목록");
 		
 		List<AddressDto> addressList = addressService.getAddressList(user_id);
+		int listCount = addressService.getAddressListCount(user_id);
 		
-		return new ResponseDto<List<AddressDto>> (HttpStatus.OK.value(), addressList);
+		Map<String, Object> map = new HashMap<>();
+		map.put("addressList", addressList);
+		map.put("listCount", listCount);
+		
+		return new ResponseDto<Map<String, Object>> (HttpStatus.OK.value(), map);
 	}
 	
 	@GetMapping("/user/address/choice")

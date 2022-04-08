@@ -144,9 +144,55 @@
         	</li>
         </ul>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer address-footer">
         <button type="button" class="btn btn-primary addressChoiceBtn">선택</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">닫기</button>
+        <button type="button" class="btn btn-danger orderAddressCancelBtn" data-bs-dismiss="modal">닫기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="orderAddressAddModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">배송지등록</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">배송지명:</label>
+            <input type="text" class="form-control" id="order_address_name" />
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">받는사람:</label>
+            <input type="text" class="form-control" id="order_address_recipient" />
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">전화번호:</label>
+            <input type="text" class="form-control" id="order_address_phone" />
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">우편번호:</label>
+            <div class="input-group">
+				<input type="text" class="form-control" id="order_address_zipcode" disabled> 
+				<input type="button" class="btn btn-secondary OrderAddressPostBtn" data-state="add" value="주소 검색">
+			</div>
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">주소:</label>
+            <input type="text" class="form-control" id="order_address_city" disabled/>
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">상세주소:</label>
+            <input type="text" class="form-control" id="order_address_street" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary orderAddressAddBtn">등록</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">취소</button>
       </div>
     </div>
   </div>
