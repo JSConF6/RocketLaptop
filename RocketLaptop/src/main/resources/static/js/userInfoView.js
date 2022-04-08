@@ -132,6 +132,7 @@ $(function(){
 		}).done(function(res) {
 			console.log(res);
 			if(res.data === 1){
+				$("#userPasswordUpdateModal").modal('hide');
 				Swal.fire({
 					icon: "success",
 					title: "비밀번호 변경",

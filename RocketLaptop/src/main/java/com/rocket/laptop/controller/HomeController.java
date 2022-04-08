@@ -148,11 +148,9 @@ public class HomeController {
 		return "/home/findIdPasswordView";
 	}
 	
-	@PostMapping("/findProcess")
+	@PostMapping("/findIdProcess")
 	@ResponseBody
-	public ResponseDto<String> findProcess(UserDto userDto, @RequestParam("find") String find) throws Exception{
-		
-		if(find.equals("findId")) {
+	public ResponseDto<String> findIdProcess(UserDto userDto) throws Exception{
 			logger.info("아이디 찾기");
 			UserDto findUser = userService.findByUsernameAndEmail(userDto);
 			
@@ -161,7 +159,11 @@ public class HomeController {
 			}
 			
 			return new ResponseDto<String>(HttpStatus.OK.value(), findUser.getUser_id());
-		}else if(find.equals("findPassword")){
+	}
+	
+	@PostMapping("/findPasswordProcess")
+	@ResponseBody
+	public ResponseDto<String> findPasswordProcess(UserDto userDto) throws Exception{
 			logger.info("비밀번호 찾기");
 			UserDto findUser = userService.findByIdAndUsernameAndEmail(userDto);
 			
@@ -174,7 +176,6 @@ public class HomeController {
 			} catch (Exception e) {
 				return new ResponseDto<String>(HttpStatus.BAD_REQUEST.value(), "메일 전송 실패 다시 시도 해주세요.");
 			}
-		}
 		
 		return new ResponseDto<String>(HttpStatus.OK.value(), "가입한 메일로 임시비밀번호를 보냈습니다.");
 	}
