@@ -101,13 +101,13 @@ public class OrderController {
 		
 		Map<String, Object> map = new HashMap<>();
 
-		CartDto cart = cartService.findByProductCode(cartDto.getProduct_code());
+		CartDto cart = cartService.getCart(cartDto);
 		
 		if(cart != null) {
 			cartDto.setCart_num(cart.getCart_num());
 			cartService.updateOrderDeAmount(cartDto);
 			
-			CartDto cartCheck = cartService.findByProductCode(cartDto.getProduct_code());
+			CartDto cartCheck = cartService.getCart(cartDto);
 			
 			map.put("cartDto", cartCheck);
 			
@@ -117,7 +117,7 @@ public class OrderController {
 		int result = cartService.cartAdd(cartDto);
 		logger.info("result : " + result);
 		
-		CartDto cartCheck = cartService.findByProductCode(cartDto.getProduct_code());
+		CartDto cartCheck = cartService.getCart(cartDto);
 		
 		map.put("cartDto", cartCheck);
 		

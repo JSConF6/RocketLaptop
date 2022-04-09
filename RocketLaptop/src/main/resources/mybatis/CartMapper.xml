@@ -10,10 +10,11 @@
 		values(#{product_code}, #{user_id}, #{order_de_amount})
 	</insert>
 	
-	<select id="findByProductCode" parameterType="String" resultType="CartDto">
+	<select id="getCart" parameterType="CartDto" resultType="CartDto">
 		select *
 		from cart
 		where product_code = #{product_code}
+		and user_id = #{user_id}
 	</select>
 	
 	<select id="getCartList" parameterType="String" resultType="CartDto">

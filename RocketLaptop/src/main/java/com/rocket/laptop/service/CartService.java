@@ -8,7 +8,7 @@ public interface CartService {
 	
 	public int cartAdd(CartDto cartDto);
 
-	public CartDto findByProductCode(String product_code);
+	public CartDto getCart(CartDto cartDto);
 
 	public List<CartDto> getCartList(String user_id);
 

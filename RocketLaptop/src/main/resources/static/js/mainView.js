@@ -19,7 +19,7 @@ $(function(){
 	
 	MainCategoryList();
 	
-	if($("#user_id").val() !== undefined){
+	if($("#user_id").val() !== undefined || $("user_role").val() === "ROLE_USER"){
 		CartListCount();	
 	}
 	

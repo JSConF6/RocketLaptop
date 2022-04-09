@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+#qnaContent{
+	resize : none
+}
+
 .productDetailsNav ul{
 	height : 70px;
 }
@@ -56,7 +60,7 @@ textarea{
 	display : none;
 }
 
-.answerBox td{
+.product-qna .qna-table tbody .answerBox td{
 	padding: 16px 22px 16px 380px;
     line-height: 22px;
     color: #5e636d;

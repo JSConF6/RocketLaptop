@@ -342,6 +342,11 @@ $(function(){
 		})
 	})
 	
+	$(".addressListBtn").on("click", function(e){
+		e.preventDefault();
+		$("#addressListModal").modal('show');
+	});
+	
 	$(".addressChoiceBtn").on("click", function(){
 		let address_num = $("input[name='address']:checked").val();
 		let user_id = $("#user_id").val();

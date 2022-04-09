@@ -22,8 +22,8 @@ public class CartServiceImpl implements CartService {
 	}
 
 	@Override
-	public CartDto findByProductCode(String product_code) {
-		return cartMapper.findByProductCode(product_code);
+	public CartDto getCart(CartDto cartDto) {
+		return cartMapper.getCart(cartDto);
 	}
 
 	@Override

@@ -15,7 +15,7 @@ public interface CartMapper {
 
 	int cartAdd(CartDto cartDto);
 
-	CartDto findByProductCode(String product_code);
+	CartDto getCart(CartDto cartDto);
 
 	List<CartDto> getCartList(String user_id);
 

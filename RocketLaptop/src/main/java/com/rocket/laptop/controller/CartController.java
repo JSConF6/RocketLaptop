@@ -37,10 +37,12 @@ public class CartController {
 	public ResponseDto<String> cartAdd(Model model, CartDto cartDto) {
 		logger.info("장바구니 담기");
 		System.out.println(cartDto);
-		CartDto cart = cartService.findByProductCode(cartDto.getProduct_code());
+		CartDto cart = cartService.getCart(cartDto);
 		
 		if(cart != null) {
-			return new ResponseDto<String>(HttpStatus.BAD_REQUEST.value(), "이미 담긴 상품입니다.");
+			cartDto.setCart_num(cart.getCart_num());
+			cartService.updateOrderDeAmount(cartDto);
+			return new ResponseDto<String>(HttpStatus.OK.value(), "장바구니 담기 성공");
 		}
 		
 		int result = cartService.cartAdd(cartDto);

@@ -1,8 +1,7 @@
 @charset "UTF-8";
 
-.my-activity-container{
-	width : 1320px;
-	margin : 0 auto;
+.review-content{
+	resize : none;
 }
 
 .star{

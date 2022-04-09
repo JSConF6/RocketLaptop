@@ -26,19 +26,9 @@
 
 <!-- Style -->
 <link rel="stylesheet" href="../css/admin/adminView.css">
-<link rel="stylesheet" href="../css/admin/adminProductAddView.css">
 
 <!-- JS -->
 <script type="text/javascript" src="../js/admin/adminView.js"></script>
-<script type="text/javascript" src="../js/admin/adminProductAddView.js"></script>
-<script type="text/javascript" src="../js/admin/adminProductDetailView.js"></script>
-<script type="text/javascript" src="../js/admin/adminProductModifyView.js"></script>
-<script type="text/javascript" src="../js/admin/adminNoticeListView.js"></script>
-<script type="text/javascript" src="../js/admin/adminNoticeDetailView.js"></script>
-<script type="text/javascript" src="../js/admin/adminNoticeModifyView.js"></script>
-<script type="text/javascript" src="../js/admin/adminQuestionDetailView.js"></script>
-<script type="text/javascript" src="../js/admin/adminUserDetailView.js"></script>
-<script type="text/javascript" src="../js/admin/adminOrderDetailView.js"></script>
 
 </head>
 <body>
@@ -62,12 +52,8 @@
 				</a></li>
 			</ul>
 			<hr>
-			<div class="dropdown">
-				<a href="#" class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle fs-5" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false"> <i class="fa-solid fa-user-gear"></i>&nbsp;&nbsp; <strong>관리자</strong>
-				</a>
-				<ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
-					<li><a class="dropdown-item" href="/logout">로그아웃</a></li>
-				</ul>
-			</div>
+			<span class="d-flex align-items-center link-dark text-decoration-none fs-5"> 
+				<i class="fa-solid fa-user-gear"></i>&nbsp;&nbsp; <strong>관리자</strong>
+			</span>
 		</div>
 	</header>
