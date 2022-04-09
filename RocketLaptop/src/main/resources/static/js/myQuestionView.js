@@ -89,7 +89,12 @@ $(function(){
 			console.log(err)
 		})
 	}
-	questionList();
+	
+	let user_role = $("#user_role").val();
+	
+	if(user_role === "ROLE_USER"){		
+		questionList();
+	}
 	
 	$("#my-question-tab").on("click", function(){
 		questionList();	

@@ -58,10 +58,7 @@
 <script src="${pageContext.request.contextPath}/js/header.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/findIdPasswordView.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/noticeDetailView.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/js/questionDetailView.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/js/myQuestionListView.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/myQuestionDetailView.js" type="text/javascript"></script>
-<script src="${pageContext.request.contextPath}/js/questionListView.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/myOrderDetailView.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/productReview.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath}/js/productQna.js" type="text/javascript"></script>
@@ -114,6 +111,8 @@
 					<div class="d-flex">
 						<sec:authorize access="hasRole('ROLE_USER')">
 							<sec:authentication property="principal.userDto.user_id" var="user_id" />
+							<sec:authentication property="principal.userDto.user_role" var="user_role"/>
+							<input type="hidden" value="${user_role}" id="user_role"/>
 							<input type="hidden" value="${user_id}" id="user_id" />
 							<li class="nav-item position-relative">
 								<a href="/user/cart/list?user_id=${user_id}" class="nav-link d-flex flex-column align-items-center text-secondary" id="cart-icon"> 
