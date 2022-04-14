@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.rocket.laptop.model.CartDto;
 import com.rocket.laptop.model.FileDto;
+import com.rocket.laptop.model.OrderDetailDto;
 import com.rocket.laptop.model.OrderDto;
 import com.rocket.laptop.model.OrderViewDto;
 import com.rocket.laptop.model.PageHandler;
@@ -77,23 +78,6 @@ public class OrderController {
 		return "/user/orderView";
 	}
 	
-	@PostMapping("/user/order/mainOrderView")
-	public String mainOrderView(CartDto cartDto, Model model) {
-		logger.info("주문 페이지 이동");
-		
-		List<OrderViewDto> orderViewList = orderService.getMainOrderViewList(cartDto.getProduct_code());
-		orderViewList.get(0).setOrder_de_amount(cartDto.getOrder_de_amount());
-		int orderViewListCount = orderViewList.size();
-		
-		UserDto userDto = userService.getUser(cartDto.getUser_id());
-		
-		model.addAttribute("orderViewList", orderViewList);
-		model.addAttribute("orderViewListCount", orderViewListCount);
-		model.addAttribute("userDto", userDto);
-		
-		return "/user/orderView";
-	}
-	
 	@GetMapping("/user/order/cartCheck")
 	@ResponseBody
 	public ResponseDto<Map<String, Object>> cartCheck(CartDto cartDto) {
@@ -127,25 +111,37 @@ public class OrderController {
 	@PostMapping("/user/order/payment/complete")
 	@ResponseBody
 	public ResponseDto<String> paymentComplete(OrderDto orderDto, 
-			@RequestParam(value = "cartNumList", required = false) int[] cartNumList,
-			@RequestParam("order_de_amount") int order_de_amount,
-			@RequestParam("productCode") String product_code) throws IamportResponseException, IOException{
+			@RequestParam(value = "cartNumList", required = false) int[] cartNumList) throws IamportResponseException, IOException{
 		logger.info("상품 결제");
-		System.out.println(order_de_amount);
-		System.out.println(product_code);
-		System.out.println(cartNumList);
 		
-		Payment payment = iamportClient.paymentByImpUid(orderDto.getImpUid()).getResponse();
+		Payment payment = iamportClient.paymentByImpUid(orderDto.getImp_uid()).getResponse();
 		
 		if(!orderDto.getOrder_totalprice().equals(payment.getAmount())) {
-			CancelData cancelData = new CancelData(orderDto.getImpUid(), true);
+			CancelData cancelData = new CancelData(orderDto.getImp_uid(), true);
 			iamportClient.cancelPaymentByImpUid(cancelData);
 			return new ResponseDto<String>(HttpStatus.BAD_REQUEST.value(), "결제 금액 오류, 결제가 취소됩니다.");
 		}
 		
 		List<CartDto> cartDtoList = cartService.findByCartNumList(cartNumList);
-			
+		
 		orderService.orderAdd(orderDto, cartDtoList, cartNumList, iamportClient);
+		
+		return new ResponseDto<String>(HttpStatus.OK.value(), orderDto.getOrder_id());
+	}
+	
+	@PostMapping("/user/order/payment/cancel")
+	@ResponseBody
+	public ResponseDto<String> paymentCancel(@RequestParam(value = "order_id") String order_id,
+			@RequestParam(value = "order_state") String order_state) throws IamportResponseException, IOException{
+		logger.info("주문 취소");
+		
+		OrderDto orderDto = orderService.getOrder(order_id);
+		List<OrderDetailDto> orderDetailList = orderService.getOrderCancelList(order_id);
+		
+		CancelData cancelData = new CancelData(orderDto.getImp_uid(), true);
+		iamportClient.cancelPaymentByImpUid(cancelData);
+		
+		orderService.orderCancel(orderDto, orderDetailList, order_state);
 		
 		return new ResponseDto<String>(HttpStatus.OK.value(), orderDto.getOrder_id());
 	}

@@ -123,7 +123,7 @@ function orderAjax(data){
 			$(".myOrderPagination").remove();
 			$(".empty_order").remove();
 			let order_state = $('#order_state').val();
-			var message = ['주문건수가 없습니다.', '배송 준비 중인 상품이 없습니다.', '배송 중인 상품이 없습니다.', "배송 완료된 상품이 없습니다."];
+			var message = ['주문건수가 없습니다.', '배송 준비 중인 상품이 없습니다.', '배송 중인 상품이 없습니다.', "배송 완료된 상품이 없습니다.", "주문취소된 상품이 없습니다."];
 			output += '<div class="text-center mt-5 mb-5 empty_order"><h1>' + message[order_state] + '</h1></div>';
 			$('.mypage_orderlist_container').append(output);
 		}

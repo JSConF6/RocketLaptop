@@ -60,8 +60,11 @@
 							<input type="text" class="form-control" id="productName" placeholder="상품이름을 입력하세요" value="${productDetail.product_name}">
 						</div>
 						<div class="mb-3">
+							<label for="productStock" class="form-label">상품수량</label> <input type="number" class="form-control" id="productStock" value="${productDetail.product_stock}" />
+						</div>
+						<div class="mb-3">
 							<label for="productPrice" class="form-label">상품가격</label> 
-							<input type=text class="form-control" id="productPrice" pattern="[0-9]+" placeholder="상품가격을 숫자로 입력하세요" value="${productDetail.product_price}">
+							<input type="number" class="form-control" id="productPrice" placeholder="상품가격을 숫자로 입력하세요" value="${productDetail.product_price}">
 						</div>
 						<div class="mb-3">
 							<label for="productDate" class="form-label">상품등록일</label> <input type="text" class="form-control" id="productDate" value='<fmt:formatDate value="${productDetail.product_reg_date}" pattern="yyyy-MM-dd"/>' disabled />

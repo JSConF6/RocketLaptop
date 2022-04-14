@@ -7,8 +7,9 @@ $(function(){
 	$(".plus").on("click", function(){
 		let num = $(".productCount").val();
 		let plusNum = Number(num) + 1;
+		let product_stock = $(".product_stock").val();
 		
-		if(plusNum >= 1000){
+		if(plusNum > product_stock){
 			$(".productCount").val(num);
 		}else{
 			totalPrice = price * plusNum;

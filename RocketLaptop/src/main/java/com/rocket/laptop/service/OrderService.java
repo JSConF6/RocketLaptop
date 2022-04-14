@@ -34,10 +34,6 @@ public interface OrderService {
 
 	public OrderDto getUserOrderDetail(String order_id, String user_id);
 
-	public List<OrderViewDto> getMainOrderViewList(String product_code);
-
-	public void mainOrderAdd(OrderDto orderDto, String product_code, int order_de_amount, IamportClient iamportClient) throws IamportResponseException, IOException;
-
 	public List<UserOrderDto> getUserOrderList(String user_id);
 
 	public List<UserOrderDto> getUserOrderListCount(String user_id);
@@ -51,4 +47,8 @@ public interface OrderService {
 	public List<UserOrderDto> getAjaxUserOrderListCount(String user_id, String order_state);
 
 	public int getAjaxOrderListCount(String user_id, String string);
+
+	public List<OrderDetailDto> getOrderCancelList(String order_id);
+
+	public void orderCancel(OrderDto orderDto, List<OrderDetailDto> orderDetailList, String order_state);
 }

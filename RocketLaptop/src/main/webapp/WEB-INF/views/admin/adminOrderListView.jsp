@@ -48,12 +48,12 @@
 									<th>수령인</th>
 									<th>주소</th>
 									<th>결제일</th>
-									<th>배송상태</th>
+									<th>배송</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="order" items="${orderList}">
-									<tr>
+									<tr class="align-middle">
 										<td>
 											<a href="/admin/orderDetail?order_id=${order.order_id}"><c:out value="${order.order_id}" /></a>
 										</td>
@@ -61,7 +61,9 @@
 										<c:set var="address" value="(${order.user_address1}) ${order.user_address2} ${order.user_address3}" />
 										<td><c:out value="${address}" /></td>
 										<td><fmt:formatDate value="${order.order_date}" pattern="yyyy-MM-dd"/></td>
-										<td>${order.order_state}</td>
+										<td>
+											${order.order_state}
+										</td>
 									</tr>
 								</c:forEach>
 							</tbody>

@@ -57,6 +57,9 @@
 							<label for="productName" class="form-label">상품이름</label> <input type="text" class="form-control" id="productName" value="${productDetail.product_name}" disabled />
 						</div>
 						<div class="mb-3">
+							<label for="productStock" class="form-label">상품수량</label> <input type="text" class="form-control" id="productStock" value="${productDetail.product_stock}개" disabled />
+						</div>
+						<div class="mb-3">
 							<fmt:formatNumber var="product_price" value="${productDetail.product_price}" pattern="###,###"></fmt:formatNumber>
 							<label for="productPrice" class="form-label">상품가격</label> <input type="text" class="form-control" id="productPrice" value="${product_price}원" disabled />
 						</div>

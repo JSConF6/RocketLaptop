@@ -79,7 +79,7 @@
 				</div>
 				<div class="col-md-7">
 					<div class="card shadow-sm h-100">
-						<div class="card-body mt-5 mb-5">
+						<div class="card-body">
 							<input type="hidden" value="${productDetail.product_price}" id="price" />
 							<input type="hidden" value="${productDetail.product_code}" id="product_code" />
 							<h5 class="card-title fs-3 text-start">${productDetail.product_name}</h5>
@@ -90,6 +90,13 @@
 							</p>
 							<p class="card-text pb-3 fs-3 text-start border-top pt-3 mb-0">무료배송</p>
 							<p class="card-text pb-3 fs-3 text-start border-top pt-3 mb-0">5일 이내 출고 (주말, 공휴일 제외)</p>
+							<c:if test="${productDetail.product_stock != 0}">
+							<div class="row pt-3 pb-3 border-top">
+								<input type="hidden" class="product_stock" value="${productDetail.product_stock}" />
+								<div class="fs-3">
+									상품수량&nbsp;&nbsp;&nbsp;&nbsp;<span>${productDetail.product_stock}개</span>
+								</div>
+							</div>
 							<div class="card-text border-top pt-3 pb-3">
 								<div class="row align-items-center">
 									<div class="col-auto">
@@ -118,6 +125,15 @@
 									<button type="button" class="btn btn-lg btn-primary text-white productDetailOrderBtn">주문하기</button>
 								</div>
 							</div>
+							</c:if>
+							<c:if test="${productDetail.product_stock == 0}">
+								<div class="row pt-3 pb-3 border-top">
+									<div class="fs-3">상품수량&nbsp;&nbsp;&nbsp;${productDetail.product_stock}개</div>
+								</div>
+								<div class="row pt-3 border-top">
+									<div class="fs-3">상품이 품절되었습니다.</div>
+								</div>
+							</c:if>
 						</div>
 					</div>
 				</div>

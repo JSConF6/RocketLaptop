@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.rocket.laptop.exception.OrderCancelFailException;
 import com.rocket.laptop.exception.OrderFailException;
 import com.rocket.laptop.model.CartDto;
 import com.rocket.laptop.model.OrderDetailDto;
@@ -18,6 +19,7 @@ import com.rocket.laptop.model.PageHandler;
 import com.rocket.laptop.model.UserOrderDto;
 import com.rocket.laptop.repository.CartMapper;
 import com.rocket.laptop.repository.OrderMapper;
+import com.rocket.laptop.repository.ProductMapper;
 import com.siot.IamportRestClient.IamportClient;
 import com.siot.IamportRestClient.exception.IamportResponseException;
 import com.siot.IamportRestClient.request.CancelData;
@@ -30,6 +32,9 @@ public class OrderServiceImpl implements OrderService {
 	
 	@Autowired
 	private CartMapper cartMapper;
+	
+	@Autowired
+	private ProductMapper productMapper;
 	
 	@Override
 	public int getAdminOrderListCount() {
@@ -93,11 +98,12 @@ public class OrderServiceImpl implements OrderService {
 				map.put("product_code", cartDto.getProduct_code());
 				map.put("order_de_amount", cartDto.getOrder_de_amount());
 				orderMapper.orderDetailAdd(map);
+				productMapper.updateProductStock(map);
 			}
 			
 			cartMapper.orderCartDelete(map);
 		} catch (Exception e) {
-			CancelData cancelData = new CancelData(orderDto.getImpUid(), true);
+			CancelData cancelData = new CancelData(orderDto.getImp_uid(), true);
 			iamportClient.cancelPaymentByImpUid(cancelData);
 			throw new OrderFailException("주문 실패 결제가 취소됩니다.");
 		}
@@ -127,30 +133,6 @@ public class OrderServiceImpl implements OrderService {
 		map.put("order_id", order_id);
 		
 		return orderMapper.getUserOrderDetail(map);
-	}
-
-	@Override
-	public List<OrderViewDto> getMainOrderViewList(String product_code) {
-		return orderMapper.getMainOrderViewList(product_code);
-	}
-
-	@Override
-	public void mainOrderAdd(OrderDto orderDto, String product_code, int order_de_amount, IamportClient iamportClient) throws IamportResponseException, IOException {
-		Map<String, Object> map = new HashMap<>();
-		
-		map.put("orderDto", orderDto);
-		map.put("product_code", product_code);
-		map.put("order_de_amount", order_de_amount);
-		
-		try {
-			orderMapper.orderAdd(orderDto);
-			
-			orderMapper.orderDetailAdd(map);
-		} catch (Exception e) {
-			CancelData cancelData = new CancelData(orderDto.getImpUid(), true);
-			iamportClient.cancelPaymentByImpUid(cancelData);
-			throw new OrderFailException("주문 실패 결제가 취소됩니다.");
-		}
 	}
 
 	@Override
@@ -213,6 +195,31 @@ public class OrderServiceImpl implements OrderService {
 		map.put("order_state", order_state);
 		
 		return orderMapper.getAjaxOrderListCount(map);
+	}
+
+	@Override
+	public List<OrderDetailDto> getOrderCancelList(String order_id) {
+		return orderMapper.getOrderCancelList(order_id);
+	}
+
+	@Override
+	public void orderCancel(OrderDto orderDto, List<OrderDetailDto> orderDetailList, String order_state) {
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("orderDto", orderDto);
+		map.put("order_state", order_state);
+		
+		try {
+			orderMapper.updateOrderState(map);
+			
+			for(OrderDetailDto orderDetailDto : orderDetailList) {
+				map.put("product_code", orderDetailDto.getProduct_code());
+				map.put("order_de_amount", orderDetailDto.getOrder_de_amount());
+				productMapper.updateOrderCancelProductStock(map);
+			}
+		} catch (Exception e) {
+			throw new OrderCancelFailException("주문 취소 실패");
+		}
 	}
 
 }

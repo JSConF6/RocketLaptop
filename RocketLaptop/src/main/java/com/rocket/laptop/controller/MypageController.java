@@ -144,7 +144,7 @@ public class MypageController {
 			@RequestParam("user_id") String user_id, @RequestParam("order_state") int order_state, Model model) {
 		logger.info("유저 주문목록 리스트 ajax");
 		
-		String[] orderState = new String[] {"전체", "배송준비", "배송 중", "배송 완료"};
+		String[] orderState = new String[] {"전체", "배송준비", "배송 중", "배송 완료", "주문취소"};
 		
 		
 		int limit = 3;

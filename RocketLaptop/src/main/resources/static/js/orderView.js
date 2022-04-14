@@ -128,7 +128,7 @@ $(function(){
       	}, function(rsp) {
 			console.log(rsp);
 			if(rsp.success){
-				data.impUid = rsp.imp_uid
+				data.imp_uid = rsp.imp_uid
 				$.ajax({
 					url: "/user/order/payment/complete",
 					type: "POST",

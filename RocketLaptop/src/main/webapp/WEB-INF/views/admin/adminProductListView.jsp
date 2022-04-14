@@ -45,10 +45,10 @@
 							<div class="col">
 								<div class="card mb-3">
 									<div class="row g-0">
-										<div class="col-md-4">
+										<div class="col-md-5">
 											<img src="../upload${product.product_img_name}" class="img-fluid rounded-start w-100 h-100">
 										</div>
-										<div class="col-md-8">
+										<div class="col-md-7">
 											<div class="card-body w-100 h-100 d-flex flex-column justify-content-center">
 												<h3 class="card-title mt-3 mb-3">
 													<a href="/admin/productDetail?product_code=${product.product_code}"><c:out value="${product.product_name}" /></a>
@@ -62,6 +62,16 @@
 													<fmt:formatNumber value="${product.product_price}" pattern="###,###,###" />
 													원
 												</p>
+												<c:if test="${product.product_stock == 0}">
+													<p class="card-text fs-5">
+														상품상태 : <span class="text-danger">품절</span>
+													</p>
+												</c:if>
+												<c:if test="${product.product_stock != 0}">
+													<p class="card-text fs-5">
+														상품상태 : <span class="text-success">판매중</span>
+													</p>
+												</c:if>
 												<p class="card-text fs-5">
 													상품 등록일 :
 													<fmt:formatDate value="${product.product_reg_date}" pattern="yyyy-MM-dd" />

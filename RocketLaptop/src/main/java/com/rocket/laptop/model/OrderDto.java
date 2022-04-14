@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 public class OrderDto {
-	private String impUid;
+	private String imp_uid;
 	private String order_id;
 	private String user_id;
 	private String order_name;

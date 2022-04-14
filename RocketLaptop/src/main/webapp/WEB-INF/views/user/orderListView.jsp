@@ -56,6 +56,7 @@
 						<option value="1">배송준비</option>
 						<option value="2">배송중</option>
 						<option value="3">배송완료</option>
+						<option value="4">주문취소</option>
 					</select>
 				</p>
 				<c:if test="${pageHandler.listCount > 0}">

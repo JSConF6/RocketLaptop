@@ -33,6 +33,17 @@ $(function(){
 			return false;
 		}
 		
+		let product_stock = $.trim($("#productStock").val());
+		if(product_stock == ""){
+			Swal.fire({
+				icon: "error",
+				title: "상품수정",
+				text: "상품수량을 입력해주세요.",
+				allowOutsideClick: false,
+			})
+			return false;
+		}
+		
 		console.log(check);
 	
 		if($.trim($("#thumbnail_upload").val()) === ""){
@@ -108,6 +119,7 @@ $(function(){
 		frm.append("category_code", category_code);
 		frm.append("product_name", product_name);
 		frm.append("product_price", product_price);
+		frm.append("product_stock", product_stock);
 		
 		frm.append("imageType", JSON.stringify(imageType));
 		

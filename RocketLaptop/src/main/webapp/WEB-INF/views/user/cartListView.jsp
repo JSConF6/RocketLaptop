@@ -68,10 +68,10 @@
 										<td><input type="checkbox" name="RowCheck" value="${cart.product_price * cart.order_de_amount}" data-cartNum="${cart.cart_num}" data-productCode="${cart.product_code}"/></td>
 										<td>
 											<div class="product-item">
-												<a class="product-thumb" href="#"><img src="/upload${cart.product_img_name}" alt="Product" height="90px"></a>
+												<a class="product-thumb" href="/product/detail?product_code=${cart.product_code}"><img src="/upload${cart.product_img_name}" alt="Product" height="90px"></a>
 												<div class="product-info">
 													<h4 class="product-title">
-														<a href="#">${cart.product_name}</a> <span class="fs-6 mt-2 mb-2">카테고리: ${cart.category_name}</span>
+														<a href="/product/detail?product_code=${cart.product_code}">${cart.product_name}</a> <span class="fs-6 mt-2 mb-2">카테고리: ${cart.category_name}</span>
 														<fmt:formatNumber var="cartPrice" value="${cart.product_price}" pattern="###,###,###" />
 														<span class="fs-6">상품가격: ${cartPrice}원</span>
 													</h4>

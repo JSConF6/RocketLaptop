@@ -57,4 +57,8 @@ public interface OrderMapper {
 
 	int getAjaxOrderListCount(Map<String, Object> map);
 
+	void updateOrderState(Map<String, Object> map);
+
+	List<OrderDetailDto> getOrderCancelList(String order_id);
+
 }

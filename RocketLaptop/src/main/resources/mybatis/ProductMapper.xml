@@ -6,14 +6,14 @@
 <mapper namespace="com.rocket.laptop.repository.ProductMapper">
 
 	<insert id="productInsert" parameterType="ProductDto">
-		insert into product (product_code, category_code, product_name, product_price, product_sales)
-		values(#{product_code}, #{category_code}, #{product_name}, #{product_price}, #{product_sales})
+		insert into product (product_code, category_code, product_name, product_price, product_sales, product_stock)
+		values(#{product_code}, #{category_code}, #{product_name}, #{product_price}, #{product_sales}, #{product_stock})
 	</insert>
 	
 	<select id="getProductList" resultType="ProductListDto" parameterType="Map">
 		select pr.* 
 		from (select @ROWNUM := @ROWNUM + 1 AS rnum, p.*
-	  		  from (select @ROWNUM:=0) AS r, (select p.product_code, c.category_name, p.product_name, p.product_price, p.product_reg_date, i.product_img_name, i.product_img_original_name
+	  		  from (select @ROWNUM:=0) AS r, (select p.product_code, p.product_stock, c.category_name, p.product_name, p.product_price, p.product_reg_date, i.product_img_name, i.product_img_original_name
 				    from product p, product_img i, category c
 					where p.product_code = i.product_code
 					and p.category_code = c.category_code
@@ -41,7 +41,7 @@
 	
 	<update id="productModify" parameterType="ProductDto">
 		update product
-		set product_name = #{product_name}, product_price = #{product_price}
+		set product_name = #{product_name}, product_price = #{product_price}, product_stock = #{product_stock}
 		where product_code = #{product_code}
 	</update>
 	
@@ -106,5 +106,17 @@
 			like #{search_word}
 		</if>
 	</sql>
+	
+	<update id="updateProductStock" parameterType="Map">
+		update product
+		set product_stock = product_stock - #{order_de_amount}
+		where product_code = #{product_code}
+	</update>
+	
+	<update id="updateOrderCancelProductStock" parameterType="Map">
+		update product
+		set product_stock = product_stock + #{order_de_amount}
+		where product_code = #{product_code}
+	</update>
 
 </mapper>

@@ -86,8 +86,8 @@
 	</select>
 	
 	<insert id="orderAdd" parameterType="OrderDto">
-		insert into order_tb (order_id, user_id, order_name, user_address1, user_address2, user_address3, order_phone, order_totalprice)
-		values(#{order_id}, #{user_id}, #{order_name}, #{user_address1}, #{user_address2}, #{user_address3}, #{order_phone}, #{order_totalprice})
+		insert into order_tb (order_id, imp_uid, user_id, order_name, user_address1, user_address2, user_address3, order_phone, order_totalprice)
+		values(#{order_id}, #{imp_uid}, #{user_id}, #{order_name}, #{user_address1}, #{user_address2}, #{user_address3}, #{order_phone}, #{order_totalprice})
 	</insert>
 	
 	<insert id="orderDetailAdd" parameterType="Map">
@@ -184,6 +184,18 @@
 			and o.order_state = #{order_state}
 		</if>
 		group by o.ORDER_ID
+	</select>
+	
+	<update id="updateOrderState" parameterType="Map">
+		update order_tb
+		set order_state = #{order_state}
+		where order_id = #{orderDto.order_id}
+	</update>
+	
+	<select id="getOrderCancelList" parameterType="String" resultType="OrderDetailDto">
+		select *
+		from order_detail
+		where order_id = #{order_id}
 	</select>
 	
 </mapper>

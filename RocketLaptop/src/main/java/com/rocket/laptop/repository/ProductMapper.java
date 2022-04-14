@@ -34,4 +34,8 @@ public interface ProductMapper {
 	public int getSearchProductListCount(Map<String, Object> map);
 
 	public List<ProductListDto> getSearchProductList(Map<String, Object> map);
+
+	public void updateProductStock(Map<String, Object> map);
+
+	public void updateOrderCancelProductStock(Map<String, Object> map);
 }

@@ -51,8 +51,10 @@
 					<h1>주문상세</h1>
 				</div>
 				<p class="mt-3">
-					<fmt:formatDate value="${orderDto.order_date}" var="orderDate" pattern="yy-MM-dd" />
-					<span class="fs-5 text-muted">${orderDate} 주문</span>&nbsp;<span class="text-muted fs-5">(${orderDto.order_state})</span>
+					<div class="d-flex align-items-center mb-3">
+						<fmt:formatDate value="${orderDto.order_date}" var="orderDate" pattern="yy-MM-dd" />
+						<span class="fs-5 text-muted">${orderDate} 주문</span>&nbsp;<span class="text-muted fs-5">(${orderDto.order_state})</span>
+					</div>
 					<div class="d-flex justify-content-between align-items-center">
 						<input type="hidden" value="${orderDto.order_id}" id="myOrder_id" />
 						<span class="text-muted fs-5">주문번호 ${orderDto.order_id}</span>
@@ -143,7 +145,13 @@
 							</div>
 						</div>
 					</div>
+					<div class="text-center">
+						<span class="text-muted fs-3">주문취소는 배송준비중 일때만 가능합니다.</span>
+					</div>
 					<div class="text-end">
+						<c:if test="${orderDto.order_state == '배송준비'}">
+							&nbsp;&nbsp;&nbsp;<button class="btn btn-danger orderCancelBtn" data-orderId="${orderDto.order_id}">주문취소</button>
+						</c:if>
 						<a class="btn btn-primary" href="/user/mypage/order/list?user_id=${param.user_id}">주문목록보기</a>
 					</div>
 				</div>

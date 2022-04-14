@@ -12,5 +12,6 @@ public class ProductListDto {
 	private int product_price;
 	private String product_img_name;
 	private String product_img_original_name;
+	private int product_stock;
 	private Timestamp product_reg_date;
 }

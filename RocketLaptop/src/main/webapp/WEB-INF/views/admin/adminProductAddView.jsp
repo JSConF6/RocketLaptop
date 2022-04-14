@@ -58,7 +58,10 @@
 							<label for="productName" class="form-label">상품이름</label> <input type="text" class="form-control" id="productName" placeholder="상품이름을 입력하세요" name="product_name">
 						</div>
 						<div class="mb-3">
-							<label for="productPrice" class="form-label">상품가격</label> <input type=text class="form-control" id="productPrice" pattern="[0-9]+" placeholder="상품가격을 숫자로 입력하세요" name="product_price">
+							<label for="productStock" class="form-label">상품수량</label> <input type="number" class="form-control" id="productStock" placeholder="상품수량을 숫자로 입력하세요" name="product_stock">
+						</div>
+						<div class="mb-3">
+							<label for="productPrice" class="form-label">상품가격</label> <input type="number" class="form-control" id="productPrice" placeholder="상품가격을 숫자로 입력하세요" name="product_price">
 						</div>
 						<div class="mb-3 img-container">
 							<label for="thumbnail_upload" class="form-label fs-4">대표 이미지<br/>
